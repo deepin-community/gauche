@@ -1,0 +1,40 @@
+Description: dump axTLS errors
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2018-10-04
+
+Index: gauche-0.9.10/ext/tls/Makefile.in
+===================================================================
+--- gauche-0.9.10.orig/ext/tls/Makefile.in
++++ gauche-0.9.10/ext/tls/Makefile.in
+@@ -6,6 +6,12 @@ abs_builddir = @abs_builddir@
+ 
+ include ../Makefile.ext
+ 
++# override the one in ../Makefile.ext
++check : all
++	@rm -f test.log
++	GAUCHE_TEST_RECORD_FILE=$(TESTRECORD) $(GOSH) -I. -I$(srcdir) $(srcdir)/test.scm > test.log
++	@if grep -q failed test.log; then cat ssltest.log axTLS/ssl/stderr.out; fi
++
+ SCM_CATEGORY = rfc
+ 
+ LIBFILES = rfc--tls.$(SOEXT) rfc--tls--mbed.$(SOEXT)
+Index: gauche-0.9.10/ext/tls/axTLS/ssl/test/killopenssl.sh
+===================================================================
+--- gauche-0.9.10.orig/ext/tls/axTLS/ssl/test/killopenssl.sh
++++ gauche-0.9.10/ext/tls/axTLS/ssl/test/killopenssl.sh
+@@ -1,5 +1,10 @@
+ #!/bin/sh
+-if [ -f "../ssl/openssl.pid" ]; then
+-    awk '{print $1}' "../ssl/openssl.pid" | xargs kill -9
+-    rm -f ../ssl/openssl.pid
+-fi
++
++[ -f ../ssl/openssl.pid ] || exit 0
++
++exec < "../ssl/openssl.pid"
++while read PID COMMAND ETC; do
++  kill -9 $PID >/dev/null 2>&1
++done
++
++rm -f ../ssl/openssl.pid

@@ -1,0 +1,18 @@
+Description: When ipv4+ipv6 dual-stack is not supported, skip testing test/net.scm
+ Checking "user42" is heuristics to detect the situation as of 2024-12-24
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2024-12-24
+
+Index: gauche/src/Makefile.in
+===================================================================
+--- gauche.orig/src/Makefile.in
++++ gauche/src/Makefile.in
+@@ -466,7 +466,7 @@ staticinit.c : all gen-staticinit.scm
+ 	$(STATIC_GOSH) $(srcdir)/gen-staticinit.scm $(top_srcdir) $(top_builddir) $(GAUCHE_ABI_VERSION)
+ 
+ # tests -----------------------------------------------
+-TESTFILES  = `cat ../test/TESTS`
++TESTFILES  = `if getent passwd user42 >/dev/null; then grep -v '^net\.scm$' ../test/TESTS; else cat ../test/TESTS; fi`
+ TEST2FILES = `cat ../test/TESTS2`
+ 
+ TESTRECORD = "$(top_builddir)/test.record"

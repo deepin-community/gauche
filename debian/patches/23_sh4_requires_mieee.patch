@@ -1,0 +1,18 @@
+Description: Fix FTBFS on SH4 (bug#612554)
+Author: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Forwarded: not yet
+Last-Update: 2024-12-06
+
+Index: gauche/configure.ac
+===================================================================
+--- gauche.orig/configure.ac
++++ gauche/configure.ac
+@@ -451,7 +451,7 @@ AS_CASE([$host],
+     AC_DEFINE(SCM_TARGET_I386,1,[Define to use i386 optimizations])],
+   [x86_64-*], [
+     AC_DEFINE(SCM_TARGET_X86_64,1,[Define to use x86_64 optimizations])],
+-  [alpha*], [
++  [alpha*|sh4-*|sh4el-*|sh4eb-*], [
+     CFLAGS="$CFLAGS -mieee"],
+   [arm*], [
+     dnl ARM processor may use a special mixed endian for doubles.  It can

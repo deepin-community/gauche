@@ -1,0 +1,64 @@
+Description: Avoid useless dependency on LIBS
+ Don't add @LIBS@ for extensions.
+ Killing @LIBS@ is only OK for Debian.  More good solution is required
+ for upstream.
+Forwarded: Under discussion
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2024-12-06
+
+Index: gauche/ext/Makefile.ext.in
+===================================================================
+--- gauche.orig/ext/Makefile.ext.in
++++ gauche/ext/Makefile.ext.in
+@@ -19,7 +19,7 @@ DESTDIR      =
+ CC           = @CC@
+ AR           = @AR@
+ LOCAL_LFLAGS = @LOCAL_LIB@
+-LIBS         = $(XLIBS) @LIBS@
++LIBS         = $(XLIBS)
+ CFLAGS       = @CFLAGS@ @SHLIB_SO_CFLAGS@ $(XCFLAGS)
+ CPPFLAGS     = @CPPFLAGS@ $(XCPPFLAGS)
+ LDFLAGS      = $(LOCAL_LFLAGS) $(XLDFLAGS) @SHLIB_SO_LDFLAGS@
+Index: gauche/src/Makefile.in
+===================================================================
+--- gauche.orig/src/Makefile.in
++++ gauche/src/Makefile.in
+@@ -270,13 +270,14 @@ OBJECTS = $(libgauche_OBJECTS) $(gosh_OB
+ @CROSS_COMPILING_no@all : $(LIBGAUCHE).$(SOEXT) $(INSTALL_BINS) test-extra$(EXEEXT)
+ @CROSS_COMPILING_yes@all : $(LIBGAUCHE).$(SOEXT) $(INSTALL_BINS)
+ 
+-gosh$(EXEEXT) : $(LIBGAUCHE).$(SOEXT) $(gosh_OBJECTS)
++
++gosh$(EXEEXT) : $(LIBGAUCHE).$(SOEXT) $(gosh_OBJECTS) 
+ 	@rm -f gosh$(EXEEXT)
+-	$(LINK) $(gosh_LDFLAGS) -o gosh$(EXEEXT) $(gosh_OBJECTS) $(gosh_LDADD) $(LIBS)
++	$(LINK) $(gosh_LDFLAGS) -o gosh$(EXEEXT) $(gosh_OBJECTS) $(gosh_LDADD)
+ 
+-gosh-noconsole$(EXEEXT) : $(LIBGAUCHE).$(SOEXT) $(gosh_noconsole_OBJECTS)
++gosh-noconsole$(EXEEXT) : $(LIBGAUCHE).$(SOEXT) $(gosh_noconsole_OBJECTS) 
+ 	@rm -f gosh-noconsole$(EXEEXT)
+-	$(LINK) $(gosh_LDFLAGS) -o gosh-noconsole$(EXEEXT) $(gosh_noconsole_OBJECTS) $(gosh_LDADD) $(LIBS) -Wl,--subsystem,windows
++	$(LINK) $(gosh_LDFLAGS) -o gosh-noconsole$(EXEEXT) $(gosh_noconsole_OBJECTS) $(gosh_LDADD) -Wl,--subsystem,windows
+ 
+ test-extra$(EXEEXT) : $(LIBGAUCHE).$(SOEXT) $(test_extra_OBJECTS)
+ 	@rm -f test-extra$(EXEEXT)
+@@ -286,8 +287,8 @@ test-extra$(EXEEXT) : $(LIBGAUCHE).$(SOE
+ # need to relink gosh-noconsole.exe (windows no-console version).
+ relink :
+ 	$(RELINK) $(libgauche_LDFLAGS) $(LIBGAUCHE).$(SOEXT) $(libgauche_OBJECTS) $(libgc_pic_LIBRARY) $(ATOMIC_OPS_LIBS) $(LIBS)
+-	$(RELINK) $(gosh_LDFLAGS) -o gosh$(EXEEXT)  $(gosh_OBJECTS) $(gosh_LDADD) $(LIBS)
+-	$(RELINK) -o gauche-config$(EXEEXT) gauche-config.$(OBJEXT) $(LIBS)
++	$(RELINK) $(gosh_LDFLAGS) -o gosh$(EXEEXT)  $(gosh_OBJECTS) $(gosh_LDADD)
++	$(RELINK) -o gauche-config$(EXEEXT) gauche-config.$(OBJEXT)
+ 
+ $(OBJECTS) : $(HEADERS)
+ 
+@@ -415,7 +416,7 @@ $(LIBGAUCHE).$(SOEXT) : $(libgauche_OBJE
+ 	$(POSTBUILD)
+ 
+ gauche-config$(EXEEXT) : gauche-config.$(OBJEXT)
+-	$(LINK) -o gauche-config$(EXEEXT) gauche-config.$(OBJEXT) $(LIBS)
++	$(LINK) -o gauche-config$(EXEEXT) gauche-config.$(OBJEXT)
+ 
+ # we need thread settings in sync with gc.
+ gauche/config_threads.h : $(top_builddir)/gc/include/config.h

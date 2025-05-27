@@ -1,0 +1,72 @@
+We wrote some notes for packaging Gauche for Debian.  Those are mainly
+for things for package maintainers.
+
+See http://wiki.debian.org/Teams/DebianGauche for the latest information.
+Subscribe pkg-gauche-devel@lists.alioth.debian.org to post your comments.
+
+Issues:
+
+* hurd-i386 system, threads 
+* linking
+  * armel missing symbol __aeabi_unwind_cpp_pr1@GCC_3.5
+  * ia64 linking libunwind
+  * mips/mipsel missing symbol __gnu_local_gp
+
+ -- NIIBE Yutaka <gniibe@fsij.org>, Tue,  8 Mar 2011 13:33:39 +0900
+
+TODO:
+
+(3) Installation of HTML files
+debian/rules:
+--------------------
+override_dh_auto_clean:
+...
+	rm doc/gauche-ref*.html
+
+override_dh_auto_build:
+	dh_auto_build
+	$(MAKE) -C doc html
+--------------------
+
+ -- NIIBE Yutaka <gniibe@fsij.org>, Wed, 21 Apr 2010 16:29:09 +0900
+
+TODOS:
+* Reconsider binary packages - libgauche0 might not be a good idea.
+* Make a branch for lenny backporting.
+* Incorporate changes made by Jens Thiele.
+** Additional manpages for gauche-dev.
+** PDF and HTML output for gauche-doc.
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>, Mon, 15 Feb 2010 00:50:46 +0900
+
+The next entry is taken from Jens Thiele's gauche 0.9.0 package at http://karme.de/debian/.
+--
+WARNING: this is a unofficial gauche package!
+
+Patches included (see also debian/patches in the source package/debian diff):
+- small docu patches
+- rpath patch i do not understand yet (from the official debian package)
+- patch to include the not yet finished developer manual
+(- build html and pdf documentation)
+
+TODOS:
+- gauche package itself should not depend on gdbm?
+  or maybe just drop the extra gauche-gdbm package and include that
+  module in gauche itself?
+- pdf output needs some work
+- maybe use the multi-file html version
+  (emacs-w3m is to slow ;-)
+- menu entry / desktop file
+- emacs-mode?
+- japanese pdf output
+  (i failed miserably when i tried that - any help?)
+  it seems there already was a discussion on the gauche-dev-jp ml:
+  http://es.sourceforge.jp/projects/gauche/lists/archive/devel-jp/2008-June/001802.html
+  low priority for me at the moment
+
+NOTES:
+- old dh_installinfo version in lenny does not handle compressed
+  multi-file info documents correctly
+  => use gauche-doc.install to install them
+
+ -- Jens Thiele <karme@karme.de>, Tue, 19 Jan 2010 22:30:44 +0100

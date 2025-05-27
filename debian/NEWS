@@ -1,0 +1,6 @@
+gauche (0.9.15-p2+20241205-2) unstable; urgency=medium
+
+  slibcat is now under /var/lib/slib/gauche.  It's slib package
+  responsibility which creates slibcat for gauche.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 17 Dec 2024 14:20:01 +0900

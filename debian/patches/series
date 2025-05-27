@@ -1,0 +1,18 @@
+#34_alpha_stackbottom.patch
+43_makedoc_gzip_best.patch
+02_linking.patch
+03_rm_without_xlink.patch
+#15_ext_termios.patch
+16_no_LIBS.patch
+20_check_exit_status.patch
+23_sh4_requires_mieee.patch
+26_no_microversion_in_soname.patch
+#30_link_pthread.patch
+31_ldflags_for_ext.patch
+# 35_axtls_error.patch
+39_net_test.patch
+# 41_link_libatomic.patch
+42_cflags_reproducible.patch
+59_make_clean.patch
+60_no_slibcat
+61_not_test_net_with_user42

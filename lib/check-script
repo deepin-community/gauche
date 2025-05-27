@@ -1,0 +1,9 @@
+;; Placeholder for the backward compatibility
+
+(warn "'check-script' script is now 'tools/check-script'. Update your build \
+       script to 'gosh tools/check-script arg ...'\n")
+(load "tools/check-script")
+
+;; Local variables:
+;; mode: scheme
+;; end:

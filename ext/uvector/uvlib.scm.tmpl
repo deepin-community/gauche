@@ -1,0 +1,653 @@
+///; Process this file with uvgen.scm to generate uvlib.scm
+///; Lines beginning with '///' are directives for ugven.scm.
+
+;;;
+;;;   Copyright (c) 2000-2014 Shiro Kawai, All rights reserved.
+;;;
+;;;   Redistribution and use in source and binary forms, with or without
+;;;   modification, are permitted provided that the following conditions
+;;;   are met:
+;;;
+;;;   1. Redistributions of source code must retain the above copyright
+;;;      notice, this list of conditions and the following disclaimer.
+;;;
+;;;   2. Redistributions in binary form must reproduce the above copyright
+;;;      notice, this list of conditions and the following disclaimer in the
+;;;      documentation and/or other materials provided with the distribution.
+;;;
+;;;   3. Neither the name of the authors nor the names of its contributors
+;;;      may be used to endorse or promote products derived from this
+;;;      software without specific prior written permission.
+;;;
+;;;   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+;;;   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+;;;   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+;;;   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+;;;   OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+;;;   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+;;;   TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+;;;   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+;;;   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+;;;   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+;;;   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+;;;
+
+///;; Begin template ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+///;;
+///(define *tmpl-body* '(
+
+;;--------------------------------------------------------------------
+;; ${t}vector basic API
+;;
+
+;; NB: Predicates referencers and modifiers are in the core.
+
+(define-cproc ${t}vector-empty? (v::<${t}vector>) ::<boolean>
+  (return (== (SCM_${T}VECTOR_SIZE v) 0)))
+
+(define-cproc ${t}vector (:optarray (elts nelts 10) :rest args)
+  :fast-flonum
+  (cond [(SCM_NULLP args)
+         (return (Scm_ObjArrayTo${T}Vector elts nelts SCM_CLAMP_ERROR))]
+        [else
+         (let* ([i::int (- nelts 1)] [p args])
+           (for [() (>= i 0) (post-- i)]
+                (SCM_FLONUM_ENSURE_MEM (aref elts i))
+                (set! p (Scm_Cons (aref elts i) p)))
+           (return (Scm_ListToUVector SCM_CLASS_${T}VECTOR p SCM_CLAMP_ERROR)))]))
+
+(define-cproc ${t}vector-length (v::<${t}vector>) ::<ulong> SCM_${T}VECTOR_SIZE)
+
+(define-cproc ${t}vector-copy
+  (v::<${t}vector> :optional (start::<fixnum> 0) (end::<fixnum> -1))
+  Scm_${T}VectorCopy)
+
+;; NB: this function accommodates to two APIs.
+;; The 'modern' API, compatible to srfi-13 and srfi-43, takes arguments:
+;;    (dst dstart src :optional sstart send)
+;; The old API only takes:
+;;    (dst src)
+;; We dispatch by the second argument.  The old API is deprecated, but
+;; kept for the existing code.
+(define-cproc ${t}vector-copy!
+  (dst::<${t}vector> dstart :optional src (sstart::<int> 0) (send::<int> -1))
+  (SCM_UVECTOR_CHECK_MUTABLE dst)
+  (cond
+   [(SCM_INTEGERP dstart) ; new API
+    (unless (SCM_${T}VECTORP src)
+      (Scm_Error "${t}vector-copy!: argument is not a matching uvector: %S"src))
+    (return (Scm_${T}VectorCopyX dst (Scm_GetInteger dstart)
+                  (SCM_${T}VECTOR src) sstart send))]
+   [(SCM_${T}VECTORP dstart) ; old API
+    (return (Scm_${T}VectorCopyX dst 0 (SCM_${T}VECTOR dstart) 0 -1))]
+   [else (SCM_TYPE_ERROR dstart "integer") (return SCM_UNDEFINED)]))
+
+(define-cproc ${t}vector-reverse-copy
+  (v::<${t}vector> :optional (start::<fixnum> 0) (end::<fixnum> -1))
+  (let* ([len::ScmSmallInt (SCM_UVECTOR_SIZE v)])
+    (SCM_CHECK_START_END start end len)
+    (let* ([r::ScmUVector* (SCM_UVECTOR (Scm_Make${T}Vector (- end start)
+                                                  (C: "${ZERO}")))]
+           [i::ScmSmallInt (- end 1)]
+           [j::ScmSmallInt 0])
+      (while (>= i start)
+        (set! (SCM_${T}VECTOR_ELEMENT r j) (SCM_${T}VECTOR_ELEMENT v i))
+        (post-- i)
+        (post++ j))
+      (return (SCM_OBJ r)))))
+
+(define-cproc ${t}vector-reverse-copy!
+  (dst::<${t}vector> dstart::<fixnum> src::<${t}vector>
+          :optional (sstart::<fixnum> 0) (send::<fixnum> -1))
+  ::<void>
+  (let* ([dlen::ScmSmallInt (SCM_UVECTOR_SIZE dst)]
+         [slen::ScmSmallInt (SCM_UVECTOR_SIZE src)]
+         [dend::ScmSmallInt -1])
+    (SCM_UVECTOR_CHECK_MUTABLE dst)
+    (SCM_CHECK_START_END sstart send slen)
+    (SCM_CHECK_START_END dstart dend dlen)
+    (set! dend (+ dstart (- send sstart)))
+    (when (> dend dlen)
+      (Scm_Error "Copy region is out of bound, from [%d,%d]%S to [%d,%d]%S"
+                 sstart send (SCM_OBJ src)
+                 dstart dend (SCM_OBJ dst)))
+    (while (>= (pre-- dend) dstart)
+      (set! (SCM_${T}VECTOR_ELEMENT dst dend)
+            (SCM_${T}VECTOR_ELEMENT src sstart))
+      (post++ sstart))))
+
+;; multi-copy! - copy src repeatedly to different parts of dst.
+(define-cproc ${t}vector-multi-copy!
+  (dst::<${t}vector> dstart::<fixnum> dstride::<fixnum>
+   src::<${t}vector> :optional (sstart::<fixnum> 0) (ssize::<fixnum> 0)
+                               (sstride::<fixnum> -1) (count::<fixnum> -1))
+  ::<void>
+  (SCM_UVECTOR_CHECK_MUTABLE dst)
+  (when (< sstride 0)
+    (if (<= ssize 0) (set! sstride 0) (set! sstride ssize)))
+  (when (<= ssize 0)
+    (set! ssize (- (SCM_UVECTOR_SIZE src) sstart)))
+  (let* ([di::long dstart] [si::long sstart]
+         [dlen::long (SCM_UVECTOR_SIZE dst)]
+         [slen::long (SCM_UVECTOR_SIZE src)]
+         [c::long 0]
+         [cnt::long (?: (< count 0) LONG_MAX count)])
+    (if (== ssize 1)
+      ;; shortcut for optimization
+      (for [() (and (< c cnt) (< di dlen) (< si slen)) (inc! c)]
+           (set! (SCM_${T}VECTOR_ELEMENT dst di)
+                 (SCM_${T}VECTOR_ELEMENT src si))
+           (+= di dstride)
+           (+= si sstride))
+      ;; general case
+      (for [() (and (< c cnt) (< di dlen) (< si slen)) (inc! c)]
+           (let* ([nitems::long ssize])
+             (when (< dlen (+ di nitems)) (set! nitems (- dlen di)))
+             (when (< slen (+ si nitems)) (set! nitems (- slen si)))
+             (memmove (+ (SCM_${T}VECTOR_ELEMENTS dst) di)
+                      (+ (SCM_${T}VECTOR_ELEMENTS src) si)
+                      (* nitems (sizeof (.type ${etype})))))
+           (+= di dstride)
+           (+= si sstride)))))
+
+(define-cproc ${t}vector->list
+  (v::<${t}vector> :optional (start::<fixnum> 0) (end::<fixnum> -1))
+  Scm_${T}VectorToList)
+
+(define-cproc reverse-${t}vector->list
+  (v::<${t}vector> :optional (start::<fixnum> 0) (end::<fixnum> -1))
+  (let* ([len::ScmSmallInt (SCM_UVECTOR_SIZE v)]
+         [h SCM_NIL] [t SCM_NIL] [e::(${etype})] [z])
+    (SCM_CHECK_START_END start end len)
+    (pre-- end)
+    (while (<= start end)
+      (set! e (SCM_${T}VECTOR_ELEMENT v end))
+      (C: "${BOX z e}")
+      (SCM_APPEND1 h t z)
+      (pre-- end))
+    (return h)))
+
+(define-cproc list->${t}vector (l::<list> :optional clamp)
+  (return (Scm_ListToUVector SCM_CLASS_${T}VECTOR l (Scm_ClampMode clamp))))
+
+(define (reverse-list->${t}vector l :optional (clamp #f))
+  (let* ([len (length l)]
+         [v (make-${t}vector len)])
+    (do [(l l (cdr l))
+         (i (- len 1) (- i 1))]
+        [(< i 0) v]
+      (${t}vector-set! v i (car l) clamp))))
+
+(define-cproc ${t}vector-fill!
+  (v::<${t}vector> val :optional (start::<fixnum> 0) (end::<fixnum> -1)) ::<void>
+  (let* ([filler :: (${etype})])
+    (C: "${UNBOX filler val SCM_CLAMP_ERROR}")
+    (Scm_${T}VectorFill v filler start end)))
+
+(define-cproc ${t}vector->vector
+  (v::<${t}vector> :optional (start::<fixnum> 0) (end::<fixnum> -1))
+  Scm_${T}VectorToVector)
+
+(define-cproc vector->${t}vector
+  (v::<vector> :optional (start::<fixnum> 0) (end::<fixnum> -1) clamp)
+  (return (Scm_VectorTo${T}Vector v start end (Scm_ClampMode clamp))))
+
+(define-cproc ${t}vector=?              ; srfi-66
+  (a::<${t}vector> b::<${t}vector>)     ;  we just typecheck args and call equal?
+  ::<boolean>
+  (return (Scm_EqualP (SCM_OBJ a) (SCM_OBJ b))))
+
+(define-cproc ${t}vector-compare        ; srfi-66
+  (a::<${t}vector> b::<${t}vector>)     ;  we just typecheck args and call compare
+  ::<int>
+  (return (Scm_Compare (SCM_OBJ a) (SCM_OBJ b))))
+
+;;;
+;;; Some srfi-160 procedures
+;;;
+
+;; Constructors
+(define (${t}vector-unfold f len seed)
+  (let1 rvec (make-${t}vector len)
+    (let loop ([i 0] [seed seed])
+      (if (= i len)
+        rvec
+        (receive (e seed) (f i seed)
+          (${t}vector-set! rvec i e)
+          (loop (+ i 1) seed))))))
+(define (${t}vector-unfold-right f len seed)
+  (let1 rvec (make-${t}vector len)
+    (let loop ([i (- len 1)] [seed seed])
+      (if (< i 0)
+        rvec
+        (receive (e seed) (f i seed)
+          (${t}vector-set! rvec i e)
+          (loop (- i 1) seed))))))
+
+(define (${t}vector-concatenate vs)
+  (let* ([size (fold (^[v l] (+ (${t}vector-length v) l)) 0 vs)]
+         [dst  (make-${t}vector size)])
+    (do ([vs vs (cdr vs)]
+         [k  0  (+ k (${t}vector-length (car vs)))])
+        [(null? vs) dst]
+      (${t}vector-copy! dst k (car vs)))))
+(define (${t}vector-append . vs) (${t}vector-concatenate vs))
+
+(define-cproc ${t}vector-append-subvectors (:rest args)
+  ;; first path - check args and lengths
+  (unless (== (% (Scm_Length args) 3) 0)
+    (Scm_Error "Argument count isn't a multiple of 3: %S" args))
+  (let* ([total::ScmSmallInt 0]
+         [lis args])
+    (while (SCM_PAIRP lis)
+      (let* ([v (SCM_CAR lis)]
+             [s (SCM_CADR lis)]
+             [e (SCM_CAR (SCM_CDDR lis))])
+        (unless (SCM_${T}VECTORP v)
+          (Scm_Error "<${t}vector> expected, but got: %S" v))
+        (unless (SCM_INTP s)
+          (Scm_Error "fixnum expected for start, but got: %S" s))
+        (unless (SCM_INTP e)
+          (Scm_Error "fixnum expected for end, but got: %S" e))
+        (let* ([start::ScmSmallInt (SCM_INT_VALUE s)]
+               [end::ScmSmallInt (SCM_INT_VALUE e)]
+               [len::ScmSmallInt (SCM_${T}VECTOR_SIZE v)])
+          (SCM_CHECK_START_END start end len)
+          (+= total (- end start)))
+        (set! lis (SCM_CDR (SCM_CDDR lis)))))
+    ;; Second path - fill it
+    (let* ([r (Scm_Make${T}Vector total (C: "${ZERO}"))]
+           [i::ScmSmallInt 0]
+           [lis args])
+      (while (SCM_PAIRP lis)
+        (let* ([v (SCM_CAR lis)]
+               [start::ScmSmallInt (SCM_INT_VALUE (SCM_CADR lis))]
+               [end::ScmSmallInt   (SCM_INT_VALUE (SCM_CAR (SCM_CDDR lis)))]
+               [len::ScmSmallInt   (SCM_${T}VECTOR_SIZE v)])
+          (SCM_CHECK_START_END start end len)
+          (let* ([j::ScmSmallInt start])
+            (while (< j end)
+              (set! (SCM_${T}VECTOR_ELEMENT r i)
+                    (SCM_${T}VECTOR_ELEMENT v j))
+              (pre++ i)
+              (pre++ j))))
+        (set! lis (SCM_CDR (SCM_CDDR lis))))
+      (return r))))
+
+;; Iteration
+
+(define (${t}vector-take v n) (${t}vector-copy v 0 n))
+(define (${t}vector-take-right v n)
+  (${t}vector-copy v (- (${t}vector-length v) n)))
+(define (${t}vector-drop v n) (${t}vector-copy v n))
+(define (${t}vector-drop-right v n)
+  (${t}vector-copy v 0 (- (${t}vector-length v) n)))
+(define (${t}vector-segment v n)
+  (define (rec i len vs)
+    (if (<= (- len i) n)
+      (reverse (cons (${t}vector-copy v i) vs))
+      (rec (+ i n) len
+           (cons (${t}vector-copy v i (+ i n)) vs))))
+  (unless (and (exact-integer? n)
+               (positive? n))
+    (error "positive exact integer required, but got:" n))
+  (rec 0 (${t}vector-length v) '()))
+(define (${t}vector= a b . rest) ; can have shortcut of 3 arg case as well
+  (and (${t}vector=? a b)
+       (or (null? rest)
+           (apply ${t}vector= b rest))))
+
+(define (%minlen vec vecs)
+  (apply min (uvector-length vec) (map uvector-length vecs)))
+(define (%vecrefs i vec vecs)
+  (cons (uvector-ref vec i) (map (cut uvector-ref <> i) vecs)))
+
+(define (${t}vector-fold kons knil vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (do ([i 0 (+ i 1)]
+           [seed knil (kons seed (${t}vector-ref vec i))])
+          [(= i len) seed]))
+    (let1 len (%minlen vec vecs)
+      (do ([i 0 (+ i 1)]
+           [seed knil (apply kons seed (%vecrefs i vec vecs))])
+          [(= i len) seed]))))
+(define (${t}vector-fold-right kons knil vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (do ([i (- len 1) (- i 1)]
+           [seed knil (kons (${t}vector-ref vec i) seed)])
+          [(< i 0) seed]))
+    (let1 len (%minlen vec vecs)
+      (do ([i (- len 1) (- i 1)]
+           [seed knil (apply kons seed (%vecrefs i vec vecs))])
+          [(< i 0) seed]))))
+(define (${t}vector-map proc vec . vecs)
+  (if (null? vecs)
+    ;; we need intermediate list to be restart-safe
+    (let1 len (${t}vector-length vec)
+      (do ([i 0 (+ i 1)]
+           [rs '() (cons (proc (${t}vector-ref vec i)) rs)])
+          [(= i len) (list->${t}vector (reverse rs))]))
+    (let1 len (%minlen vec vecs)
+      (do ([i 0 (+ i 1)]
+           [rs '() (cons (apply proc (%vecrefs i vec vecs)) rs)])
+          [(= i len) (list->${t}vector (reverse rs))]))))
+(define (${t}vector-map! proc vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (do ([i 0 (+ i 1)])
+          [(= i len) vec]
+        (${t}vector-set! vec i (proc (${t}vector-ref vec i)))))
+    (let1 len (%minlen vec vecs)
+      (do ([i 0 (+ i 1)])
+          [(= i len) vec]
+        (${t}vector-set! vec i (apply proc (%vecrefs i vec vecs)))))))
+(define (${t}vector-for-each proc vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (do ([i 0 (+ i 1)])
+          [(= i len) (undefined)]
+        (proc (${t}vector-ref vec i))))
+    (let1 len (%minlen vec vecs)
+      (do ([i 0 (+ i 1)])
+          [(= i len) (undefined)]
+        (apply proc (%vecrefs i vec vecs))))))
+(define (${t}vector-count pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (do ([i 0 (+ i 1)]
+           [c 0 (if (pred (${t}vector-ref vec i)) (+ c 1) c)])
+          [(= i len) c]))
+    (let1 len (%minlen vec vecs)
+      (do ([i 0 (+ i 1)]
+           [c 0 (if (apply pred (%vecrefs i vec vecs)) (+ c 1) c)])
+          [(= i len) c]))))
+(define (${t}vector-cumulate proc knil vec)
+  (let* ([len (${t}vector-length vec)]
+         [rvec (make-${t}vector len)])
+    (do ([i 0 (+ i 1)]
+         [seed knil
+               (rlet1 seed (proc seed (${t}vector-ref vec i))
+                 (${t}vector-set! rvec i seed))])
+        [(= i len) rvec])))
+
+;; Searching
+
+(define (${t}vector-take-while pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i 0] [r '()])
+      (if (= i len)
+        (list->${t}vector (reverse r))
+        (let1 e (${t}vector-ref vec i)
+          (if (pred e)
+            (loop (+ i 1) (cons e r))
+            (list->${t}vector (reverse r))))))))
+(define (${t}vector-take-while-right pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i (- len 1)] [r '()])
+      (if (< i 0)
+        (list->${t}vector r)
+        (let1 e (${t}vector-ref vec i)
+          (if (pred e)
+            (loop (- i 1) (cons e r))
+            (list->${t}vector r)))))))
+(define (${t}vector-drop-while pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i 0])
+      (if (= i len)
+        (make-${t}vector 0)
+        (let1 e (${t}vector-ref vec i)
+          (if (pred e)
+            (loop (+ i 1))
+            (${t}vector-copy vec i)))))))
+(define (${t}vector-drop-while-right pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i (- len 1)])
+      (if (< i 0)
+        (make-${t}vector 0)
+        (let1 e (${t}vector-ref vec i)
+          (if (pred e)
+            (loop (- i 1))
+            (${t}vector-copy vec 0 (+ i 1))))))))
+
+(define (${t}vector-index pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (let loop ([i 0])
+        (cond [(= i len) #f]
+              [(pred (${t}vector-ref vec i)) i]
+              [else (loop (+ i 1))])))
+    (let1 len (%minlen vec vecs)
+      (let loop ([i 0])
+        (cond [(= i len) #f]
+              [(apply pred (%vecrefs i vec vecs)) i]
+              [else (loop (+ i 1))])))))
+(define (${t}vector-index-right pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (let loop ([i (- len 1)])
+        (cond [(< i 0) #f]
+              [(pred (${t}vector-ref vec i)) i]
+              [else (loop (- i 1))])))
+    (let1 len (%minlen vec vecs)
+      (let loop ([i (- len 1)])
+        (cond [(< i 0) #f]
+              [(apply pred (%vecrefs i vec vecs)) i]
+              [else (loop (- i 1))])))))
+(define (${t}vector-skip pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (let loop ([i 0])
+        (cond [(= i len) #f]
+              [(pred (${t}vector-ref vec i)) (loop (+ i 1))]
+              [else i])))
+    (let1 len (%minlen vec vecs)
+      (let loop ([i 0])
+        (cond [(= i len) #f]
+              [(apply pred (%vecrefs i vec vecs)) (loop (+ i 1))]
+              [else i])))))
+(define (${t}vector-skip-right pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (let loop ([i (- len 1)])
+        (cond [(< i 0) #f]
+              [(pred (${t}vector-ref vec i)) (loop (- i 1))]
+              [else i])))
+    (let1 len (%minlen vec vecs)
+      (let loop ([i (- len 1)])
+        (cond [(< i 0) #f]
+              [(apply pred (%vecrefs i vec vecs)) (loop (- i 1))]
+              [else i])))))
+(define (${t}vector-any pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (let loop ([i 0])
+        (cond [(= i len) #f]
+              [(pred (${t}vector-ref vec i))]
+              [else (loop (+ i 1))])))
+    (let1 len (%minlen vec vecs)
+      (let loop ([i 0])
+        (cond [(= i len) #f]
+              [(apply pred (%vecrefs i vec vecs))]
+              [else (loop (+ i 1))])))))
+(define (${t}vector-every pred vec . vecs)
+  (if (null? vecs)
+    (let1 len (${t}vector-length vec)
+      (let loop ([i 0] [last #t])
+        (cond [(= i len) last]
+              [(pred (${t}vector-ref vec i)) => (^r (loop (+ i 1) r))]
+              [else #f])))
+    (let1 len (%minlen vec vecs)
+      (let loop ([i 0] [last #t])
+        (cond [(= i len) last]
+              [(apply pred (%vecrefs i vec vecs)) => (^r (loop (+ i 1) r))]
+              [else #f])))))
+(define (${t}vector-partition pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i 0] [ins '()] [outs '()])
+      (if (= i len)
+        (do ([rvec (make-${t}vector len)]
+             [rs (reverse ins (reverse outs)) (cdr rs)]
+             [i 0 (+ i 1)])
+            [(= i len) (values rvec (length ins))]
+          (${t}vector-set! rvec i (car rs)))
+        (let1 e (${t}vector-ref vec i)
+          (if (pred e)
+            (loop (+ i 1) (cons e ins) outs)
+            (loop (+ i 1) ins (cons e outs))))))))
+
+(define (${t}vector-filter pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i 0] [rs '()])
+      (if (= i len)
+        (list->${t}vector (reverse rs))
+        (let1 e (${t}vector-ref vec i)
+          (loop (+ i 1) (if (pred e) (cons e rs) rs)))))))
+(define (${t}vector-remove pred vec)
+  (let1 len (${t}vector-length vec)
+    (let loop ([i 0] [rs '()])
+      (if (= i len)
+        (list->${t}vector (reverse rs))
+        (let1 e (${t}vector-ref vec i)
+          (loop (+ i 1) (if (pred e) rs (cons e rs))))))))
+
+;; Mutators
+
+(define-cproc ${t}vector-swap! (v::<${t}vector> i::<fixnum> j::<fixnum>) ::<void>
+  (SCM_UVECTOR_CHECK_MUTABLE v)
+  (unless (and (<= 0 i) (< i (SCM_${T}VECTOR_SIZE v)))
+    (Scm_Error "Index i out of bound: %d" i))
+  (unless (and (<= 0 j) (< j (SCM_${T}VECTOR_SIZE v)))
+    (Scm_Error "Index j out of bound: %d" j))
+  (let* ([e::(${etype}) (SCM_${T}VECTOR_ELEMENT v i)])
+    (set! (SCM_${T}VECTOR_ELEMENT v i) (SCM_${T}VECTOR_ELEMENT v j))
+    (set! (SCM_${T}VECTOR_ELEMENT v j) e)))
+
+(define-cproc ${t}vector-reverse!
+ (v::<${t}vector> :optional (start::<fixnum> 0) (end::<fixnum> -1)) ::<void>
+ (SCM_UVECTOR_CHECK_MUTABLE v)
+ (let* ([len::ScmSmallInt (SCM_${T}VECTOR_SIZE v)])
+    (SCM_CHECK_START_END start end len)
+    (let* ([i::ScmSmallInt start]
+           [j::ScmSmallInt (- end 1)]
+           [e::(${etype})])
+      (while (< i j)
+        (set! e (SCM_${T}VECTOR_ELEMENT v i))
+        (set! (SCM_${T}VECTOR_ELEMENT v i) (SCM_${T}VECTOR_ELEMENT v j))
+        (set! (SCM_${T}VECTOR_ELEMENT v j) e)
+        (pre++ i)
+        (pre-- j)))))
+
+(define (${t}vector-unfold! f v start end seed)
+  (let loop ([i start] [seed seed])
+    (when (< i end)
+      (receive (e seed) (f i seed)
+        (${t}vector-set! v i e)
+        (loop (+ i 1) seed)))))
+
+(define (${t}vector-unfold-right! f v start end seed)
+  (let loop ([i (- end 1)] [seed seed])
+    (when (>= i start)
+      (receive (e seed) (f i seed)
+        (${t}vector-set! v i e)
+        (loop (- i 1) seed)))))
+
+;; Generators
+
+(define (make-${t}vector-generator vec)
+  (assume-type vec <${t}vector>)
+  (uvector->generator vec))
+
+;; Comparator
+
+(define ${t}vector-comparator
+  (make-comparator ${t}vector? ${t}vector=
+                   (^[a b] (< (compare a b) 0))
+                   default-hash))
+
+;; Output
+
+(define (write-${t}vector vec :optional (port (current-output-port)))
+  (assume-type vec <${t}vector>)
+  (write vec port))
+
+;;;
+;;; Sequence protocol implementation
+;;;
+
+;; call-with-iterator - in gauche.collection
+
+(define-method call-with-builder ((v <${t}vector-meta>) proc :key (size #f))
+  (if size
+    (let ([v (make-${t}vector size)] [i 0])
+      (proc (^[item] (${t}vector-set! v i item) (inc! i))
+            (^[] v)))
+    (let1 q '()
+      (proc (^[item] (push! q item))
+            (^[] (reverse-list->${t}vector q))))
+    ))
+
+(define-method referencer ((v <${t}vector>)) ${t}vector-ref)
+(define-method modifier   ((v <${t}vector>)) ${t}vector-set!)
+(define-method size-of    ((v <${t}vector>)) (${t}vector-length v))
+(define-method coerce-to  ((c <list-meta>) (v <${t}vector>))
+  (${t}vector->list v))
+(define-method coerce-to  ((c <${t}vector-meta>) (v <list>))
+  (list->${t}vector v))
+(define-method coerce-to  ((c <vector-meta>) (v <${t}vector>))
+  (${t}vector->vector v))
+(define-method coerce-to  ((c <${t}vector-meta>) (v <vector>))
+  (vector->${t}vector v))
+(define-method coerce-to  ((c <${t}vector-meta>) (v <${t}vector>))
+  (${t}vector-copy v))
+(define-method subseq ((v <${t}vector>) . args)
+  (apply ${t}vector-copy v args))
+
+
+///)) ;; end of tmpl-body
+
+///(define *tmpl-numop* '(
+(define-cproc ${t}vector-${opname} (v0::<${t}vector> v1 :optional clamp)
+  :fast-flonum
+  (return (Scm_${T}Vector${Opname} v0 v1 (Scm_ClampMode clamp))))
+
+(define-cproc ${t}vector-${opname}! (v0::<${t}vector> v1 :optional clamp)
+  :fast-flonum
+  (return (Scm_${T}Vector${Opname}X v0 v1 (Scm_ClampMode clamp))))
+///)) ;; end of tmpl-numop
+
+///(define *tmpl-bitop* '(
+(define-cproc ${t}vector-${opname} (v0::<${t}vector> v1)
+  (return (Scm_${T}Vector${Opname} v0 v1)))
+
+(define-cproc ${t}vector-${opname}! (v0::<${t}vector> v1)
+  (return (Scm_${T}Vector${Opname}X v0 v1)))
+///)) ;; end of tmpl-bitop
+
+///(define *tmpl-dotop* '(
+(define-cproc ${t}vector-dot (v0::<${t}vector> v1) Scm_VM${T}VectorDotProd)
+///)) ;; end of tmpl-dotop
+
+///(define *tmpl-rangeop* '(
+(define-cproc ${t}vector-${opname} (v0::<${t}vector> min max)
+  Scm_${T}Vector${Opname})
+///)) ;; end of tmpl-rangeop
+
+///(define *tmpl-swapb* '(
+(define-cproc ${t}vector-swap-bytes (v0::<${t}vector>) Scm_${T}VectorSwapBytes)
+(define-cproc ${t}vector-swap-bytes!(v0::<${t}vector>) Scm_${T}VectorSwapBytesX)
+///)) ;; end of tmpl-rangeop
+
+///(define *extra-procedure*  ;; procedurally generates code
+///  (lambda ()
+///    (generate-numop)
+///    (generate-bitop)
+///    (generate-dotop)
+///    (generate-rangeop)
+///    (generate-swapb)
+///)) ;; end of extra-procedure
+
+///; Local variables:
+///; mode: scheme
+///; end:

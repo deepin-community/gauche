@@ -1,0 +1,3 @@
+# some extensions don't have references to any external lib
+gauche: library-not-linked-against-libc
+gauche: shared-lib-without-dependency-information

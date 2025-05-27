@@ -1,0 +1,36 @@
+srcdir       = @srcdir@
+top_builddir = @top_builddir@
+top_srcdir   = @top_srcdir@
+
+SCM_CATEGORY = file
+
+include ../Makefile.ext
+
+LIBFILES = file--util.$(SOEXT) file--event.$(SOEXT)
+SCMFILES = util.sci event.scm event/common.scm event/generic.scm \
+	   event/inotify.scm event/kqueue.scm
+
+CONFIG_GENERATED = Makefile
+PREGENERATED =
+XCLEANFILES = file--util.c event-core.c event-core.sci util.sci
+
+all : $(LIBFILES)
+
+OBJECTS = $(util_OBJECTS) $(event_OBJECTS)
+
+util_OBJECTS = file--util.$(OBJEXT)
+
+file--util.$(SOEXT) : $(util_OBJECTS)
+	$(MODLINK) file--util.$(SOEXT) $(util_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+file--util.c util.sci : $(top_srcdir)/libsrc/file/util.scm
+	$(PRECOMP) -e -P -o file--util $(top_srcdir)/libsrc/file/util.scm
+
+event_OBJECTS = event.$(OBJEXT) event-core.$(OBJEXT)
+
+file--event.$(SOEXT) : $(event_OBJECTS)
+	$(MODLINK) file--event.$(SOEXT) $(event_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+event-core.c : event-core.scm
+	$(PRECOMP) $(srcdir)/event-core.scm
+
+install : install-std

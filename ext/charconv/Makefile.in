@@ -1,0 +1,63 @@
+srcdir       = @srcdir@
+top_builddir = @top_builddir@
+top_srcdir   = @top_srcdir@
+
+CONFIG_GENERATED = Makefile iconv-adapter.h eucj2ucs.c ucs2eucj.c guess_tab.c \
+		   jconv_tab.h jconv_tab.c latin_tab.h latin_tab.c
+PREGENERATED =
+XCLEANFILES = convaux.c
+PRE_PACKAGE_FILES = eucj2ucs.c guess_tab.c jconv_tab.h latin_tab.h \
+		    pre-package-data
+
+include ../Makefile.ext
+
+XCPPFLAGS = @ICONV_CPPFLAGS@
+XLDFLAGS  = @ICONV_LDFLAGS@
+XLIBS     = @ICONV_LIB@
+
+SCM_CATEGORY = gauche
+
+LIBFILES = gauche--charconv.$(SOEXT)
+SCMFILES = charconv.scm
+
+OBJECTS = charconv.$(OBJEXT)      \
+	  convaux.$(OBJEXT)       \
+	  jconv.$(OBJEXT)         \
+	  guess.$(OBJEXT)
+
+all : $(LIBFILES)
+
+gauche--charconv.$(SOEXT) : $(OBJECTS)
+	$(MODLINK) gauche--charconv.$(SOEXT) $(OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+convaux.c : convaux.scm
+	$(PRECOMP) $(srcdir)/convaux.scm
+
+$(OBJECTS) : charconv.h iconv-adapter.h
+
+jconv.$(OBJEXT) : eucj2ucs.c ucs2eucj.c jconv.c jconv_tab.h jconv_tab.c latin_tab.h latin_tab.c
+
+guess.$(OBJEXT) : guess_tab.c guess.c
+
+ucs2eucj.c : eucj2ucs.c
+
+eucj2ucs.c : gen-eucjtab.scm data/euc-jp-2004-std.txt
+	$(GOSH) $(srcdir)/gen-eucjtab.scm $(srcdir)/data/euc-jp-2004-std.txt
+
+jconv_tab.c : jconv_tab.h
+
+jconv_tab.h : gen-tabs.scm
+	$(GOSH) $(srcdir)/gen-tabs.scm jconv_tab
+
+latin_tab.c : latin_tab.h
+
+latin_tab.h : gen-lattab.scm
+	$(GOSH) $(srcdir)/gen-lattab.scm $(srcdir)/data
+
+guess_tab.c : gen-guess.scm
+	$(GOSH) $(srcdir)/gen-guess.scm guess_tab.c
+
+pre-package-data :
+	cd data; $(MAKE) GOSH=$(GOSH)
+
+install : install-std

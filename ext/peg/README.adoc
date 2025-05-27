@@ -1,0 +1,5 @@
+Originally written by Rui Ueyama.
+Heavily modified to run efficiently on Gauche.
+`benchmark.scm` and `prof.scm` are for tuning.  They use a sample data file
+`data/13tokyo.csv`, which is a public domain data provided by Japanese
+Postal Service.

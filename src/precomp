@@ -1,0 +1,9 @@
+;; Placeholder for the backward compatibility
+;;
+(warn "'precomp' script is now 'tools/precomp'.  Update your build script \
+        to use 'gosh tools/precomp arg ...'\n")
+(load "tools/precomp")
+
+;; Local variables:
+;; mode: scheme
+;; end:

@@ -1,0 +1,88 @@
+srcdir       = @srcdir@
+top_builddir = @top_builddir@
+top_srcdir   = @top_srcdir@
+
+SCM_CATEGORY = text
+
+include ../Makefile.ext
+
+LIBFILES = text--console.$(SOEXT) \
+	   text--gap-buffer.$(SOEXT) \
+	   text--gettext.$(SOEXT) \
+	   text--line-edit.$(SOEXT) \
+	   text--tr.$(SOEXT)
+SCMFILES = console.sci gap-buffer.sci gettext.sci line-edit.sci tr.sci
+
+CONFIG_GENERATED = Makefile
+PREGENERATED =
+XCLEANFILES = *.c $(SCMFILES)
+
+OBJECTS = $(text-console_OBJECTS) \
+	  $(text-gap-buffer_OBJECTS) \
+	  $(text-gettext_OBJECTS) \
+	  $(text-line-edit_OBJECTS) \
+	  $(text-tr_OBJECTS)
+
+all : $(LIBFILES)
+
+install : install-std
+
+#
+# text.console
+#
+
+text-console_OBJECTS = text--console.$(OBJEXT)
+
+text--console.$(SOEXT) : $(text-console_OBJECTS)
+	$(MODLINK) text--console.$(SOEXT) $(text-console_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+text--console.c console.sci : $(top_srcdir)/libsrc/text/console.scm
+	$(PRECOMP) -e -P -o text--console $(top_srcdir)/libsrc/text/console.scm
+
+#
+# text.gap-buffer
+#
+
+text-gap-buffer_OBJECTS = text--gap-buffer.$(OBJEXT)
+
+text--gap-buffer.$(SOEXT) : $(text-gap-buffer_OBJECTS)
+	$(MODLINK) text--gap-buffer.$(SOEXT) $(text-gap-buffer_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+text--gap-buffer.c gap-buffer.sci : $(top_srcdir)/libsrc/text/gap-buffer.scm
+	$(PRECOMP) -e -P -o text--gap-buffer $(top_srcdir)/libsrc/text/gap-buffer.scm
+
+#
+# text.gettext
+#
+
+text-gettext_OBJECTS = text--gettext.$(OBJEXT)
+
+text--gettext.$(SOEXT) : $(text-gettext_OBJECTS)
+	$(MODLINK) text--gettext.$(SOEXT) $(text-gettext_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+text--gettext.c gettext.sci : gettext.scm
+	$(PRECOMP) -e -P -o text--gettext $(srcdir)/gettext.scm
+
+#
+# text.line-edit
+#
+
+text-line-edit_OBJECTS = text--line-edit.$(OBJEXT)
+
+text--line-edit.$(SOEXT) : $(text-line-edit_OBJECTS)
+	$(MODLINK) text--line-edit.$(SOEXT) $(text-line-edit_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+text--line-edit.c line-edit.sci : $(top_srcdir)/libsrc/text/line-edit.scm
+	$(PRECOMP) -e -P -o text--line-edit $(top_srcdir)/libsrc/text/line-edit.scm
+
+#
+# text.tr
+#
+
+text-tr_OBJECTS = text--tr.$(OBJEXT)
+
+text--tr.$(SOEXT) : $(text-tr_OBJECTS)
+	$(MODLINK) text--tr.$(SOEXT) $(text-tr_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
+
+text--tr.c tr.sci : $(top_srcdir)/libsrc/text/tr.scm
+	$(PRECOMP) -e -P -o text--tr $(top_srcdir)/libsrc/text/tr.scm

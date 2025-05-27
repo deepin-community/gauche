@@ -1,4 +1,26 @@
 #!/usr/bin/make -f
+# -*- makefile-gmake -*-
+#export DH_VERBOSE=1
+export DH_OPTIONS
 
 %:
 	dh $@
+
+override_dh_auto_clean:
+	-dh_auto_clean
+	rm -f lib/gauche/config.scm
+	find . -name "*.sci" | xargs rm -f
+	find . -type l -name "*.scm" | xargs rm -f
+#	rm -f configure config.sub config.guess
+
+override_dh_auto_configure:
+	dh_auto_configure -- --libdir=\$${prefix}/lib --libexecdir=\$${prefix}/lib \
+	  --enable-multibyte=utf-8 --enable-ipv6 --enable-threads=pthreads \
+	  --with-slib=/usr/share/slib --with-tls=mbedtls \
+	  EXTRA_TEST_LIBS=-lpthread
+
+override_dh_auto_build:
+	dh_auto_build -O--no-parallel
+
+override_dh_auto_install:
+	make DESTDIR=$(CURDIR)/debian/tmp slibcat-in-place install-pkg install-doc

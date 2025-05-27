@@ -1,0 +1,54 @@
+srcdir       = @srcdir@
+top_builddir = @top_builddir@
+top_srcdir   = @top_srcdir@
+abs_srcdir   = @abs_srcdir@
+abs_builddir = @abs_builddir@
+
+include ../Makefile.ext
+
+SCM_CATEGORY = rfc
+
+LIBFILES = rfc--tls.$(SOEXT) rfc--tls--mbed.$(SOEXT)
+SCMFILES = tls.sci tls/mbed.scm
+
+OBJECTS = $(TLS_OBJECTS) $(MBED_OBJECTS)
+
+TLS_OBJECTS = rfc--tls.$(OBJEXT) \
+	      tls.$(OBJEXT)
+
+MBED_OBJECTS = tls-mbed.$(OBJEXT)
+MBEDTLS_CFLAGS = @MBEDTLS_CFLAGS@
+MBEDTLS_LIBS = @MBEDTLS_LIBS@
+SYSTEM_CERT_LIBS = @SYSTEM_CERT_LIBS@
+
+MBEDTLS_INTERNAL = $(top_builddir)/tools/tls/include/mbedtls/ssl.h
+
+@GAUCHE_TLS_SWITCH_MBEDTLS_INTERNAL_yes@MBED_DEP = $(MBEDTLS_INTERNAL)
+@GAUCHE_TLS_SWITCH_MBEDTLS_INTERNAL_no@MBED_DEP =
+
+CONFIG_GENERATED = Makefile
+PREGENERATED =
+XCLEANFILES = rfc--tls.c *.sci
+
+@CROSS_COMPILING_no@all : $(LIBFILES) $(EXTRA_TEST_BIN)
+@CROSS_COMPILING_yes@all : $(LIBFILES)
+
+rfc--tls.$(SOEXT) : $(TLS_OBJECTS)
+	$(MODLINK) rfc--tls.$(SOEXT) $(TLS_OBJECTS) $(EXT_LIBGAUCHE) $(LIBS) $(SYSTEM_CERT_LIBS)
+
+tls.sci rfc--tls.c : tls.scm
+	$(PRECOMP) -e -P -o rfc--tls $(srcdir)/tls.scm
+
+tls.o : tls.c in_gauche_cacert_path.c
+
+rfc--tls--mbed.$(SOEXT) : $(MBED_OBJECTS)
+	$(MODLINK) rfc--tls--mbed.$(SOEXT) $(MBED_OBJECTS) $(EXT_LIBGAUCHE) \
+	   $(MBEDTLS_LIBS) $(LIBS) $(SYSTEM_CERT_LIBS)
+
+tls-mbed.o : tls-mbed.c load_system_cert.c in_gauche_cacert_path.c $(MBED_DEP)
+	$(COMPILE) $(MBEDTLS_CFLAGS) -c $(srcdir)/tls-mbed.c
+
+$(MBEDTLS_INTERNAL) :
+	cd $(top_builddir)/tools/tls; $(MAKE)
+
+install : install-std

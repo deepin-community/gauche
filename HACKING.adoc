@@ -1,0 +1,254 @@
+= How to hack the cutting-edge Gauche
+
+NOTE: This document is for those who wants to hack the bleeding-edge
+Gauche source from the git repository.  If you just want to
+compile from the distribution, you don't need to read any further.
+
+
+== TOOLS REQUIRED FOR BUILDING
+
+=== On Unix platforms
+
+In order to build Gauche from the git sources, instead of from
+the distribution, you need to have the *latest* release of
+Gauche installed on your machine, for it is required to generate
+some C files.   If you don't have one, grab the release tarball
+and install it.
+
+You also need a C compiler supporting C11, e.g. `gcc` (>= 4.9) or `clang` (>= 3.3),
+`autoconf` (>= 2.71), `automake` (>= 1.14.1),
+`libtool` (>= 2.4.2), and `pkg-config` (>= 0.26).
+(Note on macOS users: Xcode now only includes subset
+of `autotools`.  You have to install full set either manually
+or thru MacPorts or Homebrew.  Xcode's `libtool` *does not work*).
+
+The git source tree doesn't include `configure` scripts.
+You can use the `DIST` script like the following to generate them.
+
+[source,console]
+----
+$ ./DIST gen
+----
+
+Afterwards, you just do the usual `./configure` + `make`.  For
+the configure options, see the link:INSTALL.adoc[].
+
+In case if the latest release of Gauche can't be built on your
+target machine but the fix is already in the HEAD, you need to
+take more steps -- you need the source with that fix, but in order
+to build it, you need the latest release of Gauche installed,
+which you can't.  If you stuck in this Catch-22 situation, you
+have to generate tarball on other machines.  Find a Linux box
+(or BSD, or most Unix box would do) and take the following steps:
+
+1. Build and install the latest release of Gauche on that box
+
+2. Clone the source on that box, and build the HEAD as explained above.
+
+3. Run
++
+[source,console]
+----
+$ ./DIST tgz
+----
++
+This creates a tarball `Gauche-_$VERSION_.tgz` in the parent
+directory of the source tree.
+
+4. Copy the created tarball to your target machine, untar,
+configure and build.  The created tarball includes generated
+files, so you don't need Gauche in this step.
+
+Note for seasoned libtool/automake users: the git source tree
+includes files that are usually generated automatically by
+autotools, such as `aclocal.m4`, `ltmain.sh`, `src/gauche/config.h.in`,
+etc.  Avoid clobbering these files, unless you're sure you want
+to do so.  If your autotools version doesn't match mine,
+it tends to break.
+
+
+=== On Windows
+
+The recommended way to build Gauche on Windows is mingw-w64 and
+MSYS2.  If you want to build from git source, you need Gauche
+of the latest release to be installed.  The easiest way is to
+grab the windows installer from https://practical-scheme.net/gauche.
+For the details of build procedure, see link:doc/HOWTO-mingw.adoc[].
+
+You can build Gauche with Cygwin, but it is no longer actively supported.
+
+Some effort was made to build Gauche with MSVC.  You can find
+project files under winnt.  Unfortunately though, it is so
+much pain to make it work and keep it updated with newer Gauche
+source tree, and now they are quite obsolete.
+
+
+== BUILD STEPS
+
+After `confiugre`, just running `make` build everything.  But you want to
+know how build process proceeds if you got into trouble hacking it.  Here's
+the internal steps after you type `make`.
+
+1. The Boehm-Demers-Weiser garbage collector (bdwgc) is built under `gc/`.
+We included the bdwgc source instead of relying on the shared library,
+since we need a custom configure options to be optimal for Gauche memory
+usage pattern.
+
+2. The 'core' engine is built under `src/`.  This includes `libgauche-X.so`
+and `libgauche-static-X.a`, and the `gosh` command.  Some sources are
+written in Gauche, so they need to be processed with working Gauche;
+thus you require the latest release of Gauche installed on your system.
+Note that, at this point, no precompiled extensions under `ext/` are
+available.  If you simply 'use' one of those modules during the building,
+it can't load the module.  To avoid this, the host `gosh` loads
+a file link:src/preload.scm[], which lists the modules the host gosh
+need to load from the host environment, not from the source tree.
+
+3. The extensions are built under `ext/`.   If it's not cross compiling,
+this process uses the freshly built `gosh` in `src/`.  Some modules under
+this directory have C code, while others are pure Scheme.  The pure Scheme
+source may be placed under `libsrc/`, so that those modules are available
+during the build process; that is, during the build process the modules
+are loaded in the source form from `libsrc/`, and once the build is
+completed, they are dynamically loaded as precompiled modules.
+
+4. Documents under `doc/` is built.  Info documents are built only when
+the system has newer makeinfo.
+
+
+Knowing which module is used during build, the one in the host environment
+or the one in the source tree, is important.  Modules listed in `preload.scm`
+are from the host environment, which means you can't use the feature
+added after the latest release of Gauche to build the current source.
+
+You can make sure that the source tree is buildable both by the latest
+relase _and_ the current built, by running `./DIST self-host-test`.
+It also checks if out-of-tree build works.  It performs the following
+opertaions:
+
+- It cleans the source tree (by `make maintainer-clean` and regenerate
+configure scripts.
+- It creates a temporary directory and run `configure` in it.  This
+sets up out-of-tree build.
+- It builds Gauche using the host environment (latest release) and
+runs the tests.
+- It installs the built Gauche inside the temporary directory.
+- It builds Gauche again, using the freshly built Gauche, and
+runs the tests again.
+
+It leaves a temporary directory `../Gauche-tmp-self-host-test` afterwards,
+so that it's easier to investigate if something goes wrong.  You can
+remove that directory if build succeeds.
+
+=== `*.sci` files
+
+After building the source, you'll see files with `sci` suffix.  It stands
+for 'SCheme Interface'.  It is generated from `*.scm` file with
+`precomp`, and contains `define-module` form with using modules and
+exporting symbols, and a form to dynamically load precompiled file.
+
+If you have `foo.scm` and `foo.sci` in the same directory and you
+try to load `foo`, `sci` take precedence.  Usually, if you change
+the source `\*.scm` file and run `make`, the `*.sci` file is
+regenerated.  But if you forgot to run `make`, you may wonder
+why the changes you did in `*.scm` file aren't reflected.
+
+If you're not sure which file is actually loaded, run `gosh` with
+`-fload-verbose` option; it reports the exact pathname of each
+loaded file.
+
+The `\*.sci` files are renamed to `*.scm` when installed, so you won't
+see them in the installation directory.
+
+The reason that we use `*.sci` files is for the precompiler not to
+overwrite the source file.  See link:doc/HOWTO-precompile.adoc[] for
+the details.
+
+
+== DEPENDENCIES
+
+Quite a few files are generated by Gauche itself if you build
+Gauche from scratch.  Consequently, there are quite a few nasty
+dependency issues.  If you modify files listed below, be careful
+not to introduce undesirable dependencies.
+
+- The compiler (`compile*.scm`) shouldn't depend on anything that
+  are not compiled into the libgauche core.   An exception is
+  `util.match`; it's ok since it is just a macro and all `match`
+  forms are expanded fully in precompilation.
+
+- `precomp`, `genstub`, `geninsn` shouldn't depend on the extension
+  modules except the '`pre-loaded`' ones in `BUILD_GOSH`.
+
+- An extension compiled by `precomp` shouldn't depend on other
+  extensions compiled by `precomp`.  This is because `precomp` is
+  run by `BUILD_GOSH` and it may not be able to load the other
+  extensions compiled for the target `gosh`.
+
+- `ext/xlink` shouldn't depend on anything that requires loading
+  extension modules, since it is called before all the extension
+  modules are generated.
+
+
+== CROSS COMPILATION
+
+In a normal compilation, extension modules (`+ext/*+`) are build
+using the new gosh just built in `src/`.  However, we can't
+run `src/gosh` when we're cross compiling.  So you need to
+install *this version of Gauche* compiled on your platform beforehand.
+Then, configure with the ordinary cross-compiling options.
+
+
+== CHANGELOGS
+
+We have link:ChangeLog[] file to record changes of new features, APIs, or
+internal changes large enough so that other developers need to be
+aware of.  Small changes like '`quick fix of the bug introduced
+in the last commit`', or documentation additions, don't need to
+be recorded.
+
+In the age of distributed development, ChangeLog seems becoming
+obsolete, for it causes conflicts easily.  Yet I still see it worth,
+for it is one-stop place where somebody who tries to grasp what was
+changed since some point of time.  SCM's commit log doesn't replace
+that role -- commit logs comes with every commit, however little it
+is, and those small trivial logs are just noise to those want to
+know changes that matter.  Also, commit logs are inherently per-commit,
+so it's not a good place to describe overall intention or a plan
+of series of changes.
+
+To keep ChangeLog in that role *and* to be friendly to distributed
+development, I suggest that you don't update ChangeLog unless you
+feel you really want to.  If I see your change is better mentioned
+in ChangeLog, I'll update it separately.
+
+
+== CODING STYLE
+
+We aren't picky about coding style, but adopt some Gauche-specific
+style, especially for Gauche macros.  For Emacs users, such style is
+written in `.dir-locals.el` in the top source directory.  The Emacs
+package `lisp-local` (available from MELPA) can automatically apply
+the settings.
+
+
+== TROUBLESHOOTING
+
+If your modification break something fundamental and you can't even
+get to REPL, there are a couple of tricks to isolate the problem.
+
+- Run gosh with `-q` option, e.g. `./gosh -ftest -q`.  It suppresses
+  loading startup files, e.g. it won't read any external Scheme files,
+  nor loading DSO files, before getting to a REPL prompt.   If you get
+  `gosh>` prompt, then the issue is the loading of runtime files.
+-- Run gosh with `./gosh -ftest -fload-verbose` option and see which
+   startup file causes the trouble.
+-- With the bare REPL from `./gosh -ftest -q`, try to load or evaluate
+   offending files/expressions to figure out the issue.  Note that
+   the 'bare' REPL only have minimal features---no toplevel commands,
+   no line editing, etc.
+
+- If you can't even get to REPL with `-q`, it is likely that something
+  is broken during initialization.  Run `gosh` with an environment variable
+  `GAUCHE_DEBUG_INITIALIZATION` set.  It reports which component is being
+  initialized.

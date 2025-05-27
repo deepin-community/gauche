@@ -1,0 +1,387 @@
+// -*- coding: utf-8 -*-
+:source-highlighter: pygments
+
+
+= Compiling and Installing Gauche
+
+NOTE: The Gauche system is a work in progress and frequently updated.
+Check out the latest information on the site:
+https://practical-scheme.net/gauche/
+
+This document explains how to compile and install Gauche from a distributed
+tarball.   To compile from cloned source tree from the repository,
+you need some extra steps; See the file link:HACKING.adoc[] for the details.
+
+
+== Prerequisites
+
+
+You need the standard build tools of the Unix environment, and
+GNU make.
+
+Besides that, the following
+tools and libraries are recommended to have.  You can build Gauche without
+them, but some features won't be available.
+
+- Makeinfo (version 5.0 or later) - used to build info document.
+If the build platform doesn't have it, document building is skipped and info
+document won't be installed.  (You need info document to use online document
+browsing from REPL.)
+- Gzip - also used during document building.
+- Libiconv - Used for character encoding conversion.  See below.
+- link:https://tls.mbed.org/[Mbed TLS] - Used for TLS/SSL connection.  See below.
+
+There are other optional libraries, which will be explained below.
+
+To build on Windows, you can use MSYS/MinGW.
+See link:doc/HOWTO-mingw.adoc[] for the details.
+
+
+== Quick Start
+
+[source,console]
+----
+% ./configure
+% make
+% make check
+% make install
+----
+
+Things will be installed under `/usr/local/bin`, `/usr/local/lib/gauche`,
+and `/usr/local/share/gauche`.
+
+If you have installed Gauche before, and want to install
+new version of Gauche with the same configuration option,
+you can use the following command instead of `configure`.
+
+[source,console]
+----
+% gauche-config --reconfigure | sh
+----
+
+When the option `--reconfigure` is given, `gauche-config` prints out
+the command line when it is configured.   Pass the output to
+shell and you can reconfigure with the same options.  It is a
+convenient way to update Gauche.
+
+
+== TLS/SSL support
+
+Gauche relies on link:https://tls.mbed.org/[MbedTLS] for secure
+connection support.
+
+By default, `configure` checks if the MbedTLS library is installed
+on the system, and use it if it's available.  Otherwise, no TLS support
+is compiled.  If you can't install MbedTLS for some reason,
+or you want to bring the compiled binary to the target system that
+may not have MbedTLS library, you can specify to download MbedTLS
+source during build and compile it into Gauche binary.
+
+[horizontal]
+`--with-tls=none`          :: do not include TLS/SSL support
+`--with-tls=mbedtls`       :: include only mbedTLS support
+`--with-tls=mbedtls-internal` :: During the build, MbedTLS source is downloaded
+                            and compiled with Gauche.  See below.
+
+
+If you give `mbedtls-internal` in place of `mbedtls`, the build process downloads
+MbedTLS source and compile it into Gauche's extension library.  The resulting
+binary doesn't depend on system's MbedTLS dynamic library, so you can move it
+to the systems that don't have MbedTLS.   You need CMake to use this option.
+Note that if you use `mbedtls-internal`, MbedTLS code is included in
+`rfc--tls--mbed.so` and `libgauche-static-*.a`, so they are subject to the
+MbedTLS license as well (Apache License 2.0).
+
+MbedTLS library can be compiled with or without multi-threading support.
+Gauche requires MbedTLS library to be compiled with multi-threading support.
+If the system's library doesn't have that support, use the option to
+build it into Gauche library.
+
+If you use TLS, you need CA certificates bundle to validate
+server certificates.  You may specify several options where to look for one.
+
+[horizontal]
+`--with-ca-bundle=check`   :: Use heuristics to find CA bundle (default)
+`--with-ca-bundle=none`    :: Do not set default CA bundle
+`--with-ca-bundle=system`  :: Use system CA bundle.
+                              On MinGW, it accesses system CA store via
+                              Windows API.  Otherwise, it checks several
+                              known paths used for popular systems.
+`--with-ca-bundle=<path>`  :: Use given path as the CA bundle file
+
+
+See the manual's `rfc.tls` entry for the details.
+
+
+== Common command names
+
+SRFI (Scheme Requrests for Implementation), where various aspects of
+Scheme spec are discussed, suggests some common names for Scheme-related
+commands if the implementation comforms certain specs.  Those command
+names may be used by other implementation, so we don't install them
+by default.
+
+If you give `--enable-shared-commands` option, the following commands are
+installed:
+
+
+  `scheme-r7rs`, `scheme-srfi-0`, `scheme-srfi-7`::
+     Aliases of `gosh`.
+
+  `compile-r7rs`::
+     Alias of `gauche-compile-r7rs`.
+
+
+
+== DBM database support
+
+By default, Gauche looks for gdbm, ndbm and odbm (original dbm) libraries
+on your system, and build support for available libraries.
+
+If you want to exclude any of these support, list the libraries you
+want to *inlucde* in `--with-dbm` configure option.  For example,
+if you want to include ndbm and odbm but nothing else,
+specify `--with-dbm=ndbm,odbm`.
+If you want to include none of them, specify `--with-dbm=no`.
+
+
+== Character encoding conversion
+
+Gauche can recognize and converts Unicode (UTF-8, 16, 32), Latin-N, and
+typical japanese character encodings, but delegates other conversion work
+to iconv library (when available).   If your system does not have iconv
+installed in the standard location, you can specify the location of your
+external iconv library by `--with-iconv` option.
+
+[source,sh]
+----
+--with-iconv=DIR
+----
+
+
+For example, if your say `--with-iconv=/usr/local`, Gauche looks
+for the header iconv.h from `/usr/local/include` and the library
+libiconv from `/usr/local/lib`.
+In case if your iconv library is named other than libiconv, say,
+`libmyconv`, you can also specify `--with-iconv-lib=myconv` to tell
+Gauche to link against the library.
+
+You can obtain Bruno Haible's libiconv library from here:
+https://www.gnu.org/software/libiconv/
+
+
+== Local library paths
+
+If you want to use some libraries installed in non-standard location
+to build Gauche, you can use the following option to specify the
+locations.
+
+[source,sh]
+----
+--with-local=PATH:PATH2:...
+----
+
+This addts `PATH/include`, `PATH2/include`, ... to the include paths,
+and `PATH/lib`, `PATH2/lib`, ... to the library search paths.
+
+For example, if you want to use gdbm library in `/usr/local`,
+you can say:
+
+[source,sh]
+----
+--with-local=/usr/local
+----
+
+
+== Selecting SLIB location
+
+link:http://people.csail.mit.edu/jaffer/SLIB[SLIB]
+is a portable Scheme library containing various useful functions,
+entirely written in Scheme.  Gauche can use SLIB features if you have
+it on your system.
+
+The configure script tries to find where SLIB is installed.  It looks
+for some typical directories like `/usr/local/slib` or `/usr/share/slib`.
+If you installed your SLIB in some non-standard location, you can tell
+it to the configure script as follows:
+
+[source,sh]
+----
+./configure --with-slib=PATH
+----
+
+where `PATH` is the path you installed your SLIB.
+
+Gauche works without SLIB, anyway.  If you're not interested, you
+don't need to care about this.
+
+SLIB needs a catalog file to be created in the Gauche library
+directory before use.  If Gauche finds SLIB during installation,
+the install procedure creates the catalog file.
+If you install slib after installing Gauche, it tries to create
+the catalog file when you use slib first time, and you may get
+an error if you don't have a permission to write into the
+Gauche library directory.   Run `gosh` in the right permission
+and evaluate something like the following will solve the problem.
+
+[source,scheme]
+----
+(use slib)
+(require 'logical)
+----
+
+
+== Run-time library path
+
+In some cases, your have to run Gauche under the environment
+you don't have much control.  One of such cases is when you
+want to run CGI script on the ISP's machine.  It may become
+a problem that your build of Gauche depends on some dynamically
+loaded libraries that are installed in non-standard location.
+
+For example, suppose you install a new `libiconv.so` in `/home/yours/lib`
+on the ISP's server and compile Gauche with `--with-iconv=/home/yours/lib`.
+You have set up correct environment variables such as `LD_LIBRARY_PATH`,
+so you can invoke Gauche interpreter `gosh` without a problem.  Now,
+you write a CGI script.   Unfortunately, the ISP's web server
+doesn't set `LD_LIBRARY_PATH` as you desired, and your script never
+runs on the server, for the interpreter can't find `libiconv.so`
+in the system default path.
+
+Some compilers have an option that writes exact path of shared
+libraries that the binary depends on.  A `configure` option `--with-rpath`
+utilizes the feature.  When an option `--with-rpath=DIR` is given,
+configure sets up a build process so that the shared libraries
+are looked from `DIR`.   This works only on `gcc`, however.
+
+
+== Customizing install location
+
+Call configure with those parameters to specify where to install.
+
+[source,console]
+----
+% ./configure --prefix=$PREFIX  --exec-prefix=$EXEC_PREFIX
+----
+
+
+If `--prefix` option is omitted, `/usr/local` is assumed as `PREFIX`.
+If `--exec-prefix` option is omitted, `EXEC_PREFIX` is set the same as `PREFIX`.
+
+
+The files are installed in those locations:
+
+  `$EXEC_PREFIX/bin/*`::
+     The interpreter (`gosh`) and configuration script (`gauche-config`).
+
+  `$EXEC_PREFIX/lib/*`::
+     Library (`libgauche.a`).
+
+  `$PREFIX/share/gauche/VERSION/include/*`::
+     Header files required to create applications using libgauche.
+
+  `$PREFIX/share/gauche/VERSION/lib/*`::
+     Machine-independent Scheme files.
+
+  `$PREFIX/share/info/*`::
+     info files.
+
+  `$EXEC_PREFIX/lib/gauche/VERSION/ARCHITECTURE/*`::
+     Machine-dependent files (`.so` files, `gosh`, `gauche-config`, and `libgauche.a`)
+
+  `$PREFIX/share/gauche/site/lib/*`::
+  `$EXEC_PREFIX/lib/gauche/site/VERSION/ARCHITECTURE/*`::
+     These are default locations where user installed
+     machine-independent/dependent files will go.
+
+
+== Optimization options
+
+
+You can pass extra options at make time, using `make` macro `OPTFLAGS`.
+`configure` sets a default, but if you want to explore different
+options, just run `make` as follows:
+
+[source,sh]
+----
+make OPTFLAGS="--some-compiler-option --other-option"
+----
+
+
+== Uninstallation
+
+You can remove installed Gauche software by running
+
+[source,sh]
+----
+make uninstall
+----
+
+on top of the source tree.
+
+
+== Cross compilation
+
+Gauche supports autotools-standard cross compilation, that is,
+you give `--build` and `--host` option to `configure` script and
+just make (assuming you have appropriate cross development tools).
+There are a couple of caveats, though.
+
+- You have to have the same version of Gauche that you're trying to
+  cross-compile on the build machine.
++
+In normal build, Gauche uses freshly built `gosh` to compile
+extension libraries (under `ext/`).  While cross compiling we can't run
+freshly built `gosh` on the build machine, so we rely on the `gosh` already
+installed on it.
+
+- You may need `--with-libatomic-ops=no` option for `./configure`
++
+The option forces Gauche to use bundled `libatomic_ops` source instead
+of system provided one.  We noticed that `./configure` may misunderstood
+the build system's `libatmic_ops` as the host system's.
+
+For example, the following command line is to cross build on your machine
+for Windows (mingw-w64 32bit):
+
+[source,sh]
+----
+./configure --build=`./config.guess` \
+            --host=i686-w64-mingw32 \
+            --with-libatomic-ops=no \
+            --prefix=/usr/local
+----
+
+== Machine-dependent information
+
+
+* MacOS X - 10.15 (Catalina) enhanced the security check, and doesn't allow
+  to execute shell scripts extracted from an unsigned downloaded tarball.
+  Run the following command after extractng tarball
+  (Replace VERSION for Gauche's version).
+  You can check if the tarball isn't tampered using asc signature file
+  distributed from https://practical-scheme.net/vault/.
++
+[source,sh]
+----
+xattr -r -d com.apple.quarantine Gauche-VERSION/
+----
+
+* IRIX with 64bit binary - If you want to compile for 64bit ABI instead
+  of the default 32bit ABI, run configure like this:
++
+[source,sh]
+----
+CC="cc -64" AS="as -64" ./configure
+----
+
+* Linux/Crusoe TM5800 - It is reported that recent Linux kernel thinks
+  TM5800 as i686-compatible, and compilation of Gauche fails at
+  gc where the i686's prefetch instruction is used.
+  If you want to disable this machine-dependent heuristic optimization,
+  run configure like this:
++
+[source,sh]
+----
+./configure --disable-heuristic-optimization
+----

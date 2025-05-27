@@ -1,5 +1,1114 @@
-template-repository (1.0-1) unstable; urgency=medium
+gauche (0.9.15-p2+20241205-4) unstable; urgency=medium
 
-  * Initial release
+  * debian/patches/61_not_test_net_with_user42: Rename.
+  * debian/patches/series: Update.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 24 Dec 2024 11:43:31 +0900
+
+gauche (0.9.15-p2+20241205-3) unstable; urgency=medium
+
+  * debian/patches/61_test_net_only_with_localhost: New.
+    (Closes: #1091021)
+  * debian/patches/series: Update.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 23 Dec 2024 11:37:35 +0900
+
+gauche (0.9.15-p2+20241205-2) unstable; urgency=medium
+
+  * debian/control (Build-Depends): Remove slib.
+  * debian/gauche.install: Update for slibcat removal.
+  * debian/patches/60_no_slibcat: New.
+  * debian/patches/series: Update.
+  * debian/NEWS: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 17 Dec 2024 14:20:01 +0900
+
+gauche (0.9.15-p2+20241205-1) unstable; urgency=medium
+
+  [ Jens Thiele ]
+  * New upstream release.
+  * debian/patches/series: Update.
+  * debian/gauche.install: Update.
+  * debian/gauche-dev.install: Update.
+  * debian/libgauche-0.98-0.symbols: Update.  
+  * debian/patches/59_make_clean.patch: New.
+
+  [ NIIBE Yutaka ]
+  * debian/patches/02_linking.patch: Refresh.
+  * debian/patches/03_rm_without_xlink.patch: Refresh.
+  * debian/patches/16_no_LIBS.patch: Refresh.
+  * debian/patches/20_check_exit_status.patch: Refresh.
+  * debian/patches/23_sh4_requires_mieee.patch: Refresh.
+  * debian/patches/26_no_microversion_in_soname.patch: Refresh.
+  * debian/patches/42_cflags_reproducible.patch: Refresh.
+  * debian/patches/43_makedoc_gzip_best.patch: Refresh.
+  * debian/patches/59_make_clean.patch: Refresh.
+  * debian/patches/52_mbedtls_3_6_0.patch: Remove.
+  * debian/patches/53_make_clean.patch: Remove.
+  * debian/patches/54_0915-p1.patch: Remove.
+  * debian/patches/55_0915-p1-generated.patch: Remove.
+  * debian/control (Build-Depends): pkg-config => pkgconf.
+  * debian/rules: Remove 'touch lib/srfi-0.scm'.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 06 Dec 2024 09:54:47 +0900
+
+gauche (0.9.15-2) unstable; urgency=medium
+
+  * debian/patches/54_0915-p1.patch: New.
+  * debian/patches/55_0915-p1-generated.patch: New.
+  * debian/gauche.install: Update.
+  * debian/control (Build-Depends): Require debhelper-compat = 13.
+  * debian/compat: Remove.
+  * debian/rules: Add 'touch lib/srfi-0.scm' for generated files.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 27 Nov 2024 10:51:03 +0900
+
+gauche (0.9.15-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/patches/48_verbose_dup_output.diff: Remove.
+  * debian/patches/49_parallel_gc.diff: Remove.
+  * debian/patches/50_extended_pair_alignment.patch: Remove.
+  * debian/patches/51_signed_overflow.patch: Remove.
+  * debian/patches/52_mbedtls_3_6_0.patch: cherry pick 4a0e889934
+    Thanks to Andrea Pappacoda for pointing this out.
+    (Closes: #1075825)
+  * debian/patches/series: Update.
+  * debian/gauche.install: Update.
+  * debian/libgauche-0.98-0.symbols: Update.
+  * debian/patches/53_make_clean.patch: New.
+  * debian/changelog: Remove trailing whitespace.
+
+ -- Jens Thiele <karme@karme.de>  Fri, 15 Nov 2024 08:09:09 +0100
+
+gauche (0.9.14-5) unstable; urgency=medium
+
+  * debian/patches/51_signed_overflow.patch: Fixed with a paren.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 04 Apr 2024 09:11:53 +0900
+
+gauche (0.9.14-4) unstable; urgency=medium
+
+  * LoongArch is supported in upstream: Thanks to Dandan Zhang
+    (Closes: #1059556).
+  * debian/patches/51_signed_overflow.patch: New.
+  * debian/patches/series: Update.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 03 Apr 2024 11:46:12 +0900
+
+gauche (0.9.14-3) unstable; urgency=medium
+
+  * debian/patches/50_extended_pair_alignment.patch: New
+  (Closes: #1068205).
+  * debian/patches/series: Update.
+  * debian/control (Build-Depends): Require newer dpkg-dev.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 02 Apr 2024 15:02:58 +0900
+
+gauche (0.9.14-2) unstable; urgency=medium
+
+  * debian/control: make gauche-dev depend on libmbedtls-dev
+
+ -- Jens Thiele <karme@karme.de>  Thu, 28 Mar 2024 15:42:59 +0100
+
+gauche (0.9.14-1) unstable; urgency=medium
+
+  * New upstream release 0.9.14.
+  * debian/patches/series:
+    remove 44_endian_not_asm_byteorder_h.patch
+    remove 30_link_pthread.patch
+    remove 40_tls_test_localhost.patch
+  * debian/gauche.install: update
+  * debian/gauche-dev.install: update
+  * debian/libgauche-0.98-0.symbols: update
+  * debian/patches/49_parallel_gc.diff: cherry pick 89d270ce5
+
+ -- Jens Thiele <karme@karme.de>  Thu, 28 Mar 2024 14:54:35 +0100
+
+gauche (0.9.13-2) unstable; urgency=medium
+
+  * debian/patches/48_verbose_dup_output.diff: Added.
+
+ -- Jens Thiele <karme@karme.de>  Tue, 14 Nov 2023 17:08:04 +0100
+
+gauche (0.9.13-1) unstable; urgency=medium
+
+  * New upstream release. (Closes: #1023035)
+  * debian/control (Package): Rename libgauche-0.97-0 to libgauche-0.98-0,
+    following the soname change of upstream.
+  * debian/patches/46_ctermid.patch: Remove as upstream fixed it.
+  * debian/patches/34_alpha_stackbottom.patch: Disabled for now as it
+    resulted in a segmentation fault.
+  * debian/patches/42_hppa_libatomic_ops.patch: Remove as no longer needed.
+  * debian/patches/43_makedoc_gzip_best.patch: Update.
+  * debian/patches/39_net_test.patch: Update.
+  * debian/patches/47_ctermid_c.patch: Remove as upstream fixed it.
+  * debian/patches/15_ext_termios.patch: Disable for now, must be merged.
+  * debian/*install: Update.
+  * debian/libgauche-0.98-0.symbols: Rename from libgauche-0.97-0.symbols.
+  * debian/libgauche-0.98-0.install: Rename from libgauche-0.97-0.install.
+
+ -- Jens Thiele <karme@karme.de>  Mon, 06 Nov 2023 08:23:53 +0100
+
+gauche (0.9.10-3) unstable; urgency=medium
+
+  * debian/patches/46_ctermid.patch: New.  Fixes FTBFS for mipsel.
+  * debian/patches/47_ctermid_c.patch: New.
+  * debian/patches/series: Update.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 23 Dec 2020 13:46:09 +0900
+
+gauche (0.9.10-2) unstable; urgency=medium
+
+  * debian/patches/28_test_under_pty.patch: Remove.
+  * debian/patches/series: Update.
+  * debian/compat: Upgrade to 13.
+  * debian/libgauche-0.97-0.symbols: Update.
+    (Build-Depends-Package): Add.
+  * debian/control (Build-Depends): Require newer debhelper.
+    (Standards-Version): Conforms to 4.5.1.
+    (Rules-Requires-Root): Add.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 21 Dec 2020 10:47:20 +0900
+
+gauche (0.9.10-1) unstable; urgency=medium
+
+  [ Jens Thiele ]
+  * New upstream release
+
+  [ NIIBE Yutaka ]
+  * Recover patch files for Debian buildd:
+    - debian/patches/28_test_under_pty.patch
+    - debian/patches/35_axtls_error.patch
+  * debian/patches/02_linking.patch: Update.
+  * debian/patches/03_rm_without_xlink.patch: Update.
+  * debian/patches/15_ext_termios.patch: Update.
+  * debian/patches/20_check_exit_status.patch: Update.
+  * debian/patches/23_sh4_requires_mieee.patch: Update.
+  * debian/patches/26_no_microversion_in_soname.patch: Update.
+  * debian/patches/28_test_under_pty.patch: Update.
+  * debian/patches/34_alpha_stackbottom.patch: Update.
+  * debian/patches/39_net_test.patch: Update.
+  * debian/patches/40_tls_test_localhost.patch: Update.
+  * debian/patches/44_endian_not_asm_byteorder_h.patch: Update.
+  * debian/libgauche-0.9-0.symbols: Update.
+  * debian/control (Package): Rename libgauche-0.9-0 to libgauche-0.97-0,
+    following the soname change of upstream.
+  * debian/libgauche-0.97-0.symbols: Rename from libgauche-0.9-0.symbols.
+  * debian/libgauche-0.97-0.install: Rename from libgauche-0.9-0.install.
+  * debian/patches/31_ldflags_for_ext.patch: Add -l@LINKGAUCHE@.
+  * debian/gauche-doc.lintian: Remove.
+  * debian/patches/series: Don't apply 35_axtls_error.patch, because we
+    don't use axTLS now.  Keep the patch, because upstream doesn't remove
+    it yet.
+  * debian/patches/28_test_under_pty.patch: Rewrite to fix generating
+    wrong "aborted" entry (Closes: #957256).
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 18 Dec 2020 16:11:10 +0900
+
+gauche (0.9.10~rc1-1) unstable; urgency=medium
+
+  * New upstream release
+  * 45_reproducible_sort_files.patch: Remove.
+  * 28_test_under_pty.patch: Remove
+  * 35_axtls_error.patch: Remove
+  * debian/control (Build-Depends): Add openssl and libmbedtls-dev
+  * debian/rules: configure --with-tls=mbedtls
+  * debian/*install: Update.
+  * debian/doc: Update.
+
+ -- Jens Thiele <karme@karme.de>  Thu, 12 Nov 2020 11:27:36 +0100
+
+gauche (0.9.6-10) unstable; urgency=medium
+
+  * debian/patches/45_reproducible_sort_files.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 18 Oct 2018 09:07:27 +0900
+
+gauche (0.9.6-9) unstable; urgency=medium
+
+  * debian/patches/34_alpha_stackbottom.patch: Add again.
+  * debian/rules (override_dh_auto_build): Add with --no-parallel.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 16 Oct 2018 17:20:37 +0900
+
+gauche (0.9.6-8) unstable; urgency=medium
+
+  * debian/control (Build-Depends): Add libgdbm-dev version requirement.
+  * debian/patches/45_avoid_duplicate_LDFLAGS.patch: Remove.
+  * debian/patches/42_cflags_reproducible.patch: More fix.
+  * debian/patches/31_ldflags_for_ext.patch: Fix.
+  * debian/libgauche-0.9-0.postinst: Remove.
+  * debian/libgauche-0.9-0.postrm: Remove.
+  * debian/watch: Update.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 15 Oct 2018 15:01:36 +0900
+
+gauche (0.9.6-7) unstable; urgency=medium
+
+  * debian/rules: Use dh_auto_configure.
+  * debian/patches/45_avoid_duplicate_LDFLAGS.patch: New.
+  * debian/patches/42_cflags_reproducible.patch: Fix.
+  * libgauche-0.9-0.symbols: Update for kfreebsd-amd64, x32 and alpha.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Sat, 06 Oct 2018 16:42:19 +0900
+
+gauche (0.9.6-6) unstable; urgency=medium
+
+  * debian/patches/44_endian_not_asm_byteorder_h.patch: New.
+
+  * libgauche-0.9-0.symbols: Update for ppc64, ppc64el, s390x, mips,
+  armel, mips64el, armhf, hppa, mipsel and ia64 (notyet: alpha, x32).
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 05 Oct 2018 17:27:34 +0900
+
+gauche (0.9.6-5) unstable; urgency=medium
+
+  * debian/rules: Add ac_cv_prog_OPENSSL="" to disable openssl.
+  * debian/patches/42_hppa_libatomic_ops.patch: Enable again with update.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 05 Oct 2018 10:00:04 +0900
+
+gauche (0.9.6-4) unstable; urgency=medium
+
+  * debian/control (Build-Depends): Remove libatomic-ops-dev, use internal
+  version instead.  Remove openssl to skip tests in ext/tls which doesn't
+  work with newer version, because of deprecated keysize.
+
+  * debian/libgauche-0.9-0.symbols: Update to include AO_* symbols.
+  Update for arm64.
+
+  Update patches to include some description.
+  * debian/patches/40_tls_test_localhost.patch: Update
+  * debian/patches/41_link_libatomic.patch: Update
+  * debian/patches/42_cflags_reproducible.patch: Update
+  * debian/patches/43_makedoc_gzip_best.patch: Update
+
+  Remove patches for older libgc.
+  * debian/patches/17_libgc_thread_local_for_archs.patch: Remove
+  * debian/patches/27_libgc_fix__data_start.patch: Remove
+  * debian/patches/34_alpha_stackbottom.patch: Remove
+  * debian/patches/36_sparc.patch: Remove
+  * debian/patches/38_libgc_ppc64el.patch: Remove
+  * debian/patches/42_hppa_libatomic_ops.patch: Remove
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 05 Oct 2018 08:31:25 +0900
+
+gauche (0.9.6-3) unstable; urgency=medium
+
+  * debian/control (Standards-Version): Conforms to 4.2.1.
+  * debian/patches/41_link_libatomic.patch: Update.
+  * debian/patches/43_makedoc_gzip_best.patch: New.
+  * debian/rules (GZIP): Remove.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 04 Oct 2018 14:19:37 +0900
+
+gauche (0.9.6-2) unstable; urgency=medium
+
+  * debian/libgauche-0.9-0.symbols: Update for m68k and powerpcspe.
+  * debian/patches/39_net_test.patch: Test with localhost.
+  * debian/patches/40_tls_test_localhost.patch: New.
+  * debian/patches/41_link_libatomic.patch: New.
+  * debian/patches/42_cflags_reproducible.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 04 Oct 2018 10:12:32 +0900
+
+gauche (0.9.6-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/compat: Upgrade to 11.
+  * debian/control (Standards-Version): Conforms to 4.1.3.
+  (Build-Depends): Requiring debhelper >=11, remove quilt, autotools-dev,
+  autoconf, and automake.  Require libatomic-ops-dev and openssl.
+  (Vcs-*): New.
+  (Maintainer): Don't use mailing list (Closes: #899898).
+  * debian/patches/*.patch: Update.
+  * debian/patches/series: Exclude libgc patches.
+  * debian/rules: Use libgc as is.
+  * debian/gauche-dev.install: Update.
+  * debian/gauche.install: Update.
+  * debian/libgauche-0.9-0.install: Update.
+  * libgauche-0.9-0.symbols: Update.  Remove reference to libatomic.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 03 Oct 2018 13:31:00 +0900
+
+gauche (0.9.5-1) unstable; urgency=medium
+
+  * debian/libgauche-0.9-0.symbols: Update.
+  * debian/gauche.install, debian/gauche-dev.install: Update.
+  * debian/libgauche-0.9-0.install: Update.
+  * debian/gauche-gdbm.install, debian/gauche-zlib.install: Update.
+  * debian/control (Build-Depends): Simply, automake.
+  * debian/rules (AUTOMAKE, ACLOCAL): Remove.
+  (override_dh_auto_install): Fix.
+  (override_dh_auto_clean, override_dh_auto_configure): Remove and link
+  gc/config.sub, gc/config.guess (Closes: #736228).
+  * New upstream release.
+  * patches/42_hppa_libatomic_ops.patch: New (Closes: #809043).
+  * debian/patches/series: Update.
+  * debian/patches/37_ppc64el.patch: Remove.
+  * debian/patches/40_mips64el.patch: Remove.
+  * debian/patches/41_port_unlock_race.patch: Remove.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 24 Oct 2016 14:38:28 +0900
+
+gauche (0.9.4-6) unstable; urgency=low
+
+  * debian/rules (GZIP): Add -n to be reproducible.
+  * debian/README.Debian: Fix typo.
+  * debian/patches/{40_mips64el.patch,41_port_unlock_race.patch}: New.
+    Thanks to James Cowgill (Closes: #774886, #779949).
+  * Confirmed that info-es are in gauche-doc (fixed in 0.9.4-5).
+    Thanks to Frank Zappa and Jens Thiele (Closes: #805478).
+  * debian/control (Maintainer): Remove Hatta Shuzo, since he is not
+    Debian developer any more (Closes: #549352).
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 18 Dec 2015 07:16:21 +0000
+
+gauche (0.9.4-5) unstable; urgency=low
+
+  * debian/control (Standards-Version): Conforms to 3.9.6.
+  * debian/rules (AUTOMAKE, ACLOCAL): Specify for machines with 1.14.
+  * debian/gauche-doc.install: Move from gauche-doc.info.
+    Thanks to Jay Sulzberger for reporting.
+  * debian/libgauche-0.9-0.symbols: Updated for kfreebsd.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 05 Nov 2014 04:54:20 +0000
+
+gauche (0.9.4-4) unstable; urgency=low
+
+  * debian/patches/38_libgc_ppc64el.patch: New (Closes: #766639).
+    Thanks to Frederic Bonnard.
+  * debian/patches/39_net_test.patch: New to disable network test.
+  * debian/libgauche-0.9-0.symbols: Updated for ppc64 and ppc64el.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 04 Nov 2014 03:43:51 +0000
+
+gauche (0.9.4-3) unstable; urgency=low
+
+  * debian/rules: Fix FTBFS for sparc.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Sat, 30 Aug 2014 12:23:07 +0000
+
+gauche (0.9.4-2) unstable; urgency=low
+
+  * debian/rules: Fix FTBFS for ppc64el.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 28 Aug 2014 00:28:37 +0000
+
+gauche (0.9.4-1) unstable; urgency=low
+
+  * New upstream release (Closes: #736228, #744573, #753402).
+  * debian/control (Standards-Version): Conforms to 3.9.4.
+    (Build-Depends): Remove libatomic-ops-dev.
+  * debian/patches/series: Updated.
+  * debian/libgauche-0.9-0.symbols: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 27 Aug 2014 01:23:07 +0000
+
+gauche (0.9.3.3-8) unstable; urgency=low
+
+  * debian/libgauche-0.9-0.symbols: Updated for alpha, armel and ia64.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 15 Jan 2013 17:17:39 +0900
+
+gauche (0.9.3.3-7) unstable; urgency=low
+
+  * debian/rules: ac_cv_prog_OPENSSL=none, workaround for axTLS.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 29 Nov 2012 09:37:15 +0900
+
+gauche (0.9.3.3-6) unstable; urgency=low
+
+  * debian/patches/35_axtls_error.patch: New.
+  * debian/patches/36_fix_for_exotic_filesystem.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 28 Nov 2012 15:45:38 +0900
+
+gauche (0.9.3.3-5) unstable; urgency=low
+
+  * debian/{gauche.install,gauche-dev.install,gauche-doc.info,
+    gauche-dev.manpages,gauche.manpages}: Updated (Thanks to Jens Thiele).
+  * debian/rules: Fix path of --mandir and --infodir.
+  * debian/patches/32_usage_libatomic_ops.patch: Updated to fix FTBFS on
+    armel, really, this time.
+  * debian/patches/34_alpha_stackbottom.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 28 Nov 2012 09:24:58 +0900
+
+gauche (0.9.3.3-4) unstable; urgency=low
+
+  * debian/33_workaround_thread_test_minmemory.patch: New.
+  * debian/libgauche-0.9-0.symbols: Updated.
+  * debian/patches/32_usage_libatomic_ops.patch: Updated.  Fix FTBFS on
+    sh4, too.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 27 Nov 2012 09:40:46 +0900
+
+gauche (0.9.3.3-3) unstable; urgency=low
+
+  * debian/patches/19_nettest_skip.patch: Updated.  Fix FTBFS on powerpc,
+    s390 and s390x.
+  * debian/patches/32_usage_libatomic_ops.patch: New.  Fix FTBFS on armel.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 26 Nov 2012 16:12:40 +0900
+
+gauche (0.9.3.3-2) unstable; urgency=low
+
+  * debian/rules (override_dh_auto_configure): Remove mistake of
+    --build options to fix FTBFS.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 26 Nov 2012 14:22:54 +0900
+
+gauche (0.9.3.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #671622).
+  * debian/compat: Upgrade to 9.
+  * debian/rules (override_dh_auto_clean): Add cleanup generated .scm and
+    sci files.
+    (DH_OPTIONS): Add export.
+    (override_dh_auto_configure): Don't call dh_auto_configure directly,
+    but call configure manually (for libdir and libexecdir).
+  * debian/gauche.install: Updated.
+  * debian/patches/30_link_pthread.patch: New.
+  * debian/patches/31_ldflags_for_ext.patch: New.
+  * debian/patches/series: Don't apply 05, 12, 14, 18, 22, 14, and 29.
+    Those are included in upstream already.
+  * debian/libgauche-0.9-0.symbols: Updated.
+  * debian/control (Standards-Version): Now, it follows 3.9.3.
+    (Description): Update from current Gauche README.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 26 Nov 2012 12:40:15 +0900
+
+gauche (0.9.1-5.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Avoid using $HOME (Closes: #666588).
+
+ -- Luk Claes <luk@debian.org>  Thu, 05 Jul 2012 18:24:46 +0000
+
+gauche (0.9.1-5) unstable; urgency=low
+
+  * debian/patches/19_nettest_skip.patch: More fix.
+  * debian/control (Breaks): Add libgauche0 (Closes: #617201).
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 08 Mar 2011 16:15:17 +0900
+
+gauche (0.9.1-4) unstable; urgency=low
+
+  * debian/patches/19_nettest_skip.patch: More fix.
+  * debian/libgauche-0.9-0.symbols: Updated for kfreebsd-*, sparc64.
+  * debian/patches/28_test_under_pty.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 08 Mar 2011 13:33:26 +0900
+
+gauche (0.9.1-3) unstable; urgency=low
+
+  * debian/patches/19_nettest_skip.patch: Added again to fix FTBFS on
+    hurd-i386, armhf and powerpcspe.
+  * debian/libgauche-0.9-0.symbols: Updated for mips, mipsel and s390.
+  * debian/control (Package): Renamed libgauche-0.9-0.
+  * debian/libgauche-0.9-0.{postinst,postrm}: New.
+  * debian/libgauche-0.9-0.{install,symbols}: Renamed.
+  * debian/patches/27_libgc_fix__data_start.patch: Renamed and include
+    similar change for mips/mipsel.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 04 Mar 2011 17:38:45 +0900
+
+gauche (0.9.1-2) unstable; urgency=low
+
+  * debian/gauche.install: Added missing files.  Thanks to Jens Thiele.
+  * debian/patches/27_s390_libgc_fix.patch: New.
+  * debian/rules (override_dh_auto_configure): Added EXTRA_TEST_LIBS.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 01 Mar 2011 11:33:14 +0900
+
+gauche (0.9.1-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/control (Standards-Version): Updated.  Not use Conflicts.
+  (Breaks): Move wiliki from Conflicts.
+  * debian/patches/01_manpages.patch: Removed.
+  * debian/patches/04_align8.patch: Removed.
+  * debian/patches/06_arm_float.patch: Removed.
+  * debian/patches/07_armel_gnueabi.patch: Removed.
+  * debian/patches/08_host_gnu.patch: Removed.
+  * debian/patches/09_gauche_config.patch: Removed.
+  * debian/patches/10_manpages.patch: Removed.
+  * debian/patches/11_strict_alias.patch: Removed.
+  * debian/patches/13_bigendian64.patch: Removed.
+  * debian/patches/19_nettest_skip.patch: Removed.
+  * debian/patches/21_vectors_test.patch: Removed.
+  * debian/gauche.install: Updated.
+  * debian/libgauche0.install: Updated.
+  * debian/gauche-dev.install: Updated.
+  * debian/gauche-gdbm.install: Updated.
+  * debian/gauche-zlib.install: Updated.
+  * debian/rules: Update path of template.DIST.
+  * debian/patches/25_binary_compat_vminexact.patch: New.
+  * debian/patches/26_no_microversion_in_soname.patch: New.
+  * debian/libgauche0.symbols: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 15 Feb 2011 10:32:11 +0900
+
+gauche (0.9-21) unstable; urgency=low
+
+  * debian/patches/24_remove_sk_hack.patch: New.  Fix FTBFS with newer
+    libc.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 10 Feb 2011 12:09:35 +0900
+
+gauche (0.9-20) unstable; urgency=low
+
+  * debian/patches/23_sh4_requires_mieee.patch: New.
+    Fix FTBFS on SH4 (Closes: #612554).  Thanks to Nobuhiro Iwamatsu.
+  * debian/patches/22_wa_s390_memcmp.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 09 Feb 2011 17:45:07 +0900
+
+gauche (0.9-19) unstable; urgency=low
+
+  * debian/patches/20_check_exit_status.patch: Fixed ('exit' command
+    should not be inside sub-shell).  Added check of test.record.
+  * debian/patches/21_vectors_test.patch: New for big endian machines.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 08 Feb 2011 09:18:45 +0900
+
+gauche (0.9-18) unstable; urgency=low
+
+  * debian/patches/12_libgc_fix__EXCEPTIONS.patch: Call GC_init_thread_local.
+  * debian/patches/19_nettest_skip.patch: New.
+  * debian/patches/20_check_exit_status.patch: New.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 07 Feb 2011 11:28:22 +0900
+
+gauche (0.9-17) unstable; urgency=high
+
+  * debian/patches/18_number.patch: New.  Gauche is vulnerable for
+  some floating point input.  Reference: CVE-2010-4645 for PHP.
+  Thanks to Jens Thiele.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 04 Feb 2011 17:42:16 +0900
+
+gauche (0.9-16) unstable; urgency=low
+
+  * debian/libgauche0.symbols (GC_start_rtn_prepare_thread): New.
+    (Scm__EncodeDouble): Removed Debian revision number.
+  * Check a old bug report and confirmed it's fixed (Closes: #333293).
+  * debian/control (Standards-Version): Version 3.9.0.
+  * README.source: Removed.
+  * debian/patches/12_libgc_fix__EXCEPTIONS.patch: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 26 Jul 2010 09:50:45 +0900
+
+gauche (0.9-15) unstable; urgency=low
+
+  * debian/control: Added Breaks: and Replaces: -headers for gauche,
+    libgauche0, gauche-zlib, and gauche-dev (Closes: #580337).
+    Thanks to Bernard Drapeau and Jens Thiele.
+  * debian/libgauche0.symbols: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 07 May 2010 12:10:37 +0900
+
+gauche (0.9-14) unstable; urgency=low
+
+  * debian/patches/17_libgc_thread_local_for_archs.patch: Renamed
+    and updated for all archs not only for i486-linux-gnu.
+  * debian/patches/15_ext_termios.patch: Updated.
+  * debian/libgauche0.symbols: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 28 Apr 2010 12:40:56 +0900
+
+gauche (0.9-13) experimental; urgency=low
+
+  * debian/libgauche0.symbols: Changes for symbols with
+    THREAD_LOCAL_ALLOC=1.
+    Removed GC_allocate_lock.
+    Added 19 symbols.
+  * debian/patches/17_libgc_thread_local_for_i486.patch: New file.
+  * debian/control (Suggests): Added gauche-gdbm and gauche-zlib.
+  * debian/libgauche0.symbols: Added (optional) for
+    Scm_BignumToSI64, Scm_BignumToUI64, Scm_GetInteger64Clamp,
+    Scm_GetIntegerU64Clamp, Scm_MakeInteger64, and Scm_MakeIntegerU64.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 26 Apr 2010 09:58:49 +0900
+
+gauche (0.9-12) experimental; urgency=low
+
+  * debian/gauche-dev.install: gauche-cesconv should be in 'gauche'.
+    Include gauche-install, gauche-config, and gauche-package under
+    /usr/lib/gauche.
+    Include genstub, precomp, and gencomp.
+  * debian/gauche.install: Specify all contents.
+  * debian/rules (override_dh_install): Removed.
+  * debian/libgauche0.symbols: New file to catch ABI change.
+  * debian/libgauche0.install: New file.
+  * debian/gauche-zlib.install: New file.
+  * debian/control (Build-Depends): Added netbase for test of ext/net.
+    (Package): Added libgauche0.
+    (Package): Added gauche-zlib.
+    (Section): gauche-dev is lisp.
+  * debian/patches/02_linking.patch: Updated.
+  * debian/patches/07_armel_gnueabi.patch: Updated.
+  * debian/patches/08_host_gnu.patch: Updated.
+  * debian/patches/09_gauche_config.patch: Updated.
+  * debian/patches/15_ext_termios.patch: New file.
+  * debian/patches/16_no_LIBS.patch: New file.
+  * gauche.postinst, gauche.postrm: Removed.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 22 Apr 2010 09:00:36 +0900
+
+gauche (0.9-11) unstable; urgency=low
+
+  * debian/patches/14_libgc_fix_threadlocal.patch: New file.
+  * debian/patches/05_libgc_fix.patch: Updated (remove ia64 exception).
+  * README.Debian: Remove ia64 comment.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 16 Apr 2010 16:54:18 +0900
+
+gauche (0.9-10) unstable; urgency=low
+
+  * debian/patches/13_bigendian64.patch: New file.
+  * debian/patches/12_libgc_fix__EXCEPTIONS.patch: New file.
+  * debian/patches/11_strict_alias.patch: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 14 Apr 2010 09:27:00 +0900
+
+gauche (0.9-9) unstable; urgency=low
+
+  * debian/patches/11_strict_alias.patch: New file.
+  * debian/rules: ia64 is OK now, comment out the workaround.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 08 Apr 2010 11:32:46 +0900
+
+gauche (0.9-8) unstable; urgency=low
+
+  * debian/patches/10_manpages.patch: New file.
+  * debian/patches/series: Don't apply 01_manpages.patch but 10_manpages.patch.
+  * debian/gauche.manpages: Updated.
+  * debian/gauche-dev.manpages: New file.
+  * debian/gauche-doc.lintian: Removed.
+  * debian/rules: Follow the removal of gauche-doc.lintian.
+  * debian/rules: Added +x for template.DIST.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 17 Mar 2010 14:23:47 +0900
+
+gauche (0.9-7) unstable; urgency=low
+
+  * debian/control (Maintainer): It's now Debian Gauche Maintainers list.
+  (Uploaders): Added Jens Thiele <karme@karme.de>.
+  * debian/patches/08_host_gnu.patch: Add THREADLIBS and
+    GAUCHE_THREAD_TYPE for i486-pc-gnu0.3.  Include config.h.in patch.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 11 Mar 2010 09:52:27 +0900
+
+gauche (0.9-6) unstable; urgency=low
+
+  * debian/patches/09_no_LIBS.patch: New file.
+  * debian/patches/02_linking.patch: Remove $(LIBS) from gauche-config build.
+  * debian/patches/05_libgc_fix.patch: Undo 0.9-5 change and enable
+    THREAD_LOCAL_ALLOC for sparc64-*-linux*.
+  * debian/patches/06_arm_float.patch: Include 2009-11-30 change of
+    src/parameter.c.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 09 Mar 2010 10:22:52 +0900
+
+gauche (0.9-5) unstable; urgency=low
+
+  * debian/patches/07_armel_gnueabi.patch: New file.
+  * debian/patches/08_host_gnu.patch: New file.
+  * debian/patches/05_libgc_fix.patch: Added local change of disabling
+    THREAD_LOCAL_ALLOC for sparc64-*-linux*.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Mon, 08 Mar 2010 12:24:07 +0900
+
+gauche (0.9-4) unstable; urgency=low
+
+  * debian/README.Debian: Added a note for ia64.
+  * debian/patches/05_libgc_fix.patch: Added local change of disabling
+    THREAD_LOCAL_ALLOC for ia64-*-linux*.
+  * debian/rules (override_dh_auto_build): New entry.
+  (less_optimization_for_vm_compilation): New variable.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Sat, 06 Mar 2010 14:10:49 +0900
+
+gauche (0.9-3) unstable; urgency=low
+
+  * debian/patches/05_libgc_fix.patch: New file.
+  * debian/patches/06_arm_float.patch: New file.
+  * debian/patches/series: Updated.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 05 Mar 2010 10:52:55 +0900
+
+gauche (0.9-2) unstable; urgency=low
+
+  * debian/control (Build-Depends): Added libatomic-ops-dev.
+  * debian/rules: Use preinstalled libatomic-ops.
+  * debian/patches/04_align8.patch: New file.
+  * debian/patches/series: Apply 04_align8.patch.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 04 Mar 2010 09:02:22 +0900
+
+gauche (0.9-1) unstable; urgency=low
+
+  * debian/patches/03_rm_without_xlink.patch: New file.
+  * debian/rules: Use new config.{sub,guess} (Closes: #536113).
+  * debian/watch: Removed "debian uupdate", to use qa.debian.org redirector.
+  * debian/gauche-doc.{postinst,prerm}: Removed since install-ifo is now
+  handled automatically by debhelper 7.2.17 or above.
+  * debian/gauche.{preinst,prerm}: Removed since it's empty.
+  * debian/patches/02_linking.patch: Rename from 02_remove_rpath.patch.
+  * debian/gauche-doc.info: Updated.
+  * debian/gauche.manpages: Updated.
+  * debian/gauche-gdbm.install: Updated.
+  * debian/gauche-dev.install: Updated.
+  * debian/gauche.install: Updated.
+  * debian/control (Section): It's now lisp (was: interpreters).
+  (Build-Depends): Added zlib1g-dev.
+  (Depends): Added ${misc:Depends}.
+  * debian/{rules,source,patches,README.source}: Use 3.0 (quilt) format.
+  * debian/patches/03_libgc_fix.patch: Removed.
+  * New upstream release (Closes: #506288).
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 25 Feb 2010 19:54:08 +0900
+
+gauche (0.8.13-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/04_slib_newer.patch: Removed.
+  * debian/patches/03_libgc_fix.patch: Updated.  Let use sigprocmask.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Fri, 15 Feb 2008 09:57:20 +0900
+
+gauche (0.8.12-3) unstable; urgency=low
+
+  * debian/patches/04_slib_newer.patch: New file.  It's needed for
+  newer slib (Closes: #458669).
+  * debian/control (Standards-Version): It now follows 3.7.3.
+  (Homepage): Added.
+  (Build-Depends): requires slib 3a5 or newer.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 16 Jan 2008 09:56:02 +0900
+
+gauche (0.8.12-2) unstable; urgency=low
+
+  * gauche-dev.install: gauche-install, gauche-cesconv, and gauche-package
+    are now in gauche-dev.
+  * debian/control (gauche-dev): Added Conflicts: against gauche.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Thu, 01 Nov 2007 10:23:20 +0900
+
+gauche (0.8.12-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Wed, 31 Oct 2007 12:50:40 +0900
+
+gauche (0.8.11-1) unstable; urgency=low
+
+  * New upstream release.
+  * Because of upstream change, now we have proper gauche-refe.info
+   (Closes: #212960).
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Sat, 25 Aug 2007 13:19:46 +0900
+
+gauche (0.8.10-1) unstable; urgency=low
+
+  * New upstream release (Closes: #413312).
+  * debian/control (Uploaders): Add me.
+  * debian/patches/{04_slib_fix.patch,05_error_reporting_fix.patch}: Removed.
+
+ -- NIIBE Yutaka <gniibe@fsij.org>  Tue, 17 Jul 2007 14:08:17 +0900
+
+gauche (0.8.8-2) unstable; urgency=low
+
+  * Apply patches from NIIBE Yutaka <gniibe@fsij.org>. (closes: #400556)
+    * debian/patches/04_slib_fix.patch: New file.
+    * debian/control (Build-Conflicts): slib removed.
+      (Build-Depends): slib.
+    * debian/rules: Don't make install, but make install-pkg, install-doc, and
+      slibcat-in-place.
+    * debian/gauche.prerm, debian/gauche.postinst: Don't touch slibcat.
+  * Include the error reporting failure fix:
+    http://sf.net/mailarchive/forum.php?thread_id=30949517&forum_id=2043
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Wed,  6 Dec 2006 21:36:44 +0900
+
+gauche (0.8.8-1) unstable; urgency=low
+
+  * New upstream release.
+  * Build-Conflicts: slib. (closes: #388474)
+  * Include libgc fix. (closes: #393601)
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Sun, 26 Nov 2006 09:43:11 +0900
+
+gauche (0.8.7-4) unstable; urgency=low
+
+  * Fix run quote bugs. (Closes: #369183)
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Sun, 28 May 2006 11:38:39 +0900
+
+gauche (0.8.7-3) unstable; urgency=low
+
+  * Oooops, the Gauche build system cannot bootstrap itself!  I should have
+    modified syslib.c rather than syslib.stub or put gauche in Build-Depends.
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Fri, 26 May 2006 12:48:21 +0900
+
+gauche (0.8.7-2) unstable; urgency=low
+
+  * Fix a packaging bug. (Closes: #368415)
+  * Fix 64-bit pointer bugs. (Closes: #368787)
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Fri, 26 May 2006 00:12:08 +0900
+
+gauche (0.8.7-1) unstable; urgency=low
+
+  * New upstream release.
+  * Remove unsolicited RPATHrom executables. (Closes: #358139)
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Sat, 20 May 2006 16:48:05 +0900
+
+gauche (0.8.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Acknowledge NMU fixed bug. (Closes: #315069)
+  * debian/rules: Do not regenerate autotool files.
+  * debian/control: Remove autotool dependencies.
+  * debian/patches/00_makefile.patch: Removed.
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Sun, 18 Dec 2005 22:13:33 +0900
+
+gauche (0.8.4-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix gcc-4.0 compile errors (Closes: #315069)
+
+ -- Luk Claes <luk@debian.org>  Sun, 16 Oct 2005 12:35:28 +0200
+
+gauche (0.8.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Build in build-tree extracted from the upstream tarball.
+  * debian/patches/02_arm_double_fix.patch: Removed.
+  * debian/watch: s/cognet/cogent/.
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Fri,  3 Jun 2005 21:14:37 +0900
+
+gauche (0.8.3-3) unstable; urgency=low
+
+  * debian/patches/02_arm_double_fix.patch: Fix the bit field definition
+    of double on arm.
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Sun, 10 Apr 2005 18:40:42 +0900
+
+gauche (0.8.3-2) unstable; urgency=low
+
+  * Copy the source tree and regenerate configure scripts (closes: Bug#301257).
+    Well, I will introduce the dbs or something like that in the next
+    upstream release.
+  * debian/patches: New directory.
+  * debian/docs: Removed.
+  * debian/watch: Watch cogent's mirror.
+  * More verbose description for sub packages (closes: Bug#300673, Bug#303011).
+  * Put -doc and -dev packages in appropriate section.
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Thu,  7 Apr 2005 02:06:46 +0900
+
+gauche (0.8.3-1) unstable; urgency=low
+
+  * New upstream release (closes: Bug#199326, Bug#271386).
+  * Split into 4 packages: gauche, gauche-doc, gauche-dev, gauche-gdbm
+    (closes: Bug#174314).
+  * Add info handling in gauche-doc (closes: Bug#217650).
+
+ -- YAEGASHI Takeshi <yaegashi@debian.org>  Mon, 31 Jan 2005 04:31:01 +0900
+
+gauche (0.7.4.2-1.1) unstable; urgency=medium
+
+  * NMU
+  * Fix old automake for arm. (closes: Bug#231929)
+  * Fix missing gauche.so (closes: Bug#236741)
+
+ -- Kenshi Muto <kmuto@debian.org>  Sat, 10 Jul 2004 10:00:55 +0000
+
+gauche (0.7.4.2-1) unstable; urgency=low
+
+  * New upstream release
+  * removed --rparh option. closes: Bug#236420
+
+ -- Hatta Shuzo <hattas@debian.org>  Sat,  6 Mar 2004 20:21:07 +0900
+
+gauche (0.7.4.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Mon,  9 Feb 2004 00:44:14 +0900
+
+gauche (0.7.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Mon, 22 Dec 2003 12:49:04 +0900
+
+gauche (0.7.2-1) unstable; urgency=low
+
+  * New upstream release. closes: Bug#214227
+
+ -- Hatta Shuzo <hattas@debian.org>  Mon,  6 Oct 2003 17:02:29 +0900
+
+gauche (0.7.1-3) unstable; urgency=low
+
+  * remove slibcat in prerm. closes: Bug#210882
+
+ -- Hatta Shuzo <hattas@debian.org>  Tue, 16 Sep 2003 00:09:07 +0900
+
+gauche (0.7.1-2) unstable; urgency=low
+
+  * replace lcs.scm with cvs version.
+  * now staticly linked against libgc that is included in upstream source tree.
+
+ -- Hatta Shuzo <hattas@debian.org>  Sat, 13 Sep 2003 02:46:34 +0900
+
+gauche (0.7.1-1) unstable; urgency=low
+
+  * New upstream release closes: Bug#199326
+
+ -- Hatta Shuzo <hattas@debian.org>  Thu, 11 Sep 2003 12:55:42 +0900
+
+gauche (0.6.8-1.1) unstable; urgency=low
+
+  * NMU
+  * Fix build-dep on libgdbmg1-dev to libgdbm-dev.
+  (closes: #199589)
+
+ -- Junichi Uekawa <dancer@debian.org>  Sun, 27 Jul 2003 08:30:52 +0900
+
+gauche (0.6.8-1) unstable; urgency=low
+
+  * New upstream release
+  * fixed a bug that 'gauche-config -I' displays broken information. closes: Bug#186210
+
+ -- Hatta Shuzo <hattas@debian.org>  Wed,  2 Apr 2003 10:13:40 +0900
+
+gauche (0.6.7.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Now, 'make distclean' removes config.log closes: Bug#184900
+  * applied a patch sent from Goran Weinholt. thanks. closes: Bug#176571
+  * config.guess and config.sub are copied from autotools-dev pkg. closes: Bug#168517
+  * made gauche use system libgc closes: Bug#174212
+  * thank for Mark Brown's patch files.
+
+ -- Hatta Shuzo <hattas@debian.org>  Thu, 20 Mar 2003 10:44:32 +0900
+
+gauche (0.6.6-2) unstable; urgency=low
+
+  * added build-depends libgdbm-dev. closes: Bug#173786
+
+ -- Hatta Shuzo <hattas@debian.org>  Sat, 21 Dec 2002 17:46:29 +0900
+
+gauche (0.6.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Tue, 17 Dec 2002 19:17:20 +0900
+
+gauche (0.6.5-1) unstable; urgency=low
+
+  * New upstream release
+  * rebuild against libc6 2.3.1 closes: Bug#171033
+
+ -- Hatta Shuzo <hattas@debian.org>  Wed,  4 Dec 2002 13:17:17 +0900
+
+gauche (0.6.4-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Wed, 16 Oct 2002 10:41:42 +0900
+
+gauche (0.6.3-2) unstable; urgency=low
+
+  * fixed typo in debian/control.
+  * configure with --with-slib and --enable-threads=posix.
+  * added recommends: slib.
+  * made generated source files in ext/uvector removed when distclean.
+
+ -- Hatta Shuzo <hattas@debian.org>  Tue,  1 Oct 2002 16:53:43 +0900
+
+gauche (0.6.3-1) unstable; urgency=low
+
+  * New upstream release
+  * register info files. closes: Bug#160661
+  * changed multibyte encoding to UTF-8
+  * added suggests: r5rs-doc
+
+ -- Hatta Shuzo <hattas@debian.org>  Tue,  1 Oct 2002 11:21:46 +0900
+
+gauche (0.6.2-1) unstable; urgency=low
+
+  * New upstream release (closes: Bug#138550)
+
+ -- Hatta Shuzo <hattas@debian.org>  Wed,  4 Sep 2002 13:34:01 +0900
+
+gauche (0.4.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Sat, 13 Oct 2001 17:16:26 +0900
+
+gauche (0.4.5-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Sat, 29 Sep 2001 13:45:38 +0900
+
+gauche (0.3.14-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Wed, 13 Jun 2001 15:53:14 +0900
+
+gauche (0.3.11-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Mon, 21 May 2001 20:29:03 +0900
+
+gauche (0.3.10-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Tue, 15 May 2001 11:22:29 +0900
+
+gauche (0.3.8-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Tue, 24 Apr 2001 14:10:00 +0900
+
+gauche (0.3.7-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Mon, 23 Apr 2001 13:26:57 +0900
+
+gauche (0.3.6-1) unstable; urgency=low
+
+  * New upstream release (closes: Bug#93092)
+
+ -- Hatta Shuzo <hattas@debian.org>  Thu, 19 Apr 2001 18:52:14 +0900
+
+gauche (0.3.3-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Hatta Shuzo <hattas@debian.org>  Mon,  9 Apr 2001 11:39:06 +0900
+
+gauche (0.3-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Hatta Shuzo <hattas@debian.org>  Fri,  6 Apr 2001 15:55:57 +0900
+
+

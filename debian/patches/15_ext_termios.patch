@@ -1,0 +1,184 @@
+Description: Correct library dependency for openpty/forkpty
+Forwarded: Yes
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2020-12-17
+
+Index: gauche/configure.ac
+===================================================================
+--- gauche.orig/configure.ac
++++ gauche/configure.ac
+@@ -399,7 +399,7 @@ AC_HEADER_TIME
+ AC_CHECK_HEADERS(time.h sys/time.h sys/types.h glob.h dlfcn.h getopt.h sched.h)
+ AC_CHECK_HEADERS(unistd.h rpc/types.h malloc.h)
+ AC_CHECK_HEADERS(syslog.h crypt.h)
+-AC_CHECK_HEADERS(pty.h util.h bsd/libutil.h libutil.h sys/loadavg.h sys/resource.h)
++AC_CHECK_HEADERS(sys/loadavg.h sys/resource.h)
+ AC_CHECK_HEADERS(sys/statvfs.h)
+ 
+ dnl glibc specific
+@@ -558,10 +558,6 @@ dnl version of gauche.  Thus we explicit
+ case "$host" in
+   *cygwin*)
+     : ;;
+-  *)
+-    AC_SEARCH_LIBS(openpty, util, AC_DEFINE(HAVE_OPENPTY, 1, [Define if you have openpty]))
+-    AC_SEARCH_LIBS(forkpty, util, AC_DEFINE(HAVE_FORKPTY, 1, [Define if you have forkpty]))
+-    ;;
+ esac
+ 
+ dnl Check for fcntl
+@@ -863,6 +859,7 @@ EXT_LIBS=
+ m4_include([ext/charconv/charconv.ac])
+ m4_include([ext/dbm/dbm.ac])
+ m4_include([ext/net/net.ac])
++m4_include([ext/termios/termios.ac])
+ m4_include([ext/zlib/zlib.ac])
+ m4_include([ext/tls/tls.ac])
+ 
+Index: gauche/ext/termios/termios.ac
+===================================================================
+--- /dev/null
++++ gauche/ext/termios/termios.ac
+@@ -0,0 +1,27 @@
++dnl
++dnl Configure ext/termios
++dnl This file is included by the toplevel configure.in
++dnl
++AC_CONFIG_HEADER(ext/termios/termios_config.h)
++AC_CHECK_HEADERS(pty.h util.h libutil.h)
++dnl
++ac_termios_save_LIBS=$LIBS
++AC_CHECK_FUNC(openpty, , [AC_CHECK_LIB(util, openpty)])
++if test "x$ac_cv_func_openpty" = xyes -o "x$ac_cv_lib_util_openpty" = xyes; then
++  AC_DEFINE(HAVE_OPENPTY, 1, [Define if you have openpty])
++fi
++AC_CHECK_FUNC(forkpty, , [AC_CHECK_LIB(util, forkpty)])
++if test "x$ac_cv_func_forkpty" = xyes -o "x$ac_cv_lib_util_forkpty" = xyes; then
++  AC_DEFINE(HAVE_FORKPTY, 1, [Define if you have forkpty])
++fi
++if test "x$ac_cv_lib_util_openpty" = xyes -o "x$ac_cv_lib_util_forkpty" = xyes; then
++  TERMIOSLIB="-lutil"
++fi
++LIBS=$ac_termios_save_LIBS
++AC_SUBST(TERMIOSLIB)
++
++EXT_LIBS="$EXT_LIBS $TERMIOSLIB"
++
++dnl Local variables:
++dnl mode: autoconf
++dnl end:
+Index: gauche/ext/termios/Makefile.in
+===================================================================
+--- gauche.orig/ext/termios/Makefile.in
++++ gauche/ext/termios/Makefile.in
+@@ -11,13 +11,14 @@ SCMFILES = termios.sci
+ 
+ OBJECTS = termios.$(OBJEXT) gauche--termios.$(OBJEXT)
+ 
+-GENERATED = Makefile
++GENERATED = Makefile termios_config.h
+ XCLEANFILES =  gauche--termios.c termios.sci
++TERMIOSLIB = @TERMIOSLIB@
+ 
+ all : $(LIBFILES)
+ 
+ gauche--termios.$(SOEXT) : $(OBJECTS)
+-	$(MODLINK) gauche--termios.$(SOEXT) $(OBJECTS) $(EXT_LIBGAUCHE) $(LIBS)
++	$(MODLINK) gauche--termios.$(SOEXT) $(OBJECTS) $(EXT_LIBGAUCHE) $(LIBS) $(TERMIOSLIB)
+ 
+ gauche--termios.c termios.sci : termios.scm
+ 	$(PRECOMP) -e -P -o gauche--termios $(srcdir)/termios.scm
+Index: gauche/ext/termios/termios.c
+===================================================================
+--- gauche.orig/ext/termios/termios.c
++++ gauche/ext/termios/termios.c
+@@ -36,6 +36,7 @@
+ #include <gauche/class.h>
+ #include <gauche/extend.h>
+ 
++#include "termios_config.h"
+ #include "gauche-termios.h"
+ 
+ #if !defined(GAUCHE_WINDOWS)
+Index: gauche/ext/termios/termios_config.h.in
+===================================================================
+--- /dev/null
++++ gauche/ext/termios/termios_config.h.in
+@@ -0,0 +1,15 @@
++/* Define if you have forkpty */
++#undef HAVE_FORKPTY
++
++/* Define to 1 if you have the <libutil.h> header file. */
++#undef HAVE_LIBUTIL_H
++
++/* Define if you have openpty */
++#undef HAVE_OPENPTY
++
++/* Define to 1 if you have the <pty.h> header file. */
++#undef HAVE_PTY_H
++
++/* Define to 1 if you have the <util.h> header file. */
++#undef HAVE_UTIL_H
++
+Index: gauche/ext/termios/termios.scm
+===================================================================
+--- gauche.orig/ext/termios/termios.scm
++++ gauche/ext/termios/termios.scm
+@@ -39,6 +39,7 @@
+ 
+ (inline-stub
+  (declcode
++  (.include "termios_config.h")
+   (.include "gauche-termios.h"))
+ 
+  ;;---------------------------------------------------------------------
+Index: gauche/src/gauche/config.h.in
+===================================================================
+--- gauche.orig/src/gauche/config.h.in
++++ gauche/src/gauche/config.h.in
+@@ -132,9 +132,6 @@
+    */
+ #undef HAVE_ALLOCA_H
+ 
+-/* Define to 1 if you have the <bsd/libutil.h> header file. */
+-#undef HAVE_BSD_LIBUTIL_H
+-
+ /* Define to 1 if you have the `clearenv' function. */
+ #undef HAVE_CLEARENV
+ 
+@@ -168,9 +165,6 @@
+ /* Define if you have fcntl */
+ #undef HAVE_FCNTL
+ 
+-/* Define if you have forkpty */
+-#undef HAVE_FORKPTY
+-
+ /* Define to 1 if you have the `fpsetprec' function. */
+ #undef HAVE_FPSETPREC
+ 
+@@ -255,9 +249,6 @@
+ /* Define to 1 if you have the `sunmath' library (-lsunmath). */
+ #undef HAVE_LIBSUNMATH
+ 
+-/* Define to 1 if you have the <libutil.h> header file. */
+-#undef HAVE_LIBUTIL_H
+-
+ /* Define to 1 if the system has the type `long double'. */
+ #undef HAVE_LONG_DOUBLE
+ 
+@@ -294,15 +285,9 @@
+ /* Define to 1 if you have the <net/if.h> header file. */
+ #undef HAVE_NET_IF_H
+ 
+-/* Define if you have openpty */
+-#undef HAVE_OPENPTY
+-
+ /* Define to 1 if the system has the type `pthread_spinlock_t'. */
+ #undef HAVE_PTHREAD_SPINLOCK_T
+ 
+-/* Define to 1 if you have the <pty.h> header file. */
+-#undef HAVE_PTY_H
+-
+ /* Define to 1 if you have the `putenv' function. */
+ #undef HAVE_PUTENV
+ 

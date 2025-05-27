@@ -1,0 +1,26 @@
+Description: Reproducible build: filter CFLAGS's -f.*-prefix-map
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2014-12-06
+
+Index: gauche/configure.ac
+===================================================================
+--- gauche.orig/configure.ac
++++ gauche/configure.ac
+@@ -356,7 +356,7 @@ AC_SUBST(LINKGAUCHE)
+ 
+ dnl put the args to the configure in gauche-config script for later use.
+ dnl the use of ac_configure_args depends on autoconf 2.52.
+-GAUCHE_CONFIGURE_ARGS=`echo "$ac_configure_args" | sed 's/@<:@\\"\`\$@:>@/\\\\&/g'`
++GAUCHE_CONFIGURE_ARGS=`echo "$ac_configure_args" | sed 's/@<:@\\"\`\$@:>@/\\\\&/g' 's/-f@<:@a-z@:>@*-prefix-map=@<:@^ @:>@* //'`
+ AC_SUBST(GAUCHE_CONFIGURE_ARGS)
+ 
+ dnl ==========================================================
+@@ -403,7 +403,7 @@ dnl Safe default CFLAGS (usually -g -O2
+ dnl If the user overrides CFLAGS during configure, which is recorded.
+ dnl This information is used when configuring extensions.
+ CFLAGS="$CFLAGS -Wall -Wextra -Wno-unused-label"
+-DEFAULT_CFLAGS="$CFLAGS"
++DEFAULT_CFLAGS="$(echo "$CFLAGS" | sed 's/-f@<:@a-z@:>@*-prefix-map=@<:@^ @:>@* //')"
+ AC_SUBST(DEFAULT_CFLAGS)
+ 
+ dnl ===========================================================

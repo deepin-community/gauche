@@ -1,0 +1,21 @@
+Description: Include @LDFLAGS@ and -l@LINKGAUCHE@ for ext
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2021-12-17
+
+Index: gauche/ext/Makefile.ext.in
+===================================================================
+--- gauche.orig/ext/Makefile.ext.in
++++ gauche/ext/Makefile.ext.in
+@@ -19,10 +19,10 @@ DESTDIR      =
+ CC           = @CC@
+ AR           = @AR@
+ LOCAL_LFLAGS = @LOCAL_LIB@
+-LIBS         = $(XLIBS)
++LIBS         = $(XLIBS) -l@LINKGAUCHE@
+ CFLAGS       = @CFLAGS@ @SHLIB_SO_CFLAGS@ $(XCFLAGS)
+ CPPFLAGS     = @CPPFLAGS@ $(XCPPFLAGS)
+-LDFLAGS      = $(LOCAL_LFLAGS) $(XLDFLAGS) @SHLIB_SO_LDFLAGS@
++LDFLAGS      = @LDFLAGS@ $(LOCAL_LFLAGS) $(XLDFLAGS) @SHLIB_SO_LDFLAGS@
+ BUILD_GOSH_FLAGS =
+ 
+ # These are set by configure

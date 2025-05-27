@@ -1,0 +1,2366 @@
+libgauche-0.98.so.0 libgauche-0.98-0 #MINVER#
+* Build-Depends-Package: gauche-dev
+ Scm_AbandonedMutexExceptionClass@Base 0.9
+ Scm_Abort@Base 0.9
+ Scm_Abs@Base 0.9
+ Scm_AccessorMethodClass@Base 0.9
+ Scm_Acons@Base 0.9
+ Scm_Add@Base 0.9
+ Scm_AddCleanupHandler@Base 0.9
+ Scm_AddDirectMethod@Base 0.9
+ Scm_AddDirectSubclass@Base 0.9
+ Scm_AddFeature@Base 0.9
+ Scm_AddLoadPath@Base 0.9
+ Scm_AddLoadPathHook@Base 0.9.3
+ Scm_AddMethod@Base 0.9
+ Scm_AliasBinding@Base 0.9.1
+ Scm_AllModules@Base 0.9
+#MISSING: 0.9.13# Scm_AllocateInstance@Base 0.9
+ Scm_Angle@Base 0.9
+ Scm_Append2@Base 0.9
+ Scm_Append2X@Base 0.9
+ Scm_Append@Base 0.9
+ Scm_Apply@Base 0.9
+ Scm_ApplyRec0@Base 0.9
+ Scm_ApplyRec1@Base 0.9
+ Scm_ApplyRec2@Base 0.9
+ Scm_ApplyRec3@Base 0.9
+ Scm_ApplyRec4@Base 0.9
+ Scm_ApplyRec5@Base 0.9
+ Scm_ApplyRec@Base 0.9
+ Scm_ArchitectureDirectory@Base 0.9
+ Scm_ArrayToList@Base 0.9
+ Scm_ArrayToListWithTail@Base 0.9
+ Scm_Ash@Base 0.9
+ Scm_Assoc@Base 0.9
+ Scm_AssocDelete@Base 0.9
+ Scm_AssocDeleteX@Base 0.9
+ Scm_Assq@Base 0.9
+ Scm_Assv@Base 0.9
+ Scm_AtomicBaseClass@Base 0.9.15-p2
+ Scm_AtomicBoxClass@Base 0.9.15-p2
+ Scm_AtomicBoxCompareAndSwap@Base 0.9.15-p2
+ Scm_AtomicBoxRef@Base 0.9.15-p2
+ Scm_AtomicBoxSet@Base 0.9.15-p2
+ Scm_AtomicBoxSwap@Base 0.9.15-p2
+ Scm_AtomicFlagClass@Base 0.9.15-p2
+ Scm_AtomicFxboxClass@Base 0.9.15-p2
+ Scm_AtomicPairClass@Base 0.9.15-p2
+ Scm_AttachVM@Base 0.9
+ Scm_AutoloadClass@Base 0.9
+ Scm_BaseClassOf@Base 0.9
+ Scm_BaseName@Base 0.9
+ Scm_BignumAbsCmp@Base 0.9
+ Scm_BignumAccMultAddUI@Base 0.9
+ Scm_BignumAdd@Base 0.9
+ Scm_BignumAddSI@Base 0.9
+ Scm_BignumAsh@Base 0.9
+ Scm_BignumCmp3U@Base 0.9
+ Scm_BignumCmp@Base 0.9
+ Scm_BignumComplement@Base 0.9
+ Scm_BignumCopy@Base 0.9
+ Scm_BignumDivRem@Base 0.9
+ Scm_BignumDivSI@Base 0.9
+ Scm_BignumLogAnd@Base 0.9
+ Scm_BignumLogCount@Base 0.9
+ Scm_BignumLogIor@Base 0.9
+ Scm_BignumLogXor@Base 0.9
+ Scm_BignumMul@Base 0.9
+ Scm_BignumMulSI@Base 0.9
+ Scm_BignumNegate@Base 0.9
+ Scm_BignumRemSI@Base 0.9.4
+ Scm_BinarySearchC128@Base 0.9.10
+ Scm_BinarySearchC32@Base 0.9.10
+ Scm_BinarySearchC64@Base 0.9.10
+ Scm_BignumSub@Base 0.9
+ Scm_BignumSubSI@Base 0.9
+ Scm_BignumToDouble@Base 0.9
+ (arch=arm armel hppa hurd-i386 i386 kfreebsd-i386 mips mipsel powerpc sparc s390 m68k sh4 avr32 armhf powerpcspe x32)Scm_BignumToSI64@Base 0.9
+ Scm_BignumToSI@Base 0.9
+ Scm_BignumToString@Base 0.9
+ (arch=arm armel hppa hurd-i386 i386 kfreebsd-i386 mips mipsel powerpc sparc s390 m68k sh4 avr32 armhf powerpcspe x32)Scm_BignumToUI64@Base 0.9
+ Scm_BignumToUI@Base 0.9
+ Scm_BinarySearchF16@Base 0.9.6
+ Scm_BinarySearchF32@Base 0.9.6
+ Scm_BinarySearchF64@Base 0.9.6
+ Scm_BinarySearchS16@Base 0.9.6
+ Scm_BinarySearchS32@Base 0.9.6
+ Scm_BinarySearchS64@Base 0.9.6
+ Scm_BinarySearchS8@Base 0.9.6
+ Scm_BinarySearchU16@Base 0.9.6
+ Scm_BinarySearchU32@Base 0.9.6
+ Scm_BinarySearchU64@Base 0.9.6
+ Scm_BinarySearchU8@Base 0.9.6
+ Scm_BindPrimitiveParameter@Base 0.9.10
+ Scm_Bit2Bool@Base 0.9.10
+ Scm_Bit2Int@Base 0.9.10
+ Scm_BitsCopyX@Base 0.9
+ Scm_BitsCount0@Base 0.9
+ Scm_BitsCount1@Base 0.9
+ Scm_BitsEqual@Base 0.9
+ Scm_BitsFill@Base 0.9
+ Scm_BitsHighest0@Base 0.9
+ Scm_BitsHighest1@Base 0.9
+ Scm_BitsIncludes@Base 0.9
+ Scm_BitsLowest0@Base 0.9
+ Scm_BitsLowest1@Base 0.9
+ Scm_BitsOperate@Base 0.9
+ Scm_BitvectorClass@Base 0.9.10
+ Scm_BitvectorCopy@Base 0.9.10
+ Scm_BitvectorCopyX@Base 0.9.10
+ Scm_BitvectorToString@Base 0.9.10
+ Scm_BoolClass@Base 0.9
+ Scm_BottomClass@Base 0.9.3
+ Scm_BoxClass@Base 0.9.3
+ Scm_BufferingMode@Base 0.9
+ Scm_BuildGoshVersion@Base 0.9.15-p2
+ Scm_BuiltinSymbols@Base 0.9
+ Scm_ByteReady@Base 0.9
+ Scm_ByteReadyUnsafe@Base 0.9
+ Scm_C128VectorClass@Base 0.9.10
+ Scm_C32VectorClass@Base 0.9.10
+ Scm_C64VectorClass@Base 0.9.10
+ Scm_CStringArrayToList@Base 0.9
+ Scm_Caar@Base 0.9
+ Scm_Cadr@Base 0.9
+ Scm_CallMacroExpander@Base 0.9
+ Scm_Car@Base 0.9
+ Scm_Cdar@Base 0.9
+ Scm_Cddr@Base 0.9
+ Scm_Cdr@Base 0.9
+ Scm_CharAlphabeticP@Base 0.9.3
+ Scm_CharClass@Base 0.9
+ Scm_CharDowncase@Base 0.9.3
+ Scm_CharEncodingName@Base 0.9
+ Scm_CharFoldcase@Base 0.9.3
+ Scm_CharGeneralCategory@Base 0.9.3
+ Scm_CharLexerCategoryP@Base 0.9.6
+ Scm_CharLowercaseP@Base 0.9.3
+ Scm_CharNumericP@Base 0.9.3
+ Scm_CharReady@Base 0.9
+ Scm_CharReadyUnsafe@Base 0.9
+ Scm_CharSetAdd@Base 0.9
+ Scm_CharSetAddRange@Base 0.9
+ Scm_CharSetCaseFold@Base 0.9
+ Scm_CharSetClass@Base 0.9
+ Scm_CharSetComplement@Base 0.9
+ Scm_CharSetContains@Base 0.9
+ Scm_CharSetCopy@Base 0.9
+ Scm_CharSetDump@Base 0.9
+ Scm_CharSetEq@Base 0.9
+ Scm_CharSetFreeze@Base 0.9.6
+ Scm_CharSetFreezeX@Base 0.9.6
+ Scm_CharSetLE@Base 0.9
+ Scm_CharSetParseCategory@Base 0.9.10
+ Scm_CharSetRanges@Base 0.9
+ Scm_CharSetRead@Base 0.9
+ Scm_CharSizeTable@Base 0.9
+ Scm_CharTitlecase@Base 0.9.3
+ Scm_CharTitlecaseP@Base 0.9.3
+ Scm_CharToUcs@Base 0.9
+#MISSING: 0.9.13# Scm_CharToUcsHook@Base 0.9
+ Scm_CharUpcase@Base 0.9.3
+ Scm_CharUppercaseP@Base 0.9.3
+ Scm_CharUtf8Getc@Base 0.9
+ Scm_CharUtf8Putc@Base 0.9
+ Scm_CheckClassBinding@Base 0.9
+ Scm_ClampMode@Base 0.9.6
+ Scm_ClassClass@Base 0.9
+ Scm_ClassMalleableSet@Base 0.9.3
+ Scm_ClassOf@Base 0.9
+ Scm_Cleanup@Base 0.9
+ Scm_ClearEnv@Base 0.9.3
+ Scm_ClockGetResMonotonic@Base 0.9.4
+ Scm_ClockGetTimeMonotonic@Base 0.9.4
+ Scm_ClosePort@Base 0.9
+ Scm_CodingAwarePortClass@Base 0.9
+ Scm_CoditionContinuationMixinClass@Base 0.9.14
+ Scm_CollectionClass@Base 0.9
+ Scm_CommitClassRedefinition@Base 0.9
+ Scm_Compare@Base 0.9
+ Scm_Compile@Base 0.9
+ Scm_CompileFinish@Base 0.9
+ Scm_CompilePartial@Base 0.9
+ Scm_CompileSyntaxRules@Base 0.9
+ Scm_CompiledCodeClass@Base 0.9
+ Scm_CompiledCodeDump@Base 0.9
+ Scm_CompiledCodeEmit@Base 0.9
+ Scm_CompiledCodeFinishBuilder@Base 0.9
+ Scm_CompiledCodeFullName@Base 0.9
+ Scm_CompiledCodeNewLabel@Base 0.9
+ Scm_CompiledCodeSetLabel@Base 0.9
+ Scm_CompiledCodeToList@Base 0.9
+ Scm_ComplexClass@Base 0.9
+ Scm_CompoundConditionClass@Base 0.9
+ Scm_ComputeApplicableMethods@Base 0.9
+ Scm_ComputeCPL@Base 0.9
+ Scm_ConditionClass@Base 0.9
+ Scm_ConditionHasType@Base 0.9
+ Scm_ConditionMessage@Base 0.9
+ Scm_ConditionTypeName@Base 0.9
+ Scm_ConnectionClass@Base 0.9.10
+ Scm_Cons@Base 0.9
+ Scm_Conses@Base 0.9
+#Scm_CopyIdentifier@Base 0.9 #missing 0.9.5
+ Scm_CopyList@Base 0.9
+#MISSING: 0.9.13# Scm_CopyProcedure@Base 0.9.6
+ Scm_CopyStringWithFlags@Base 0.9
+ Scm_CurrentLoadHistory@Base 0.9.3
+ Scm_CurrentLoadNext@Base 0.9.3
+ Scm_CurrentLoadPort@Base 0.9.3
+ Scm_CurrentMicroseconds@Base 0.9
+ Scm_CurrentModule@Base 0.9
+ Scm_CurrentTime@Base 0.9
+ Scm_DStringAdd@Base 0.9
+ Scm_DStringDump@Base 0.9
+ Scm_DStringGet@Base 0.9
+ Scm_DStringGetz@Base 0.9
+ Scm_DStringInit@Base 0.9
+ Scm_DStringPutb@Base 0.9
+ Scm_DStringPutc@Base 0.9
+ Scm_DStringPutz@Base 0.9
+ Scm_DStringSize@Base 0.9
+ Scm_DStringTruncate@Base 0.9.6
+ Scm_DStringWeld@Base 0.9.6
+ Scm_DecodeFlonum@Base 0.9
+#MISSING: 0.9.13# Scm_DecomposeLazyPair@Base 0.9.3
+ Scm_DefaultCPL@Base 0.9
+ Scm_DefaultEndian@Base 0.9
+ Scm_Define@Base 0.9
+ Scm_DefineAutoload@Base 0.9
+ Scm_DefineConst@Base 0.9
+#MISSING: 0.9.13# Scm_DefinePrimitiveParameter@Base 0.9
+ Scm_DefineReaderCtor@Base 0.9
+ Scm_DefineReaderDirective@Base 0.9
+ Scm_Delete@Base 0.9
+ Scm_DeleteCleanupHandler@Base 0.9
+ Scm_DeleteDirectMethod@Base 0.9
+ Scm_DeleteDirectSubclass@Base 0.9
+ Scm_DeleteDuplicates@Base 0.9
+ Scm_DeleteDuplicatesX@Base 0.9
+ Scm_DeleteKeyword@Base 0.9
+ Scm_DeleteKeywordX@Base 0.9
+ Scm_DeleteLoadPathHook@Base 0.9.3
+ Scm_DeleteMethod@Base 0.9
+ Scm_DeleteX@Base 0.9
+ Scm_Denominator@Base 0.9
+ Scm_DetachVM@Base 0.9.3
+ Scm_DictionaryClass@Base 0.9
+ Scm_DigitToInt@Base 0.9
+ Scm_DirName@Base 0.9
+ Scm_DisableFeature@Base 0.9.10
+ Scm_Div@Base 0.9
+ Scm_DivCompat@Base 0.9.3
+ Scm_DivInexact@Base 0.9
+ Scm_DoubleComplexToComplex@Base 0.9.10
+ Scm_DoubleToHalf@Base 0.9
+#MISSING: 0.9.13# Scm_DoubleToInt64@Base 0.9
+#MISSING: 0.9.13# Scm_DoubleToUInt64@Base 0.9
+#MISSING: 0.9.13# Scm_DumpBignum@Base 0.9
+ Scm_DynLoad@Base 0.9
+ Scm_EOFObjectClass@Base 0.9
+ Scm_Environ@Base 0.9.3
+ Scm_EqHash@Base 0.9
+ Scm_EqP@Base 0.9
+ Scm_EqualM@Base 0.9
+ Scm_EqualP@Base 0.9
+ Scm_EqvHash@Base 0.9
+ Scm_EqvP@Base 0.9
+ Scm_Error@Base 0.9
+ Scm_ErrorClass@Base 0.9
+ Scm_EscapePointClass@Base 0.9.15-p2
+ Scm_Eval@Base 0.9
+ Scm_EvalCString@Base 0.9
+ Scm_EvalRec@Base 0.9
+ Scm_ExactToInexact@Base 0.9
+ Scm_ExecutablePath@Base 0.9.10
+ Scm_Exit@Base 0.9
+ Scm_ExportAll@Base 0.9
+ Scm_ExportSymbols@Base 0.9
+ Scm_Expt@Base 0.9
+ Scm_ExtendModule@Base 0.9
+ Scm_ExtendedCons@Base 0.9
+ Scm_ExtractKeywords@Base 0.9.6
+ Scm_F16VectorClass@Base 0.9
+ Scm_F32VectorClass@Base 0.9
+ Scm_F64VectorClass@Base 0.9
+ Scm_FWarn@Base 0.9
+ Scm_FdReady@Base 0.9
+ Scm_FindBinding@Base 0.9
+#Scm_FindFile@Base 0.9 #missing 0.9.3
+ Scm_FindModule@Base 0.9
+ Scm_FiniteP@Base 0.9
+ Scm_FloatComplexToComplex@Base 0.9.10
+ Scm_Flush@Base 0.9
+ Scm_FlushAllPorts@Base 0.9
+ Scm_FlushUnsafe@Base 0.9
+#MISSING: 0.9.13# Scm_ForEach1@Base 0.9
+#MISSING: 0.9.13# Scm_ForEach@Base 0.9
+ Scm_Force@Base 0.9
+ Scm_ForceLazyPair@Base 0.9.3
+ Scm_ForeignPointerAttr@Base 0.9
+ Scm_ForeignPointerAttrGet@Base 0.9
+ Scm_ForeignPointerAttrSet@Base 0.9
+ Scm_ForeignPointerClass@Base 0.9
+ Scm_Format@Base 0.9
+ Scm_GC@Base 0.9
+ Scm_GCSentinel@Base 0.9
+ Scm_GaucheInternalModule@Base 0.9
+ Scm_GaucheModule@Base 0.9
+ Scm_Gcd@Base 0.9
+ Scm_GenericAddMethod@Base 0.9
+ Scm_GenericAllocate@Base 0.9
+ Scm_GenericApplyGeneric@Base 0.9
+ Scm_GenericChangeClass@Base 0.9
+ Scm_GenericClass@Base 0.9
+ Scm_GenericComputeApplicableMethods@Base 0.9
+ Scm_GenericComputeCPL@Base 0.9
+ Scm_GenericComputeGetNSet@Base 0.9
+ Scm_GenericComputeSlots@Base 0.9
+ Scm_GenericDeleteMethod@Base 0.9
+ Scm_GenericInitialize@Base 0.9
+ Scm_GenericMake@Base 0.9
+ Scm_GenericMethodMoreSpecificP@Base 0.9
+ Scm_GenericObjectApply@Base 0.9
+ Scm_GenericObjectCompare@Base 0.9
+ Scm_GenericObjectEqualP@Base 0.9
+ Scm_GenericObjectHash@Base 0.9
+ Scm_GenericObjectSetter@Base 0.9
+ Scm_GenericSlotBoundUsingClassP@Base 0.9
+ Scm_GenericSlotMissing@Base 0.9
+ Scm_GenericSlotRefUsingClass@Base 0.9
+ Scm_GenericSlotSetUsingClass@Base 0.9
+ Scm_GenericSlotUnbound@Base 0.9
+ Scm_GenericUpdateDirectMethod@Base 0.9
+ Scm_GenericWriteObject@Base 0.9
+ Scm_Gensym@Base 0.9
+#MISSING: 0.9.13# Scm_GetArchitectureDirectory@Base 0.9
+ Scm_GetBufferingMode@Base 0.9
+ Scm_GetBytes@Base 0.9.6
+ Scm_GetDouble@Base 0.9
+ Scm_GetDoubleComplex@Base 0.9.10
+ Scm_GetDynLoadPath@Base 0.9
+ Scm_GetFeatures@Base 0.9
+ Scm_GetFloatComplex@Base 0.9.10
+ Scm_GetGroupById@Base 0.9
+ Scm_GetGroupByName@Base 0.9
+ Scm_GetHalfComplex@Base 0.9.10
+ Scm_GetInteger16Clamp@Base 0.9
+ Scm_GetInteger32Clamp@Base 0.9
+ Scm_GetPortPosition@Base 0.9.10
+ Scm_GetPortPositionUnsafe@Base 0.9.10
+ (arch=arm armel hppa hurd-i386 i386 kfreebsd-i386 mips mipsel powerpc sparc s390 m68k sh4 avr32 armhf powerpcspe x32)Scm_GetInteger64Clamp@Base 0.9
+ Scm_GetInteger8Clamp@Base 0.9
+ Scm_GetIntegerClamp@Base 0.9
+ Scm_GetIntegerU16Clamp@Base 0.9
+ Scm_GetIntegerU32Clamp@Base 0.9
+ (arch=arm armel hppa hurd-i386 i386 kfreebsd-i386 mips mipsel powerpc sparc s390 m68k sh4 avr32 armhf powerpcspe x32)Scm_GetIntegerU64Clamp@Base 0.9
+ Scm_GetIntegerU8Clamp@Base 0.9
+ Scm_GetIntegerUClamp@Base 0.9
+ Scm_GetKeyword@Base 0.9
+#MISSING: 0.9.13# Scm_GetLibraryDirectory@Base 0.9
+ Scm_GetLoadPath@Base 0.9
+ Scm_GetMasterSigmask@Base 0.9
+ Scm_GetOutputString@Base 0.9
+ Scm_GetOutputStringUnsafe@Base 0.9
+ Scm_GetPasswdById@Base 0.9
+ Scm_GetPasswdByName@Base 0.9
+ Scm_GetPortFd@Base 0.9
+ Scm_GetReaderCtor@Base 0.9
+ Scm_GetRemainingInputString@Base 0.9
+#MISSING: 0.9.13# Scm_GetRuntimeDirectory@Base 0.9.1
+#MISSING: 0.9.13# Scm_GetSigmask@Base 0.9
+ Scm_GetSignalHandler@Base 0.9
+ Scm_GetSignalHandlerMask@Base 0.9
+ Scm_GetSignalHandlers@Base 0.9
+ Scm_GetSignalPendingLimit@Base 0.9
+#MISSING: 0.9.13# Scm_GetSiteArchitectureDirectory@Base 0.9
+#MISSING: 0.9.13# Scm_GetSiteLibraryDirectory@Base 0.9
+ Scm_GetSlotAccessor@Base 0.9
+ Scm_GetStandardCharSet@Base 0.9
+ Scm_GetString@Base 0.9
+ Scm_GetStringConst@Base 0.9
+ Scm_GetStringContent@Base 0.9
+ Scm_GetSysTime@Base 0.9
+ Scm_GetTimeOfDay@Base 0.9
+ Scm_GetTimeSpec@Base 0.9
+ Scm_Getb@Base 0.9
+ Scm_GetbUnsafe@Base 0.9
+ Scm_Getc@Base 0.9
+ Scm_GetcUnsafe@Base 0.9
+ Scm_Getz@Base 0.9
+ Scm_GetzUnsafe@Base 0.9
+ Scm_GlobalVariableRef@Base 0.9
+ Scm_GlocClass@Base 0.9
+ Scm_GlocConstP@Base 0.9.1
+ Scm_GlocConstSetter@Base 0.9
+ Scm_GlocInlinableP@Base 0.9.1
+ Scm_GlocInlinableSetter@Base 0.9.1
+ Scm_GlocMark@Base 0.9.1
+ Scm_GlocMarkConst@Base 0.9
+ Scm_GlocUnmarkConst@Base 0.9
+ Scm_HalfComplexToComplex@Base 0.9.10
+ Scm_HalfToDouble@Base 0.9
+ Scm_HasSetter@Base 0.9
+ Scm_Hash@Base 0.9
+ Scm_HashCoreClear@Base 0.9
+ Scm_HashCoreCopy@Base 0.9
+ Scm_HashCoreInitGeneral@Base 0.9
+ Scm_HashCoreInitSimple@Base 0.9
+ Scm_HashCoreNumEntries@Base 0.9
+ Scm_HashCoreSearch@Base 0.9
+ Scm_HashCoreTypeToProcs@Base 0.9
+ Scm_HashIterInit@Base 0.9
+ Scm_HashIterNext@Base 0.9
+ Scm_HashString@Base 0.9
+ Scm_HashTableAdd@Base 0.9
+ Scm_HashTableClass@Base 0.9
+ Scm_HashTableCopy@Base 0.9
+ Scm_HashTableDelete@Base 0.9
+ Scm_HashTableGet@Base 0.9
+ Scm_HashTableKeys@Base 0.9
+ Scm_HashTablePut@Base 0.9
+ Scm_HashTableRef@Base 0.9
+ Scm_HashTableSet@Base 0.9
+ Scm_HashTableStat@Base 0.9
+ Scm_HashTableValues@Base 0.9
+ Scm_HideBinding@Base 0.9
+ Scm_HostArchitecture@Base 0.9
+ Scm_IOClosedErrorClass@Base 0.9
+ Scm_IODecodingErrorClass@Base 0.9.10
+ Scm_IOEncodingErrorClass@Base 0.9.10
+ Scm_IOErrorClass@Base 0.9
+ Scm_IOInvalidPositionErrorClass@Base 0.9.10
+ Scm_IOReadErrorClass@Base 0.9
+ Scm_IOUnitErrorClass@Base 0.9
+ Scm_IOWriteErrorClass@Base 0.9
+ Scm_IdentifierBindingEqv@Base 0.9
+ Scm_IdentifierClass@Base 0.9
+ Scm_IdentifierEnv@Base 0.9.6
+ Scm_ImagPart@Base 0.9
+ Scm_ImmutablePairP@Base 0.9.10
+ Scm_ImportModule@Base 0.9
+ Scm_ImportModules@Base 0.9
+ Scm_InexactToExact@Base 0.9
+ Scm_InfiniteP@Base 0.9
+ Scm_Init@Base 0.9
+ Scm_InitBuiltinClass@Base 0.9
+ Scm_InitBuiltinGeneric@Base 0.9
+ Scm_InitBuiltinMethod@Base 0.9
+#Scm_InitCommandLine2@Base 0.9.10
+#Scm_InitParameterLoc@Base 0.9.3
+ Scm_InitStaticClass@Base 0.9
+ Scm_InitStaticClassWithMeta@Base 0.9
+ Scm_InitStaticClassWithSupers@Base 0.9
+ Scm_Init_compile@Base 0.9
+#Scm_Init_exclib@Base 0.9 #missing 0.9.3
+#Scm_Init_extlib@Base 0.9 #missing 0.9.3
+#Scm_Init_intlib@Base 0.9 #missing 0.9.3
+ Scm_Init_libalpha@Base 0.9.3
+ Scm_Init_libbool@Base 0.9.3
+ Scm_Init_libchar@Base 0.9.3
+ Scm_Init_libdict@Base 0.9.3
+ Scm_Init_libeval@Base 0.9.3
+ Scm_Init_libexc@Base 0.9.3
+ Scm_Init_libio@Base 0.9.3
+ Scm_Init_liblazy@Base 0.9.3
+ Scm_Init_liblist@Base 0.9.3
+#Scm_Init_libmac@Base 0.9.6 #missing 0.9.10
+ Scm_Init_libmacbase@Base 0.9.10
+ Scm_Init_libmacro@Base 0.9.10
+ Scm_Init_libmisc@Base 0.9.3
+ Scm_Init_libmod@Base 0.9.3
+ Scm_Init_libnum@Base 0.9.3
+ Scm_Init_libobj@Base 0.9.3
+ Scm_Init_libomega@Base 0.9.3
+ Scm_Init_libparam@Base 0.9.10
+ Scm_Init_libproc@Base 0.9.3
+ Scm_Init_librx@Base 0.9.3
+ Scm_Init_libstr@Base 0.9.3
+ Scm_Init_libsym@Base 0.9.3
+ Scm_Init_libsys@Base 0.9.3
+ Scm_Init_libvec@Base 0.9.3
+#Scm_Init_objlib@Base 0.9 #missing 0.9.3
+#Scm_Init_scmlib@Base 0.9 #missing 0.9.3
+#Scm_Init_stdlib@Base 0.9 #missing 0.9.3
+#Scm_Init_syslib@Base 0.9 #missing 0.9.3
+#Scm_InstanceSlotRef3@Base 0.9.10
+ Scm_InstanceSlotRef@Base 0.9
+ Scm_InstanceSlotSet@Base 0.9
+ Scm_Int64Hash@Base 0.9.10
+ Scm_Int64SecondsToTime@Base 0.9
+#Scm_Int64ToDouble@Base 0.9
+ Scm_IntSecondsToTime@Base 0.9
+ Scm_IntToDigit@Base 0.9
+ Scm_IntegerClass@Base 0.9
+ Scm_IntegerP@Base 0.9
+ Scm_IntegerToOffset@Base 0.9
+ Scm_InvalidApply@Base 0.9
+ Scm_IsArmLE@Base 0.9.10
+ Scm_IsBE@Base 0.9.10
+ Scm_IsLE@Base 0.9.10
+ Scm_IsSugid@Base 0.9
+ Scm_JoinTimeoutExceptionClass@Base 0.9
+ Scm_KeywordClass@Base 0.9
+ Scm_LastPair@Base 0.9
+ Scm_LazyPairClass@Base 0.9.3
+ Scm_Length@Base 0.9
+ Scm_LibgauchePath@Base 0.9.10
+ Scm_LibraryDirectory@Base 0.9
+#Scm_LimitedLengthPortClass@Base 0.9
+ Scm_List@Base 0.9
+ Scm_ListClass@Base 0.9
+ Scm_ListRef@Base 0.9
+ Scm_ListTail@Base 0.9
+ Scm_ListToArray@Base 0.9
+ Scm_ListToBitvector@Base 0.9.10
+ Scm_ListToCStringArray@Base 0.9
+ Scm_ListToConstCStringArray@Base 0.9
+ Scm_ListToMVBox@Base 0.9.10
+ Scm_ListToString@Base 0.9
+ Scm_ListToVector@Base 0.9
+ Scm_Load@Base 0.9
+ Scm_LoadFromPort@Base 0.9
+#MISSING: 0.9.13# Scm_LoadMainScript@Base 0.9.3
+ Scm_LoadPacketInit@Base 0.9
+ Scm_LogAnd@Base 0.9
+ Scm_LogIor@Base 0.9
+ Scm_LogNot@Base 0.9
+ Scm_LogXor@Base 0.9
+ Scm_MBLen@Base 0.9
+ Scm_MVBoxClass@Base 0.9.10
+ Scm_MacroClass@Base 0.9
+ Scm_MacroName@Base 0.9.6
+ Scm_Magnitude@Base 0.9
+ Scm_MakeAtomicBox@Base 0.9.15-p2
+ Scm_MakeAutoload@Base 0.9
+ Scm_MakeBaseGeneric@Base 0.9
+ Scm_MakeBignumFromDouble@Base 0.9
+ Scm_MakeBignumFromSI@Base 0.9
+ Scm_MakeBignumFromUI@Base 0.9
+ Scm_MakeBignumFromUIArray@Base 0.9
+ Scm_MakeBignumWithSize@Base 0.9
+ Scm_MakeBinding@Base 0.9.1
+ Scm_MakeBits@Base 0.9
+ Scm_MakeBitvector@Base 0.9.10
+ Scm_MakeBox@Base 0.9.3
+ Scm_MakeBufferedPort@Base 0.9
+ Scm_MakeBufferedPortFull@Base 0.9.10
+ Scm_MakeC128Vector@Base 0.9.10
+ Scm_MakeC128VectorFromArray@Base 0.9.10
+ Scm_MakeC128VectorFromArrayShared@Base 0.9.10
+ Scm_MakeC32Vector@Base 0.9.10
+ Scm_MakeC32VectorFromArray@Base 0.9.10
+ Scm_MakeC32VectorFromArrayShared@Base 0.9.10
+ Scm_MakeC64Vector@Base 0.9.10
+ Scm_MakeC64VectorFromArray@Base 0.9.10
+ Scm_MakeC64VectorFromArrayShared@Base 0.9.10
+ Scm_MakeClosure@Base 0.9
+ Scm_MakeCodingAwarePort@Base 0.9
+ Scm_MakeCompiledCodeBuilder@Base 0.9
+ Scm_MakeComplex@Base 0.9
+ Scm_MakeComplexPolar@Base 0.9
+ Scm_MakeCompnum@Base 0.9
+ Scm_MakeCompoundCondition@Base 0.9
+ Scm_MakeEmptyCharSet@Base 0.9
+ Scm_MakeError@Base 0.9
+ Scm_MakeF16Vector@Base 0.9
+ Scm_MakeF16VectorFromArray@Base 0.9
+ Scm_MakeF16VectorFromArrayShared@Base 0.9
+ Scm_MakeF32Vector@Base 0.9
+ Scm_MakeF32VectorFromArray@Base 0.9
+ Scm_MakeF32VectorFromArrayShared@Base 0.9
+ Scm_MakeF64Vector@Base 0.9
+ Scm_MakeF64VectorFromArray@Base 0.9
+ Scm_MakeF64VectorFromArrayShared@Base 0.9
+ Scm_MakeFillString@Base 0.9
+ Scm_MakeFlonum@Base 0.9
+ Scm_MakeFlonumToNumber@Base 0.9
+ Scm_MakeForeignPointer@Base 0.9
+ Scm_MakeForeignPointerClass@Base 0.9
+ Scm_MakeGloc@Base 0.9
+ Scm_MakeHashTable@Base 0.9
+ Scm_MakeHashTableSimple@Base 0.9
+ Scm_MakeIdentifier@Base 0.9
+ Scm_MakeImmutableCharSet@Base 0.9.6
+ Scm_MakeImmutablePair@Base 0.9.10
+ Scm_MakeInputStringPort@Base 0.9
+ Scm_MakeInputStringPortFull@Base 0.9.10
+ (arch=arm armel hppa hurd-i386 i386 kfreebsd-i386 mips mipsel powerpc sparc s390 m68k sh4 avr32 armhf powerpcspe x32)Scm_MakeInteger64@Base 0.9
+ Scm_MakeInteger@Base 0.9
+ (arch=arm armel hppa hurd-i386 i386 kfreebsd-i386 mips mipsel powerpc sparc s390 m68k sh4 avr32 armhf powerpcspe x32)Scm_MakeIntegerU64@Base 0.9
+ Scm_MakeIntegerU@Base 0.9
+ Scm_MakeKeyword@Base 0.9
+ Scm_MakeLazyPair@Base 0.9.3
+ Scm_MakeList@Base 0.9
+ Scm_MakeMVBox@Base 0.9.10
+ Scm_MakeMacro@Base 0.9
+ Scm_MakeMacroAutoload@Base 0.9
+#Scm_MakeMacroFull@Base 0.9.6 #missing 0.9.10
+#Scm_MakeMacroTransformer@Base 0.9 #missing 0.9.5
+#Scm_MakeMacroTransformerOld@Base 0.9
+ Scm_MakeModule@Base 0.9
+ Scm_MakeNextMethod@Base 0.9
+ Scm_MakeOutputStringPort@Base 0.9
+ Scm_MakeOutputStringPortFull@Base 0.9.10
+#Scm_MakeParameterSlot@Base 0.9
+ Scm_MakePortWithFd@Base 0.9
+ Scm_MakePrimitiveParameter@Base 0.9.10
+ Scm_MakePrimitiveParameterSubr@Base 0.9.10
+ Scm_MakePromise@Base 0.9
+ Scm_MakeRational@Base 0.9
+ Scm_MakeRatnum@Base 0.9
+ Scm_MakeReadContext@Base 0.9
+ Scm_MakeReadError@Base 0.9
+ Scm_MakeReadReference@Base 0.9
+ Scm_MakeS16Vector@Base 0.9
+ Scm_MakeS16VectorFromArray@Base 0.9
+ Scm_MakeS16VectorFromArrayShared@Base 0.9
+ Scm_MakeS32Vector@Base 0.9
+ Scm_MakeS32VectorFromArray@Base 0.9
+ Scm_MakeS32VectorFromArrayShared@Base 0.9
+ Scm_MakeS64Vector@Base 0.9
+ Scm_MakeS64VectorFromArray@Base 0.9
+ Scm_MakeS64VectorFromArrayShared@Base 0.9
+ Scm_MakeS8Vector@Base 0.9
+ Scm_MakeS8VectorFromArray@Base 0.9
+ Scm_MakeS8VectorFromArrayShared@Base 0.9
+ Scm_MakeString@Base 0.9
+#Scm_MakeStringPointer@Base 0.9 #missing 0.9.10
+ Scm_MakeStringCursorEnd@Base 0.9.10
+ Scm_MakeStringCursorFromIndex@Base 0.9.10
+ Scm_MakeSubr@Base 0.9
+ Scm_MakeSymbol@Base 0.9
+#MISSING: 0.9.13# Scm_MakeSyntacticClosure@Base 0.9
+ Scm_MakeSyntax@Base 0.9
+ Scm_MakeSysStat@Base 0.9
+ Scm_MakeSysTime@Base 0.9
+#MISSING: 0.9.13# Scm_MakeSysTm@Base 0.9
+ Scm_MakeSystemError@Base 0.9
+ Scm_MakeThreadException@Base 0.9
+ Scm_MakeTime64@Base 0.9
+ Scm_MakeTime@Base 0.9
+ Scm_MakeTreeMap@Base 0.9
+ Scm_MakeU16Vector@Base 0.9
+ Scm_MakeU16VectorFromArray@Base 0.9
+ Scm_MakeU16VectorFromArrayShared@Base 0.9
+ Scm_MakeU32Vector@Base 0.9
+ Scm_MakeU32VectorFromArray@Base 0.9
+ Scm_MakeU32VectorFromArrayShared@Base 0.9
+ Scm_MakeU64Vector@Base 0.9
+ Scm_MakeU64VectorFromArray@Base 0.9
+ Scm_MakeU64VectorFromArrayShared@Base 0.9
+ Scm_MakeU8Vector@Base 0.9
+ Scm_MakeU8VectorFromArray@Base 0.9
+ Scm_MakeU8VectorFromArrayShared@Base 0.9
+ Scm_MakeUVector@Base 0.9
+ Scm_MakeUVectorFull@Base 0.9
+ Scm_MakeVector@Base 0.9
+ Scm_MakeVirtualPort@Base 0.9
+ Scm_MakeVirtualPortFull@Base 0.9.10
+ Scm_MakeWeakBox@Base 0.9
+ Scm_MakeWeakHashTableSimple@Base 0.9
+ Scm_MakeWeakVector@Base 0.9
+#Scm_Map1@Base 0.9
+#Scm_Map@Base 0.9
+ Scm_MaybeSubstring@Base 0.9
+ Scm_Member@Base 0.9
+ Scm_Memq@Base 0.9
+ Scm_Memv@Base 0.9
+ Scm_MessageConditionClass@Base 0.9
+ Scm_MessageConditionPrint@Base 0.9.10
+ Scm_MethodApplicableForClasses@Base 0.9.3
+ Scm_MethodClass@Base 0.9
+ Scm_MinMax@Base 0.9
+ Scm_Mkstemp@Base 0.9
+ Scm_ModuleClass@Base 0.9
+ Scm_ModuleNameToPath@Base 0.9
+ Scm_Modulo@Base 0.9
+#MISSING: 0.9.13# Scm_MonotonicMerge1@Base 0.9.3
+ Scm_MonotonicMerge@Base 0.9
+ Scm_Mul@Base 0.9
+ Scm_NanP@Base 0.9
+ Scm_NativeEndian@Base 0.9
+ Scm_Negate@Base 0.9
+ Scm_NewVM@Base 0.9
+ Scm_NextMethodClass@Base 0.9
+ Scm_NoNextMethod@Base 0.9
+ Scm_NoOperation@Base 0.9
+ Scm_NormalizeBignum@Base 0.9
+ Scm_NormalizePathname@Base 0.9
+ Scm_NullClass@Base 0.9
+ Scm_NullModule@Base 0.9
+ Scm_NullProc@Base 0.9
+ Scm_NumCmp@Base 0.9
+ Scm_NumEq@Base 0.9
+ Scm_NumGE@Base 0.9.1
+ Scm_NumGT@Base 0.9.1
+ Scm_NumLE@Base 0.9.1
+ Scm_NumLT@Base 0.9.1
+ Scm_NumberClass@Base 0.9
+ Scm_NumberToString@Base 0.9
+ Scm_Numerator@Base 0.9
+ Scm_ObjToExitCode@Base 0.9.14
+#MISSING: 0.9.13# Scm_ObjectAllocate@Base 0.9
+ Scm_ObjectCPL@Base 0.9
+ Scm_ObjectClass@Base 0.9
+ Scm_ObjectCompare@Base 0.9.6
+ Scm_OddP@Base 0.9
+ Scm_OffsetToInteger@Base 0.9
+ Scm_OpenFilePort@Base 0.9
+ Scm_OrderedDictionaryClass@Base 0.9
+ Scm_PairAttr@Base 0.9
+ Scm_PairAttrGet@Base 0.9
+ Scm_PairAttrSet@Base 0.9
+ Scm_PairClass@Base 0.9
+ Scm_PairP@Base 0.9.3
+ Scm_Panic@Base 0.9
+#Scm_ParameterRef@Base 0.9
+#Scm_ParameterSet@Base 0.9
+ Scm_PathDelimiter@Base 0.9
+ Scm_PathToModuleName@Base 0.9
+ Scm_Pause@Base 0.9
+ Scm_Peekb@Base 0.9
+ Scm_PeekbUnsafe@Base 0.9
+ Scm_Peekc@Base 0.9
+ Scm_PeekcUnsafe@Base 0.9
+ Scm_PortBufferAvail@Base 0.9.10
+ Scm_PortBufferRoom@Base 0.9.10
+ Scm_PortBufferStruct@Base 0.9.10
+ Scm_PortBytes@Base 0.9.10
+ Scm_PortClass@Base 0.9
+ Scm_PortError@Base 0.9
+ Scm_PortErrorClass@Base 0.9
+ Scm_PortErrorWithAux@Base 0.9.10
+ Scm_PortFdDup@Base 0.9
+ Scm_PortFileNo@Base 0.9
+ Scm_PortInputStringStruct@Base 0.9.10
+ Scm_PortLine@Base 0.9
+ Scm_PortName@Base 0.9
+ Scm_PortOutputDString@Base 0.9.10
+ Scm_PortPositionable@Base 0.9.10
+ Scm_PortSeek@Base 0.9
+ Scm_PortSeekUnsafe@Base 0.9
+ Scm_PortVTableStruct@Base 0.9.10
+ Scm_PortWriteState@Base 0.9.10
+ Scm_PortWriteStateSet@Base 0.9.10
+ Scm_PrimitiveParameterClass@Base 0.9.10
+ Scm_PrimitiveParameterRef@Base 0.9.10
+ Scm_PrimitiveParameterSet@Base 0.9.10
+ Scm_PrintDouble@Base 0.9
+ Scm_PrintStaticRoots@Base 0.9
+ Scm_Printf@Base 0.9
+ Scm_PrintfShared@Base 0.9
+ Scm_ProcedureClass@Base 0.9
+ Scm_ProfilerCountBufferFlush@Base 0.9
+ Scm_ProfilerRawResult@Base 0.9
+ Scm_ProfilerReset@Base 0.9
+ Scm_ProfilerStart@Base 0.9
+ Scm_ProfilerStop@Base 0.9
+ Scm_PromiseClass@Base 0.9
+ Scm_Provide@Base 0.9
+ Scm_ProvidedP@Base 0.9
+ Scm_PtrSysCall@Base 0.9
+ Scm_Putb@Base 0.9
+ Scm_PutbUnsafe@Base 0.9
+ Scm_Putc@Base 0.9
+ Scm_PutcUnsafe@Base 0.9
+ Scm_Puts@Base 0.9
+ Scm_PutsUnsafe@Base 0.9
+ Scm_Putz@Base 0.9
+ Scm_PutzUnsafe@Base 0.9
+ Scm_Quotient@Base 0.9
+ Scm_Raise@Base 0.9
+ Scm_RaiseCondition@Base 0.9
+ Scm_RationalClass@Base 0.9
+ Scm_RatnumAddSub@Base 0.9
+ Scm_RatnumMulDiv@Base 0.9
+ Scm_Read@Base 0.9
+ Scm_ReadContextClass@Base 0.9
+ Scm_ReadDirectory@Base 0.9
+ Scm_ReadError@Base 0.9
+ Scm_ReadErrorClass@Base 0.9
+ Scm_ReadFromCString@Base 0.9
+ Scm_ReadFromString@Base 0.9
+ Scm_ReadLine@Base 0.9
+ Scm_ReadLineUnsafe@Base 0.9
+ Scm_ReadList@Base 0.9
+ Scm_ReadListWithContext@Base 0.9
+ Scm_ReadReferenceClass@Base 0.9
+ Scm_ReadWithContext@Base 0.9
+ Scm_ReadXdigitsFromPort@Base 0.9
+ Scm_ReadXdigitsFromString@Base 0.9
+ Scm_RealClass@Base 0.9
+ Scm_RealPart@Base 0.9
+ Scm_RealSecondsToTime@Base 0.9
+ Scm_Reciprocal@Base 0.9
+ Scm_ReciprocalInexact@Base 0.9
+ Scm_RecursiveHash@Base 0.9.10
+ Scm_ReduceRational@Base 0.9
+ Scm_RegComp@Base 0.9
+#MISSING: 0.9.13# Scm_RegCompFromAST2@Base 0.9.10
+ Scm_RegCompFromAST@Base 0.9
+ Scm_RegDump@Base 0.9
+ Scm_RegExec@Base 0.9
+ Scm_RegMatchAfter@Base 0.9
+ Scm_RegMatchBefore@Base 0.9
+ Scm_RegMatchClass@Base 0.9
+ Scm_RegMatchDump@Base 0.9
+ Scm_RegMatchEnd@Base 0.9
+ Scm_RegMatchStart@Base 0.9
+ Scm_RegMatchSubstr@Base 0.9
+ Scm_RegOptimizeAST@Base 0.9
+ Scm_RegexpClass@Base 0.9
+ Scm_RegisterDL@Base 0.9
+ Scm_RegisterFinalizer@Base 0.9
+ Scm_Repl@Base 0.9
+ Scm_ReplaceClassBinding@Base 0.9
+ Scm_ReportError@Base 0.9
+ Scm_Require@Base 0.9
+ Scm_ResetSignalHandlers@Base 0.9
+ Scm_ResolveAutoload@Base 0.9
+ Scm_Reverse2@Base 0.9.3
+ Scm_Reverse2X@Base 0.9.3
+ Scm_Reverse@Base 0.9
+ Scm_ReverseX@Base 0.9
+ Scm_Round@Base 0.9
+ Scm_RoundToExact@Base 0.9
+ Scm_RuntimeDirectory@Base 0.9.10
+ Scm_RuntimeState@Base 0.9.15-p2
+ Scm_S16VectorClass@Base 0.9
+ Scm_S32VectorClass@Base 0.9
+ Scm_S64VectorClass@Base 0.9
+ Scm_S8VectorClass@Base 0.9
+ Scm_SchemeModule@Base 0.9
+ Scm_SelectModule@Base 0.9
+ Scm_SequenceClass@Base 0.9
+ Scm_SeriousCompoundConditionClass@Base 0.9
+ Scm_SeriousConditionClass@Base 0.9
+ Scm_SetCallTraceSize@Base 0.9.6
+ Scm_SetCar@Base 0.9.10
+ Scm_SetCdr@Base 0.9.10
+ Scm_SetCurrentErrorPort@Base 0.9
+ Scm_SetCurrentInputPort@Base 0.9
+ Scm_SetCurrentOutputPort@Base 0.9
+ Scm_SetDefaultEndian@Base 0.9
+ Scm_SetPortErrorOccurred@Base 0.9.10
+ Scm_SetPortPosition@Base 0.9.10
+ Scm_SetEnv@Base 0.9.3
+ Scm_SetMasterSigmask@Base 0.9
+#Scm_SetSigmask@Base 0.9
+ Scm_SetSignalHandler@Base 0.9
+ Scm_SetSignalPendingLimit@Base 0.9
+ Scm_SetStderr@Base 0.9.1
+ Scm_SetStdin@Base 0.9.1
+ Scm_SetStdout@Base 0.9.1
+ Scm_Setter@Base 0.9
+ Scm_SetterSet@Base 0.9
+ Scm_ShortClassName@Base 0.9.6
+ Scm_ShowStackTrace@Base 0.9
+ Scm_SigCheck@Base 0.9
+ Scm_SigFillSetMostly@Base 0.9.6
+ Scm_SigSuspend@Base 0.9
+ Scm_SigWait@Base 0.9
+ Scm_Sign@Base 0.9
+ Scm_SignalName@Base 0.9
+ Scm_SignalQueueClear@Base 0.9
+ Scm_SignalQueueInit@Base 0.9
+ Scm_SimpleMain@Base 0.9
+ Scm_SiteArchitectureDirectory@Base 0.9
+ Scm_SiteLibraryDirectory@Base 0.9
+ Scm_SlotAccessorClass@Base 0.9
+ Scm_SmallIntHash@Base 0.9.10
+ Scm_SortArray@Base 0.9
+ Scm_SortList@Base 0.9
+ Scm_SortListX@Base 0.9
+ Scm_SortMethods@Base 0.9
+ Scm_Sprintf@Base 0.9
+ Scm_SprintfShared@Base 0.9
+ Scm_StartClassRedefinition@Base 0.9
+ Scm_Stderr@Base 0.9
+ Scm_Stdin@Base 0.9
+ Scm_Stdout@Base 0.9
+ Scm_StringAppend2@Base 0.9
+ Scm_StringAppend@Base 0.9
+ Scm_StringAppendC@Base 0.9
+ Scm_StringBodyBuildIndex@Base 0.9.10
+ Scm_StringBodyFastIndexableP@Base 0.9.10
+ Scm_StringBodyIndexDump@Base 0.9.10
+ Scm_StringBodyPosition@Base 0.9.3
+ Scm_StringByteRef@Base 0.9
+ Scm_StringCiCmp@Base 0.9
+ Scm_StringClass@Base 0.9
+ Scm_StringCmp@Base 0.9
+ Scm_StringCompleteToIncomplete@Base 0.9
+ Scm_StringCursorBack@Base 0.9.10
+ Scm_StringCursorClass@Base 0.9.10
+ Scm_StringCursorCompare@Base 0.9.10
+ Scm_StringCursorForward@Base 0.9.10
+ Scm_StringCursorIndex@Base 0.9.10
+ Scm_StringCursorLargeClass@Base 0.9.10
+ Scm_StringCursorP@Base 0.9.10
+ Scm_StringDump@Base 0.9
+ Scm_StringEqual@Base 0.9
+ Scm_StringIncompleteToComplete@Base 0.9
+ Scm_StringJoin@Base 0.9
+#Scm_StringPointerClass@Base 0.9 #missing 0.9.10
+#Scm_StringPointerCopy@Base 0.9 #missing 0.9.10
+#Scm_StringPointerDump@Base 0.9 #missing 0.9.10
+#Scm_StringPointerNext@Base 0.9 #missing 0.9.10
+#Scm_StringPointerPrev@Base 0.9 #missing 0.9.10
+#Scm_StringPointerRef@Base 0.9 #missing 0.9.10
+#Scm_StringPointerSet@Base 0.9 #missing 0.9.10
+#Scm_StringPointerSubstring@Base 0.9 #missing 0.9.10
+ Scm_StringPosition@Base 0.9
+ Scm_StringRef@Base 0.9
+ Scm_StringRefCursor@Base 0.9.10
+ Scm_StringReplaceBody@Base 0.9
+ Scm_StringScan@Base 0.9
+ Scm_StringScanChar@Base 0.9
+ Scm_StringScanCharRight@Base 0.9.3
+ Scm_StringScanRight@Base 0.9.3
+ Scm_StringSplitByChar@Base 0.9
+ Scm_StringToBitvector@Base 0.9.10
+ Scm_StringToList@Base 0.9
+ Scm_StringToNumber@Base 0.9
+ Scm_Sub@Base 0.9
+ Scm_Substring@Base 0.9
+ Scm_SubstringCursor@Base 0.9.10
+#MISSING: 0.9.13# Scm_SubtypeP@Base 0.9
+ Scm_SupportedCharacterEncodingP@Base 0.9
+ Scm_SupportedCharacterEncodings@Base 0.9
+ Scm_SymbolClass@Base 0.9
+ Scm_SymbolSansPrefix@Base 0.9
+#MISSING: 0.9.13# Scm_SyntacticClosureClass@Base 0.9
+ Scm_SyntaxClass@Base 0.9
+ Scm_SyntaxPatternClass@Base 0.9
+ Scm_SyntaxRulesClass@Base 0.9
+ Scm_SysCall@Base 0.9
+ Scm_SysError@Base 0.9
+ Scm_SysExec@Base 0.9
+ Scm_SysFdsetClass@Base 0.9
+ Scm_SysGroupClass@Base 0.9
+ Scm_SysKill@Base 0.9
+ Scm_SysMkstemp@Base 0.9
+ Scm_SysPasswdClass@Base 0.9
+ Scm_SysPrepareFdMap@Base 0.9
+ Scm_SysSelect@Base 0.9
+ Scm_SysSelectX@Base 0.9
+ Scm_SysSigmask@Base 0.9
+ Scm_SysSigsetClass@Base 0.9
+ Scm_SysSigsetFill@Base 0.9
+ Scm_SysSigsetOp@Base 0.9
+ Scm_SysStatClass@Base 0.9
+ Scm_SysSwapFds@Base 0.9
+#MISSING: 0.9.13# Scm_SysTmClass@Base 0.9
+ Scm_SysWait@Base 0.9
+ Scm_SystemErrorClass@Base 0.9
+ Scm_TerminatedThreadExceptionClass@Base 0.9
+ Scm_ThreadExceptionClass@Base 0.9
+ Scm_TimeClass@Base 0.9
+ Scm_TimeToSeconds@Base 0.9
+ Scm_TmpDir@Base 0.9.1
+ Scm_ToTimeSpec@Base 0.9.14
+ Scm_TopClass@Base 0.9
+ Scm_TransplantInstance@Base 0.9
+ Scm_TreeCoreCheckConsistency@Base 0.9
+ Scm_TreeCoreClear@Base 0.9
+ Scm_TreeCoreClosestEntries@Base 0.9
+ Scm_TreeCoreCopy@Base 0.9
+ Scm_TreeCoreDump@Base 0.9
+ Scm_TreeCoreEq@Base 0.9
+ Scm_TreeCoreGetBound@Base 0.9
+ Scm_TreeCoreInit@Base 0.9
+ Scm_TreeCoreNextEntry@Base 0.9
+ Scm_TreeCoreNumEntries@Base 0.9
+ Scm_TreeCorePopBound@Base 0.9
+ Scm_TreeCorePrevEntry@Base 0.9
+ Scm_TreeCoreSearch@Base 0.9
+ Scm_TreeIterAtEnd@Base 0.9
+ Scm_TreeIterCurrent@Base 0.9
+ Scm_TreeIterInit@Base 0.9
+ Scm_TreeIterNext@Base 0.9
+ Scm_TreeIterPrev@Base 0.9
+ Scm_TreeMapClass@Base 0.9
+ Scm_TreeMapCopy@Base 0.9
+ Scm_TreeMapDelete@Base 0.9
+ Scm_TreeMapDump@Base 0.9
+ Scm_TreeMapRef@Base 0.9
+ Scm_TreeMapSet@Base 0.9
+ Scm_TypeError@Base 0.9
+ Scm_TypeP@Base 0.9
+ Scm_U16VectorClass@Base 0.9
+ Scm_U32VectorClass@Base 0.9
+ Scm_U64VectorClass@Base 0.9
+ Scm_U8VectorClass@Base 0.9
+#MISSING: 0.9.13# Scm_UInt64ToDouble@Base 0.9
+ Scm_UVectorClass@Base 0.9
+ Scm_UVectorElementSize@Base 0.9
+ Scm_UVectorSet@Base 0.9.6
+ Scm_UVectorSizeInBytes@Base 0.9
+ Scm_UVectorType@Base 0.9
+ Scm_UVectorTypeName@Base 0.9
+ Scm_UcsToChar@Base 0.9
+#Scm_UcsToCharHook@Base 0.9
+ Scm_UncaughtExceptionClass@Base 0.9
+ Scm_UndefinedObjectClass@Base 0.9
+ Scm_Ungetb@Base 0.9
+ Scm_UngetbUnsafe@Base 0.9
+ Scm_Ungetc@Base 0.9
+ Scm_UngetcUnsafe@Base 0.9
+ Scm_UnhandledSignalErrorClass@Base 0.9
+ Scm_UnknownClass@Base 0.9
+ Scm_UnregisterFinalizer@Base 0.9
+ Scm_UnsetEnv@Base 0.9.3
+#Scm_UnwrapSyntax2@Base 0.9.10
+ Scm_UnwrapSyntax@Base 0.9
+ Scm_UpdateDirectMethod@Base 0.9
+ Scm_UserModule@Base 0.9
+ Scm_VM@Base 0.9
+ Scm_VMAbs@Base 0.9
+ Scm_VMAdd@Base 0.9
+ Scm_VMApply0@Base 0.9
+ Scm_VMApply1@Base 0.9
+ Scm_VMApply2@Base 0.9
+ Scm_VMApply3@Base 0.9
+ Scm_VMApply4@Base 0.9
+ Scm_VMApply@Base 0.9
+ Scm_VMCallCC@Base 0.9
+ Scm_VMCallPC@Base 0.9.1
+ Scm_VMClass@Base 0.9
+ Scm_VMClassOf@Base 0.9
+ Scm_VMDefaultExceptionHandler@Base 0.9
+ Scm_VMDiv@Base 0.9
+ Scm_VMDivInexact@Base 0.9
+ Scm_VMDump@Base 0.9
+ Scm_VMDynamicWind@Base 0.9
+#MISSING: 0.9.13# Scm_VMDynamicWindC@Base 0.9
+ Scm_VMEval@Base 0.9
+ Scm_VMExactToInexact@Base 0.9
+ Scm_VMExecuteToplevels@Base 0.9
+ Scm_VMExpt@Base 0.9
+ Scm_VMFinalizerRun@Base 0.9
+ Scm_VMFlushFPStack@Base 0.9
+ Scm_VMForce@Base 0.9.10
+ Scm_VMGetBindInfo@Base 0.9
+ Scm_VMGetCallTraceLite@Base 0.9.6
+ Scm_VMGetNumResults@Base 0.9
+ Scm_VMGetResult@Base 0.9
+ Scm_VMGetSourceInfo@Base 0.9
+ Scm_VMGetStack@Base 0.9
+ Scm_VMGetStackLite@Base 0.9
+ Scm_VMInsnBuild@Base 0.9
+ Scm_VMInsnName@Base 0.9
+ Scm_VMInsnNameToCode@Base 0.9
+ Scm_VMInsnNumParams@Base 0.9
+ Scm_VMInsnOperandType@Base 0.9
+ Scm_VMIsA@Base 0.9
+ Scm_VMKey@Base 0.9
+ Scm_VMLoad@Base 0.9
+#MISSING: 0.9.13# Scm_VMLoadFromPort@Base 0.9
+#MISSING: 0.9.13# Scm_VMMacroExpand@Base 0.9
+ Scm_VMMul@Base 0.9
+ Scm_VMNegate@Base 0.9
+ Scm_VMNextHandler@Base 0.9
+ Scm_VMPushCC@Base 0.9
+ Scm_VMReciprocal@Base 0.9
+ Scm_VMReciprocalInexact@Base 0.9
+ Scm_VMRepl@Base 0.9
+ Scm_VMReraise@Base 0.9.6
+ Scm_VMReset@Base 0.9.10
+ Scm_VMRewindProtect@Base 0.9
+ Scm_VMRound@Base 0.9
+ Scm_VMSetResult@Base 0.9
+ Scm_VMSlotBoundP@Base 0.9
+ Scm_VMSlotInitializeUsingAccessor@Base 0.9
+ Scm_VMSlotRef@Base 0.9
+ Scm_VMSlotRefUsingAccessor@Base 0.9
+ Scm_VMSlotSet@Base 0.9
+ Scm_VMSlotSetUsingAccessor@Base 0.9
+ Scm_VMSub@Base 0.9
+ Scm_VMThrowException@Base 0.9
+ Scm_VMTouchInstance@Base 0.9
+ Scm_VMUVectorRef@Base 0.9
+ Scm_VMUndefinedBool@Base 0.9.10
+ Scm_VMUnwindProtect@Base 0.9
+ Scm_VMValues2@Base 0.9
+ Scm_VMValues3@Base 0.9
+ Scm_VMValues4@Base 0.9
+ Scm_VMValues5@Base 0.9
+ Scm_VMValues@Base 0.9
+ Scm_VMValuesFromArray@Base 0.9.10
+ Scm_VMWithErrorHandler@Base 0.9
+ Scm_VMWithExceptionHandler@Base 0.9
+ Scm_VMWithGuardHandler@Base 0.9
+ Scm_VMWithPortLocking@Base 0.9
+ Scm_VaCons@Base 0.9
+ Scm_VaList@Base 0.9
+ Scm_Values2@Base 0.9
+ Scm_Values3@Base 0.9
+ Scm_Values4@Base 0.9
+ Scm_Values5@Base 0.9
+ Scm_Values@Base 0.9
+ Scm_ValuesFromArray@Base 0.9.10
+ Scm_VectorClass@Base 0.9
+ Scm_VectorCopy@Base 0.9
+ Scm_VectorFill@Base 0.9
+ Scm_VectorRef@Base 0.9
+ Scm_VectorSet@Base 0.9
+ Scm_VectorToList@Base 0.9
+ Scm_Vprintf@Base 0.9
+ Scm_Vsprintf@Base 0.9
+ Scm_Warn@Base 0.9
+ Scm_WeakBoxEmptyP@Base 0.9
+ Scm_WeakBoxRef@Base 0.9
+ Scm_WeakBoxSet@Base 0.9
+ Scm_WeakHashIterInit@Base 0.9
+ Scm_WeakHashIterNext@Base 0.9
+ Scm_WeakHashTableClass@Base 0.9
+ Scm_WeakHashTableCopy@Base 0.9
+ Scm_WeakHashTableDelete@Base 0.9
+ Scm_WeakHashTableKeys@Base 0.9
+ Scm_WeakHashTableRef@Base 0.9
+ Scm_WeakHashTableSet@Base 0.9
+ Scm_WeakHashTableValues@Base 0.9
+ Scm_WeakVectorClass@Base 0.9
+ Scm_WeakVectorRef@Base 0.9
+ Scm_WeakVectorSet@Base 0.9
+ Scm_Write@Base 0.9
+ Scm_WriteCircular@Base 0.9
+ Scm_WriteLimited@Base 0.9
+ Scm_WriteSymbolName@Base 0.9
+ Scm_YieldCPU@Base 0.9
+ Scm__AllocateAndInitializeInstance@Base 0.9.1
+ Scm__AllocateCodePage@Base 0.9.15
+ Scm__BuildMethodDispatcher@Base 0.9.6
+ Scm__CharCaseMap@Base 0.9.3
+ Scm__CharIsExtraWhiteSpace@Base 0.9
+ Scm__CheckDictValue@Base 0.9
+ Scm__ConstObjs@Base 0.9
+ Scm__DStringRealloc@Base 0.9
+ Scm__ERCompare@Base 0.9.6
+ Scm__EncodeDouble@Base 0.9
+ Scm__GenericBuildDispatcher@Base 0.9.6
+ Scm__GenericDispatcherDump@Base 0.9.6
+ Scm__GenericDispatcherInfo@Base 0.9.10
+ Scm__GenericInvalidateDispatcher@Base 0.9.6
+ Scm__GetExtendedPairDescriptor@Base 0.9.10
+#Scm__GetOutputStringCompat@Base 0.9
+#Scm__GetOutputStringUnsafeCompat@Base 0.9
+#Scm__GetRemainingInputStringCompat@Base 0.9
+ Scm__HashIterInitCompat@Base 0.9
+ Scm__HashIterNextCompat@Base 0.9
+ Scm__IdentifierToBoundGloc@Base 0.9.6
+ Scm__InitAutoloads@Base 0.9
+ Scm__InitChar@Base 0.9
+ Scm__InitClass@Base 0.9
+#Scm__InitCode@Base 0.9 #missing 0.9.5
+ Scm__InitCollection@Base 0.9
+ Scm__InitCompaux@Base 0.9
+ Scm__InitExceptions@Base 0.9
+ Scm__InitExecenv@Base 0.9.10
+#Scm__InitKeyword@Base 0.9 #missing 0.9.4
+ Scm__InitList@Base 0.9.10
+ Scm__InitLoad@Base 0.9
+ Scm__InitMacro@Base 0.9
+ Scm__InitModule@Base 0.9
+#Scm__InitModulePost@Base 0.9.1 #missing 0.9.5
+ Scm__InitNumber@Base 0.9
+ Scm__InitParameter@Base 0.9.3
+ Scm__InitPort@Base 0.9
+ Scm__InitProc@Base 0.9
+ Scm__InitRead@Base 0.9
+ Scm__InitRegexp@Base 0.9
+#Scm__InitRepl@Base 0.9 #missing 0.9.4
+ Scm__InitSignal@Base 0.9
+ Scm__InitSymbol@Base 0.9
+ Scm__InitSystem@Base 0.9
+ Scm__InitVM@Base 0.9
+ Scm__InitWrite@Base 0.9
+#MISSING: 0.9.14# Scm__InstallCharconvHooks@Base 0.9
+ Scm__InstallCodingAwarePortHook@Base 0.9
+ Scm__InstallReadUvectorHook@Base 0.9
+#Scm__InternalClassName@Base 0.9
+#Scm__LoadCompat@Base 0.9
+#Scm__LoadFromPortCompat@Base 0.9
+ Scm__MakeCallTraceQueue@Base 0.9.6
+#Scm__MakeVMParameterTable@Base 0.9.10
+ Scm__MethodDispatcherAdd@Base 0.9.6
+ Scm__MethodDispatcherDelete@Base 0.9.6
+ Scm__MethodDispatcherDump@Base 0.9.6
+ Scm__MethodDispatcherInfo@Base 0.9.10
+ Scm__MethodDispatcherLookup@Base 0.9.6
+ Scm__MakeWrapperModule@Base 0.9.1
+ Scm__MutexCleanup@Base 0.9
+ Scm__OrderedDictionaryCPL@Base 0.9
+#Scm__RecordLoadStart@Base 0.9.3
+#Scm__RequireCompat@Base 0.9
+#Scm__RuntimeDirectory@Base 0.9.1
+ Scm__SequenceCPL@Base 0.9
+ Scm__SwapMacroTransformer@Base 0.9.15-p2
+#Scm__VMParameterTableInit@Base 0.9
+ Scm__VMProtectStack@Base 0.9.3
+ Scm__VMUnprotectStack@Base 0.9.3
+ call_nice@Base 0.9.10
+ class_of_cc@Base 0.9
+ collect_samples@Base 0.9
+#get_initfn_name@Base 0.9
+ hash_core_predef_procs@Base 0.9
+ is_a_cc@Base 0.9
+#macro_expand_cc@Base 0.9 #missing 0.9.5
+ make_sigset@Base 0.9
+ make_syntax_pattern@Base 0.9
+ make_syntax_rules@Base 0.9
+#maybe_prepend_install_dir@Base 0.9 #missing 0.9.10
+#parameter_mutex@Base 0.9 #missing 0.9.10
+ raise_port_error@Base 0.9.10
+ readline_body@Base 0.9
+ string_scan_mode@Base 0.9.3
+ Scm_ComparatorClass@Base 0.9.4
+ Scm_CompiledCodeCopyX@Base 0.9.4
+ Scm_CosPi@Base 0.9.4
+ Scm_CurrentReadContext@Base 0.9.4
+ Scm_DStringPeek@Base 0.9.4
+ Scm_EncodeFlonum@Base 0.9.4
+ Scm_ExactIntegerExpt@Base 0.9.4
+ Scm_FlonumSign@Base 0.9.4
+ Scm_GetCwd@Base 0.9.4
+ Scm_GetEnv@Base 0.9.4
+ Scm_GetPortBufferSigpipeSensitive@Base 0.9.4
+ Scm_GetPortBufferingMode@Base 0.9.4
+ Scm_GetPortBufferingModeAsKeyword@Base 0.9.4
+ Scm_InitCommandLine@Base 0.9.4
+ Scm_Init_libcmp@Base 0.9.4
+ Scm_Init_libcode@Base 0.9.4
+ Scm_Init_libfmt@Base 0.9.4
+ Scm_Init_libhash@Base 0.9.15-p2
+ Scm_KeywordToBufferingMode@Base 0.9.4
+ Scm_MakeComparator@Base 0.9.4
+ Scm_MakeForeignPointerWithAttr@Base 0.9.4
+ Scm_ModuleExports@Base 0.9.4
+ Scm_NumberFormatInit@Base 0.9.4
+#Scm_PortAttrCreate@Base 0.9.4
+#Scm_PortAttrCreateUnsafe@Base 0.9.4
+ Scm_PortAttrDelete@Base 0.9.4
+#Scm_PortAttrDeleteUnsafe@Base 0.9.4
+ Scm_PortAttrGet@Base 0.9.4
+#Scm_PortAttrGetUnsafe@Base 0.9.4
+ Scm_PortAttrSet@Base 0.9.4
+#Scm_PortAttrSetUnsafe@Base 0.9.4
+ Scm_PortAttrs@Base 0.9.4
+#Scm_PortAttrsUnsafe@Base 0.9.4
+ Scm_PrintNumber@Base 0.9.4
+ Scm_ReadContextLiteralImmutable@Base 0.9.4
+ Scm_ReaderLexicalMode@Base 0.9.4
+ Scm_RegisterPrelinked@Base 0.9.4
+ Scm_SetCurrentReadContext@Base 0.9.4
+ Scm_SetPortBufferSigpipeSensitive@Base 0.9.4
+ Scm_SetPortBufferingMode@Base 0.9.4
+ Scm_SetReaderLexicalMode@Base 0.9.4
+ Scm_SetRuntimeReplState@Base 0.9.15-p2
+ Scm_SinPi@Base 0.9.4
+ Scm_StrdupPartial@Base 0.9.4
+ Scm_StringSplitByCharWithLimit@Base 0.9.4
+ Scm_TanPi@Base 0.9.4
+ Scm_TwosPower@Base 0.9.4
+ Scm_WriteContextCase@Base 0.9.4
+ Scm_WriteContextMode@Base 0.9.4
+ Scm__InitComparator@Base 0.9.4
+ Scm__WritePrimitive@Base 0.9.4
+#defaultReadContext@Base 0.9.4 #missing 0.9.10
+ errno_n2y@Base 0.9.4
+ errno_y2n@Base 0.9.4
+#readerLexicalMode@Base 0.9.4  #missing 0.9.5
+ Scm_Allocate@Base 0.9.5
+ Scm_AvailableProcessors@Base 0.9.5
+ Scm_CombineHashValue@Base 0.9.5
+ Scm_ComparatorComparisonProcedure@Base 0.9.5
+ Scm_ComparatorHashFunction@Base 0.9.5
+ Scm_ComparatorOrderingPredicate@Base 0.9.5
+ Scm_CompileErrorMixinClass@Base 0.9.5
+ Scm_CompiledCodePushInfo@Base 0.9.5
+#MISSING: 0.9.13# Scm_CurrentRecursiveHash@Base 0.9.5
+ Scm_DLObjClass@Base 0.9.5
+ Scm_DLObjs@Base 0.9.5
+ Scm_DefaultHash@Base 0.9.5
+ Scm_DefaultWriteControls@Base 0.9.5
+ Scm_DumpStackTrace@Base 0.9.5
+ Scm_ExtractSimpleCondition@Base 0.9.5
+ Scm_FileAlreadyExistsErrorMixinClass@Base 0.9.5
+ Scm_FileIsReadOnlyErrorMixinClass@Base 0.9.5
+ Scm_FileProtectionErrorMixinClass@Base 0.9.5
+ Scm_FilenameErrorMixinClass@Base 0.9.5
+ Scm_FlonumIntegerToExact@Base 0.9.5
+ Scm_ForeignPointerInvalidP@Base 0.9.5
+ Scm_ForeignPointerInvalidate@Base 0.9.5
+ Scm_ForeignPointerRef@Base 0.9.5
+ Scm_GetIntegerUMod@Base 0.9.5
+ Scm_GetPortCaseFolding@Base 0.9.5
+ Scm_GetPortReaderLexicalMode@Base 0.9.5
+ Scm_GetWriteControls@Base 0.9.5
+ Scm_HashSaltRef@Base 0.9.5
+ Scm_HashSaltSet@Base 0.9.5
+ Scm_HashTableType@Base 0.9.5
+ Scm_IdentifierGlobalBinding@Base 0.9.5
+ Scm_Init_libsrfis@Base 0.9.5
+#MISSING: 0.9.15-p2# Scm_InitializedP@Base 0.9.5
+ Scm_KeywordToString@Base 0.9.5
+ Scm_ListToUVector@Base 0.9.5
+ Scm_LoadConditionMixinClass@Base 0.9.5
+ Scm_LoadFromCString@Base 0.9.5
+ Scm_MacroTransformer@Base 0.9.5
+ Scm_MakeComplexPolarPI@Base 0.9.5
+ Scm_MakeExtendedPair@Base 0.9.5
+ Scm_MakeHashTableFull@Base 0.9.5
+ Scm_MakeWriteControls@Base 0.9.5
+ Scm_MakeWriteState@Base 0.9.5
+ Scm_MalformedFilenameErrorClass@Base 0.9.5
+ Scm_MixinConditionClass@Base 0.9.5
+ Scm_ModuleSeal@Base 0.9.5
+ Scm_NanoSleep@Base 0.9.5
+ Scm_NewInstance@Base 0.9.5
+ Scm_NoSuchFileErrorMixinClass@Base 0.9.5
+ Scm_OutermostIdentifier@Base 0.9.5
+ Scm_ParseDigitsAsLong@Base 0.9.5
+ Scm_PortableHash@Base 0.9.5
+#Scm_Raise2@Base 0.9.5 #missing 0.9.10
+ Scm_ReadDigitsAsLong@Base 0.9.5
+ Scm_ReadUVector@Base 0.9.5
+#Scm_ReportError2@Base 0.9.5 #missing 0.9.10
+ Scm_SetPortCaseFolding@Base 0.9.5
+ Scm_SetPortReaderLexicalMode@Base 0.9.5
+ Scm_SysMkdtemp@Base 0.9.5
+ Scm_UngottenBytes@Base 0.9.5
+ Scm_UngottenBytesUnsafe@Base 0.9.5
+ Scm_UngottenChars@Base 0.9.5
+ Scm_UngottenCharsUnsafe@Base 0.9.5
+ Scm_UnwrapIdentifier@Base 0.9.5
+#Scm_VMThrowException2@Base 0.9.5 #missing 0.9.10
+ Scm_WrapIdentifier@Base 0.9.5
+ Scm_WriteControlsClass@Base 0.9.5
+ Scm_WriteStateClass@Base 0.9.5
+ Scm_WriteWithControls@Base 0.9.5
+ Scm__DwSipDefaultHash@Base 0.9.5
+ Scm__DwSipPortableHash@Base 0.9.5
+ Scm__GaucheKeywordModule@Base 0.9.5
+ Scm__InitHash@Base 0.9.5
+ Scm__KeywordModule@Base 0.9.5
+ Scm__RequireBaseModule@Base 0.9.5
+ Scm__VMInsnAddress@Base 0.9.15
+#MISSING: 0.9.15# Scm__VMInsnOffsets@Base 0.9.5
+ (arch=arm armel armhf)check_armendian@Base 0.9
+# Symbols from libgc
+#(arch=armel armhf sh4|optional)AO_compare_double_and_swap_double_emulation@Base 0.9.3 #missing 0.9.10
+#(arch=armel armhf sh4|optional)AO_fetch_compare_and_swap_emulation@Base 0.9.3 #missing 0.9.10
+#(arch=armel armhf sh4|optional)AO_pause@Base 0.9.6 #missing 0.9.10
+#(arch=armel armhf sh4|optional)AO_pt_lock@Base 0.9.3 #missing 0.9.10
+#(arch=armel armhf sh4|optional)AO_store_full_emulation@Base 0.9.3 #missing 0.9.10
+#(optional)GC_FirstDLOpenedLinkMap@Base 0.9.3 #missing 0.9.10
+#(optional)GC_abort@Base 0.9 #missing 0.9.4
+#(optional)GC_add_ext_descriptor@Base 0.9 #missing 0.9.5
+#(optional)GC_add_leaked@Base 0.9 #missing 0.9.3
+ (optional)GC_abort_on_oom@Base 0.9.10
+#(optional)GC_add_map_entry@Base 0.9 #missing 0.9.10
+ (optional)GC_add_roots@Base 0.9
+#(optional)GC_add_roots_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_add_smashed@Base 0.9 #missing 0.9.10
+#(optional)GC_add_to_black_list_normal@Base 0.9 #missing 0.9.10
+#(optional)GC_add_to_black_list_stack@Base 0.9 #missing 0.9.10
+#(optional)GC_add_to_fl@Base 0.9 #missing 0.9.10
+#(optional)GC_add_to_heap@Base 0.9 #missing 0.9.10
+#(optional)GC_adj_bytes_allocd@Base 0.9 #missing 0.9.10
+#(optional)GC_all_bottom_indices@Base 0.9 #missing 0.9.10
+#(optional)GC_all_bottom_indices_end@Base 0.9 #missing 0.9.10
+ (optional)GC_all_interior_pointers@Base 0.9
+#(optional)GC_alloc_large@Base 0.9 #missing 0.9.10
+#(optional)GC_alloc_large_and_clear@Base 0.9 #missing 0.9.10
+#(optional)GC_alloc_reclaim_list@Base 0.9 #missing 0.9.10
+#(optional)GC_allochblk@Base 0.9 #missing 0.9.10
+#(optional)GC_allochblk_nth@Base 0.9 #missing 0.9.10
+#(optional)GC_allocobj@Base 0.9 #missing 0.9.10
+ (optional)GC_allow_register_threads@Base 0.9.3
+ (optional)GC_aobjfreelist_ptr@Base 0.9
+#(optional)GC_apply_to_all_blocks@Base 0.9 #missing 0.9.10
+#(optional)GC_approx_sp@Base 0.9 #missing 0.9.10
+#(optional)GC_arobjfreelist@Base 0.9 #missing 0.9.5
+#(optional)GC_array_kind@Base 0.9 #missing 0.9.5
+#(optional)GC_array_mark_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_array_mark_proc_index@Base 0.9 #missing 0.9.5
+ (optional)GC_arrays@Base 0.9
+ (optional)GC_atfork_child@Base 0.9.4
+ (optional)GC_atfork_parent@Base 0.9.4
+ (optional)GC_atfork_prepare@Base 0.9.4
+ (optional)GC_auobjfreelist_ptr@Base 0.9
+#(optional)GC_avail_descr@Base 0.9 #missing 0.9.5
+ (optional)GC_base@Base 0.9
+#(optional)GC_bl_init@Base 0.9 #missing 0.9.10
+#(optional)GC_bl_init_no_interiors@Base 0.9.3 #missing 0.9.10
+#(optional)GC_black_list_spacing@Base 0.9 #missing 0.9.10
+#(optional)GC_block_empty@Base 0.9 #missing 0.9.10
+#(optional)GC_block_nearly_full@Base 0.9 #missing 0.9.10
+#(optional)GC_block_was_dirty@Base 0.9 #missing 0.9.10
+#(optional)GC_bm_table@Base 0.9 #missing 0.9.5
+#(optional)GC_build_fl@Base 0.9 #missing 0.9.10
+#(optional)GC_build_fl2@Base 0.9 #missing 0.9.10
+#(optional)GC_build_fl4@Base 0.9 #missing 0.9.10
+#(optional)GC_build_fl_clear2@Base 0.9 #missing 0.9.10
+#(optional)GC_build_fl_clear4@Base 0.9 #missing 0.9.10
+#(optional)GC_bytes_allocd_at_reset@Base 0.9 #missing 0.9.3
+#(optional)GC_bytes_found@Base 0.9 #missing 0.9.10
+ (optional)GC_call_with_alloc_lock@Base 0.9
+ (optional)GC_call_with_gc_active@Base 0.9.3
+ (optional)GC_call_with_stack_base@Base 0.9
+#(optional)GC_calloc_explicitly_typed@Base 0.9 #missing 0.9.5
+#(optional)GC_change_stubborn@Base 0.9 #missing 0.9.5
+#(optional)GC_check_annotated_obj@Base 0.9 #missing 0.9.10
+#(optional)GC_check_finalizer_nested@Base 0.9.3 #missing 0.9.10
+#(optional)GC_check_leaked@Base 0.9.3 #missing 0.9.10
+#(optional)GC_check_heap@Base 0.9 #missing 0.9.10
+#(optional)GC_check_heap_block@Base 0.9 #missing 0.9.10
+#(optional)GC_check_heap_proc@Base 0.9 #missing 0.9.10
+#(optional)GC_clear_a_few_frames@Base 0.9 #missing 0.9.10
+#(optional)GC_clear_bl@Base 0.9 #missing 0.9.10
+#(optional)GC_clear_fl_links@Base 0.9 #missing 0.9.10
+#(optional)GC_clear_fl_marks@Base 0.9 #missing 0.9.10
+#(optional)GC_clear_hdr_marks@Base 0.9 #missing 0.9.10
+ (optional)GC_clear_mark_bit@Base 0.9
+#(optional)GC_clear_marks@Base 0.9 #missing 0.9.10
+ (optional)GC_clear_roots@Base 0.9
+ (optional)GC_clear_stack@Base 0.9
+#(optional)GC_clear_stack_inner@Base 0.9 #missing 0.9.10
+ (optional)GC_collect_a_little@Base 0.9
+#(optional)GC_collect_a_little_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_collect_at_heapsize@Base 0.9.3 #missing 0.9.10
+#(optional)GC_collect_or_expand@Base 0.9 #missing 0.9.10
+#(optional)GC_collecting@Base 0.9 #missing 0.9.10
+#(optional)GC_collection_in_progress@Base 0.9 #missing 0.9.10
+#(optional)GC_compute_large_free_bytes@Base 0.9.4 #missing 0.9.10
+#(optional)GC_compute_root_size@Base 0.9.4 #missing 0.9.10
+#(optional)GC_cond_register_dynamic_libraries@Base 0.9 #missing 0.9.10
+#(optional)GC_continue_reclaim@Base 0.9 #missing 0.9.10
+#(optional)GC_copy_bl@Base 0.9 #missing 0.9.10
+#(optional)GC_copyright@Base 0.9 #missing 0.9.10
+#(optional)GC_core_finalized_malloc@Base 0.9.4 #missing 0.9.5
+#(optional)GC_init_finalized_malloc@Base 0.9.4 #missing 0.9.5
+#(optional)GC_current_warn_proc@Base 0.9 #missing 0.9.10
+ (optional)GC_debug_change_stubborn@Base 0.9
+ (optional)GC_debug_end_stubborn_change@Base 0.9
+ (optional)GC_debug_free@Base 0.9
+#(optional)GC_debug_free_inner@Base 0.9 #missing 0.9.3
+#(optional)GC_debug_gcj_malloc@Base 0.9 #missing 0.9.5
+ (optional)GC_debug_header_size@Base 0.9
+#(optional)GC_debug_invoke_finalizer@Base 0.9 #missing 0.9.10
+ (optional)GC_debug_malloc@Base 0.9
+ (optional)GC_debug_malloc_atomic@Base 0.9
+ (optional)GC_debug_malloc_atomic_ignore_off_page@Base 0.9
+ (optional)GC_debug_malloc_atomic_uncollectable@Base 0.9
+ (optional)GC_debug_malloc_ignore_off_page@Base 0.9
+ (optional)GC_debug_malloc_replacement@Base 0.9
+ (optional)GC_debug_malloc_stubborn@Base 0.9
+ (optional)GC_debug_malloc_uncollectable@Base 0.9
+#(optional)GC_debug_print_heap_obj_proc@Base 0.9 #missing 0.9.10
+ (optional)GC_debug_realloc@Base 0.9
+ (optional)GC_debug_realloc_replacement@Base 0.9
+ (optional)GC_debug_register_displacement@Base 0.9
+ (optional)GC_debug_register_finalizer@Base 0.9
+ (optional)GC_debug_register_finalizer_ignore_self@Base 0.9
+ (optional)GC_debug_register_finalizer_no_order@Base 0.9
+ (optional)GC_debug_register_finalizer_unreachable@Base 0.9
+ (optional)GC_debug_strdup@Base 0.9
+ (optional)GC_debug_strndup@Base 0.9.3
+#(optional)GC_debugging_started@Base 0.9 #missing 0.9.10
+#(optional)GC_default_is_valid_displacement_print_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_default_is_visible_print_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_default_on_abort@Base 0.9.4 #missing 0.9.10
+#(optional)GC_default_oom_fn@Base 0.9 #missing 0.9.10
+#(optional)GC_default_print_heap_obj_proc@Base 0.9 #missing 0.9.10
+#(optional)GC_default_push_other_roots@Base 0.9 #missing 0.9.10
+#(optional)GC_default_same_obj_print_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_default_stop_func@Base 0.9.3 #missing 0.9.10
+#(optional)GC_default_warn_proc@Base 0.9 #missing 0.9.10
+#(optional)GC_deficit@Base 0.9 #missing 0.9.10
+#(optional)GC_delete_gc_thread@Base 0.9 #missing 0.9.10
+#(optional)GC_delete_thread@Base 0.9 #missing 0.9.10
+#(optional)GC_descr_obj_size@Base 0.9 #missing 0.9.5
+#(optional)GC_describe_type_fns@Base 0.9.3 #missing 0.9.10
+#(optional)GC_dirty_init@Base 0.9 #missing 0.9.10
+#(optional)GC_dirty_maintained@Base 0.9
+ (optional)GC_disable@Base 0.9
+#(optional)GC_disable_signals@Base 0.9 #missing 0.9.3
+#(optional)GC_disclaim_and_reclaim@Base 0.9.4 #missing 0.9.10
+#(optional)GC_disclaim_and_reclaim_or_free_small_block@Base 0.9.4 #missing 0.9.10
+#(optional)GC_dl_entries@Base 0.9 #missing 0.9.4
+#(optional)GC_dl_hashtbl@Base 0.9.4 #missing 0.9.10
+ (optional)GC_dlopen@Base 0.9
+ (optional)GC_do_blocking@Base 0.9
+#(optional)GC_do_blocking_inner@Base 0.9.3 #missing 0.9.10
+#(optional)GC_do_nothing@Base 0.9 #missing 0.9.3
+ (optional)GC_dont_expand@Base 0.9
+ (optional)GC_dont_gc@Base 0.9
+ (optional)GC_dont_precollect@Base 0.9
+#(optional)GC_double_descr@Base 0.9 #missing 0.9.5
+ (optional)GC_dump@Base 0.9
+ (optional)GC_dump_finalization@Base 0.9
+#(optional)GC_dump_finalization_links@Base 0.9.4 #missing 0.9.10
+ (optional)GC_dump_regions@Base 0.9
+#(optional)GC_dump_regularly@Base 0.9 #missing 0.9.10
+#(optional)GC_ed_size@Base 0.9 #missing 0.9.5
+ (optional)GC_enable@Base 0.9
+ (optional)GC_enable_incremental@Base 0.9
+#(optional)GC_enable_signals@Base 0.9 #missing 0.9.3
+#(optional)GC_end_stubborn_change@Base 0.9 #missing 0.9.5
+#(optional)GC_enqueue_all_finalizers@Base 0.9 #missing 0.9.10
+#(optional)GC_eobjfreelist@Base 0.9  #missing 0.9.5
+ (optional)GC_err_printf@Base 0.9
+#(optional)GC_err_puts@Base 0.9 #missing 0.9.10
+#(optional)GC_excl_table_entries@Base 0.9 #missing 0.9.10
+ (optional)GC_exclude_static_roots@Base 0.9
+#(optional)GC_exclude_static_roots_inner@Base 0.9.3 #missing 0.9.10
+#(optional)GC_exit_check@Base 0.9 #missing 0.9.10
+ (optional)GC_expand_hp@Base 0.9
+#(optional)GC_expand_hp_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_explicit_kind@Base 0.9  #missing 0.9.5
+#(optional)GC_explicit_typing_initialized@Base 0.9  #missing 0.9.5
+#(optional)GC_ext_descriptors@Base 0.9  #missing 0.9.5
+#(optional)GC_extend_size_map@Base 0.9 #missing 0.9.10
+#(optional)GC_fail_count@Base 0.9 #missing 0.9.10
+#(arch=amd64 i386 ia64 alpha m68k x32|optional)GC_fault_handler_lock@Base 0.9.3 #missing 0.9.10
+#(optional)GC_finalization_failures@Base 0.9 #missing 0.9.3
+#(optional)GC_finalize@Base 0.9 #missing 0.9.10
+ (optional)GC_finalize_all@Base 0.9
+#(optional)GC_finalize_now@Base 0.9 #missing 0.9.5
+ (optional)GC_finalize_on_demand@Base 0.9
+#(optional)GC_finalized_disclaim@Base 0.9.4 #missing 0.9.5
+#(optional)GC_finalized_kind@Base 0.9.4 #missing 0.9.5
+#(optional)GC_finalized_malloc@Base 0.9.4 #missing 0.9.5
+#(optional)GC_finalized_objfreelist@Base 0.9.4 #missing 0.9.5
+ (optional)GC_finalizer_notifier@Base 0.9
+#(optional)GC_find_header@Base 0.9 #missing 0.9.10
+ (optional)GC_find_leak@Base 0.9
+#(optional)GC_finish_collection@Base 0.9 #missing 0.9.10
+#(optional)GC_fo_entries@Base 0.9 #missing 0.9.10
+#(optional)GC_fo_head@Base 0.9.4 #missing 0.9.5
+#(optional)GC_force_unmap_on_gcollect@Base 0.9.3 #missing 0.9.10
+#(optional)GC_fork_child_proc@Base 0.9.3 #missing 0.9.4
+#(optional)GC_fork_parent_proc@Base 0.9.3 #missing 0.9.4
+#(optional)GC_fork_prepare_proc@Base 0.9.3 #missing 0.9.4
+ (optional)GC_free@Base 0.9
+#(optional)GC_free_block_ending_at@Base 0.9 #missing 0.9.10
+#(optional)GC_free_bytes@Base 0.9 #missing 0.9.10
+#(optional)GC_free_inner@Base 0.9 #missing 0.9.10
+ (optional)GC_free_space_divisor@Base 0.9
+#(optional)GC_freehblk@Base 0.9 #missing 0.9.10
+#(optional)GC_freehblk_ptr@Base 0.9 #missing 0.9.3
+ (optional)GC_full_freq@Base 0.9
+ (optional)GC_gc_no@Base 0.9
+#(optional)GC_gcj_debug_kind@Base 0.9 #missing 0.9.5
+#(optional)GC_gcj_fake_mark_proc@Base 0.9.3 #missing 0.9.5
+#(optional)GC_gcj_kind@Base 0.9 #missing 0.9.5
+#(optional)GC_gcj_malloc@Base 0.9 #missing 0.9.5
+#(optional)GC_gcj_malloc_ignore_off_page@Base 0.9 #missing 0.9.5
+#(optional)GC_gcj_malloc_initialized@Base 0.9 #missing 0.9.5
+#(optional)GC_gcjdebugobjfreelist@Base 0.9 #missing 0.9.5
+#(optional)GC_gcjobjfreelist@Base 0.9 #missing 0.9.5
+ (optional)GC_gcollect@Base 0.9
+ (optional)GC_gcollect_and_unmap@Base 0.9.3
+ (optional)GC_general_register_disappearing_link@Base 0.9
+ (optional)GC_generic_malloc@Base 0.9
+ (optional)GC_generic_malloc_ignore_off_page@Base 0.9
+#(optional)GC_generic_malloc_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_generic_malloc_inner_ignore_off_page@Base 0.9 #missing 0.9.10
+ (optional)GC_generic_malloc_many@Base 0.9
+ (optional)GC_generic_or_special_malloc@Base 0.9
+ (optional)GC_get_abort_func@Base 0.9.4
+ (optional)GC_get_all_interior_pointers@Base 0.9.3
+ (optional)GC_get_bytes_since_gc@Base 0.9
+ (optional)GC_get_dont_expand@Base 0.9.3
+ (optional)GC_get_dont_precollect@Base 0.9.3
+ (optional)GC_get_finalize_on_demand@Base 0.9.3
+ (optional)GC_get_finalizer_notifier@Base 0.9.3
+ (optional)GC_get_find_leak@Base 0.9.3
+#(optional)GC_get_first_part@Base 0.9 #missing 0.9.10
+ (optional)GC_get_force_unmap_on_gcollect@Base 0.9.3
+ (optional)GC_get_free_space_divisor@Base 0.9.3
+ (optional)GC_get_full_freq@Base 0.9.3
+ (optional)GC_get_gc_no@Base 0.9.3
+ (optional)GC_get_heap_usage_safe@Base 0.9.3
+ (optional)GC_get_java_finalization@Base 0.9.3
+ (optional)GC_get_max_retries@Base 0.9.3
+ (optional)GC_get_no_dls@Base 0.9.3
+ (optional)GC_get_non_gc_bytes@Base 0.9.3
+#(arch=armhf armel|optional)GC_get_nprocs_present@Base 0.9.3 #missing 0.9.10
+ (optional)GC_get_on_heap_resize@Base 0.9.4
+ (optional)GC_get_oom_fn@Base 0.9.3
+ (optional)GC_get_pages_executable@Base 0.9.3
+ (optional)GC_get_parallel@Base 0.9.3
+ (optional)GC_get_prof_stats@Base 0.9.4
+ (optional)GC_get_prof_stats_unsafe@Base 0.9.4
+ (optional)GC_get_push_other_roots@Base 0.9.4
+ (optional)GC_get_start_callback@Base 0.9.3
+ (optional)GC_get_stop_func@Base 0.9.3
+ (optional)GC_get_suspend_signal@Base 0.9.3
+ (optional)GC_get_thr_restart_signal@Base 0.9.4
+ (optional)GC_get_time_limit@Base 0.9.3
+ (optional)GC_get_unmapped_bytes@Base 0.9.3
+ (optional)GC_get_version@Base 0.9.3
+ (optional)GC_get_warn_proc@Base 0.9.3
+#(optional)GC_handle_fork@Base 0.9.3 #missing 0.9.10
+#(optional)GC_has_static_roots@Base 0.9.3 #missing 0.9.10
+ (optional)GC_get_free_bytes@Base 0.9
+ (optional)GC_get_heap_size@Base 0.9
+#(optional)GC_get_main_stack_base@Base 0.9 #missing 0.9.10
+ (optional)GC_get_stack_base@Base 0.9
+ (optional)GC_get_total_bytes@Base 0.9
+ (optional)GC_greatest_plausible_heap_addr@Base 0.9
+#(optional)GC_grow_table@Base 0.9 #missing 0.9.10
+#(optional)GC_has_other_debug_info@Base 0.9 #missing 0.9.10
+#(optional)GC_have_errors@Base 0.9 #missing 0.9.10
+#(optional)GC_hblk_fl_from_blocks@Base 0.9 #missing 0.9.10
+#(optional)GC_hblkfreelist@Base 0.9 #missing 0.9.10
+#(optional)GC_hdr_cache_hits@Base 0.9 #missing 0.9.3
+#(optional)GC_hdr_cache_misses@Base 0.9 #missing 0.9.3
+#(optional)GC_header_cache_miss@Base 0.9 #missing 0.9.10
+#(optional)GC_high_water@Base 0.9 #missing 0.9.3
+#(optional)GC_ignore_self_finalize_mark_proc@Base 0.9 #missing 0.9.10
+ (optoinal)GC_ignore_warn_proc@Base 0.9.3
+#(optional)GC_in_thread_creation@Base 0.9 #missing 0.9.10
+#(optional)GC_incomplete_normal_bl@Base 0.9 #missing 0.9.10
+#(optional)GC_incomplete_stack_bl@Base 0.9 #missing 0.9.10
+ (optional)GC_incr_bytes_allocd@Base 0.9
+ (optional)GC_incr_bytes_freed@Base 0.9
+#(optional)GC_incremental@Base 0.9 #missing 0.9.10
+ (optional)GC_incremental_protection_needs@Base 0.9
+ (optional)GC_init@Base 0.9
+#(optional)GC_init_explicit_typing@Base 0.9 #missing 0.9.5
+#(optional)GC_init_gcj_malloc@Base 0.9  #missing 0.9.5
+#(optional)GC_init_headers@Base 0.9 #missing 0.9.10
+#(optional)GC_init_inner@Base 0.9 #missing 0.9.3
+#(optional)GC_init_parallel@Base 0.9 #missing 0.9.10
+#(optional)GC_init_size_map@Base 0.9 #missing 0.9.10
+#(optional)GC_initialize_offsets@Base 0.9 #missing 0.9.10
+#(optional)GC_initiate_gc@Base 0.9 #missing 0.9.10
+#(optional)GC_start_rtn_prepare_thread@Base 0.9 #missing 0.9.10
+#(optional)GC_inner_start_routine@Base 0.9 #missing 0.9.10
+#(optional)GC_install_counts@Base 0.9 #missing 0.9.10
+#(optional)GC_install_header@Base 0.9 #missing 0.9.10
+#(optional)GC_invalidate_mark_state@Base 0.9 #missing 0.9.10
+ (optional)GC_invoke_finalizers@Base 0.9
+#(optional)GC_is_black_listed@Base 0.9 #missing 0.9.10
+ (optional)GC_is_disabled@Base 0.9.3
+#(optional)GC_is_full_gc@Base 0.9 #missing 0.9.10
+ (optional)GC_is_heap_ptr@Base 0.9.4
+ (optional)GC_is_init_called@Base 0.9.6
+#(optional)GC_is_initialized@Base 0.9 #missing 0.9.10
+ (optional)GC_is_marked@Base 0.9
+#(optional)GC_is_static_root@Base 0.9 #missing 0.9.3
+#(optional)GC_is_valid_displacement@Base 0.9 #missing 0.9.5
+#(optional)GC_is_valid_displacement_print_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_is_visible@Base 0.9 #missing 0.9.5
+#(optional)GC_is_visible_print_proc@Base 0.9 #missing 0.9.5
+ (optional)GC_is_tmp_root@Base 0.9.6
+ (optional)GC_java_finalization@Base 0.9
+#(optional)GC_large_alloc_warn_interval@Base 0.9 #missing 0.9.10
+#(optional)GC_large_alloc_warn_suppressed@Base 0.9 #missing 0.9.10
+#(optional)GC_leaked@Base 0.9 #missing 0.9.10
+ (optional)GC_least_plausible_heap_addr@Base 0.9
+#(optional)GC_ll_hashtbl@Base 0.9.4 #missing 0.9.10
+#(optional)GC_lock@Base 0.9 #missing 0.9.10
+#(optional)GC_lock_holder@Base 0.9 #missing 0.9.4
+#(optional)GC_log@Base 0.9 #missing 0.9.10
+ (optional)GC_log_printf@Base 0.9
+#(optional)GC_lookup_thread@Base 0.9 #missing 0.9.10
+#(optional)GC_make_array_descriptor@Base 0.9 #missing 0.9.5
+#(optional)GC_make_closure@Base 0.9 #missing 0.9.10
+#(optional)GC_make_descriptor@Base 0.9 #missing 0.9.5
+#(optional)GC_make_sequence_descriptor@Base 0.9 #missing 0.9.5
+ (optional)GC_malloc@Base 0.9
+ (optional)GC_malloc_atomic@Base 0.9
+ (optional)GC_malloc_atomic_ignore_off_page@Base 0.9
+ (optional)GC_malloc_atomic_uncollectable@Base 0.9
+#(optional)GC_malloc_explicitly_typed@Base 0.9 #missing 0.9.5
+#(optional)GC_malloc_explicitly_typed_ignore_off_page@Base 0.9 #missing 0.9.5
+ (optional)GC_malloc_ignore_off_page@Base 0.9
+ (optional)GC_malloc_many@Base 0.9
+#(optional)GC_malloc_stubborn@Base 0.9 #missing 0.9.5
+ (optional)GC_malloc_uncollectable@Base 0.9
+ (optional)GC_mark_and_push@Base 0.9
+#(optional)GC_mark_and_push_stack@Base 0.9 #missing 0.9.10
+#(optional)GC_mark_from@Base 0.9 #missing 0.9.10
+#(optional)GC_mark_init@Base 0.9 #missing 0.9.10
+#(optional)GC_mark_some@Base 0.9 #missing 0.9.10
+#(optional)GC_mark_stack@Base 0.9 #missing 0.9.4
+#(optional)GC_mark_stack_empty@Base 0.9 #missing 0.9.4
+#(optional)GC_mark_stack_limit@Base 0.9 #missing 0.9.4
+#(optional)GC_mark_stack_size@Base 0.9 #missing 0.9.10
+#(optional)GC_mark_stack_too_small@Base 0.9 #missing 0.9.10
+#(optional)GC_mark_stack_top@Base 0.9 #missing 0.9.4
+#(optional)GC_mark_state@Base 0.9 #missing 0.9.10
+#(optional)GC_max_heapsize@Base 0.9.4 #missing 0.9.10
+ (optional)GC_max_retries@Base 0.9
+#(optional)GC_maybe_gc@Base 0.9 #missing 0.9.10
+ (optional)GC_memalign@Base 0.9
+#(optional)GC_min_sp@Base 0.9 #missing 0.9.3
+ (optional)GC_move_disappearing_link@Base 0.9.4
+#(optional)GC_move_disappearing_link_inner@Base 0.9.4 #missing 0.9.10
+ (optional)GC_move_long_link@Base 0.9.4
+#(optional)GC_n_attempts@Base 0.9 #missing 0.9.10
+#(optional)GC_n_heap_sects@Base 0.9 #missing 0.9.10
+#(optional)GC_n_kinds@Base 0.9 #missing 0.9.10
+#(optional)GC_n_leaked@Base 0.9 #missing 0.9.10
+#(optional)GC_n_mark_procs@Base 0.9 #missing 0.9.10
+#(optional)GC_n_rescuing_pages@Base 0.9 #missing 0.9.10
+#(optional)GC_n_set_marks@Base 0.9 #missing 0.9.10
+#(optional)GC_n_smashed@Base 0.9 #missing 0.9.10
+#(optional)GC_need_full_gc@Base 0.9 #missing 0.9.10
+#(optional)GC_need_to_lock@Base 0.9 #missing 0.9.10
+#(optional)GC_never_stop_func@Base 0.9 #missing 0.9.10
+ (optional)GC_new_free_list@Base 0.9
+ (optional)GC_new_free_list_inner@Base 0.9
+#(optional)GC_new_hblk@Base 0.9 #missing 0.9.10
+ (optional)GC_new_kind@Base 0.9
+ (optional)GC_new_kind_inner@Base 0.9
+ (optional)GC_new_proc@Base 0.9
+ (optional)GC_new_proc_inner@Base 0.9
+#(optional)GC_new_thread@Base 0.9 #missing 0.9.10
+#(optional)GC_next_exclusion@Base 0.9 #missing 0.9.10
+#(optional)GC_next_used_block@Base 0.9 #missing 0.9.10
+ (optional)GC_no_dls@Base 0.9
+ (optional)GC_non_gc_bytes@Base 0.9
+#(optional)GC_non_gc_bytes_at_gc@Base 0.9.4 #missing 0.9.10
+#(optional)GC_noop@Base 0.9 #missing 0.9.4
+ (optional)GC_noop1@Base 0.9
+#(optional)GC_noop6@Base 0.9.4 #missing 0.9.10
+#(optional)GC_noop_sink@Base 0.9.3 #missing 0.9.10
+#(optional)GC_normal_finalize_mark_proc@Base 0.9 #missing 0.9.10
+#(optional)GC_notify_full_gc@Base 0.9 #missing 0.9.3
+#(optional)GC_notify_or_invoke_finalizers@Base 0.9 #missing 0.9.10
+#(optional)GC_nprocs@Base 0.9 #missing 0.9.10
+#(optional)GC_null_finalize_mark_proc@Base 0.9 #missing 0.9.10
+#(optional)GC_number_stack_black_listed@Base 0.9 #missing 0.9.10
+#(optional)GC_obj_kinds@Base 0.9 #missing 0.9.10
+#(optional)GC_objects_are_marked@Base 0.9 #missing 0.9.10
+ (optional)GC_objfreelist_ptr@Base 0.9
+#(optional)GC_old_dl_entries@Base 0.9.3 #missing 0.9.10
+#(optional)GC_old_ll_entries@Base 0.9.4 #missing 0.9.10
+#(optional)GC_old_normal_bl@Base 0.9 #missing 0.9.10
+#(optional)GC_old_stack_bl@Base 0.9 #missing 0.9.10
+#(optional)GC_on_stack@Base 0.9 #missing 0.9.3
+ (optional)GC_on_abort@Base 0.9.4
+ (optional)GC_on_heap_resize@Base 0.9.4
+ (optional)GC_oom_fn@Base 0.9
+#(optional)GC_page_size@Base 0.9 #missing 0.9.10
+#(optional)GC_page_was_dirty@Base 0.9 #missing 0.9.10
+#(optional)GC_page_was_ever_dirty@Base 0.9 # missing 0.9.3
+#(optional)GC_pages_executable@Base 0.9.3 #missing 0.9.10
+#(optional)GC_parse_mem_size_arg@Base 0.9.3 #missing 0.9.10
+ (optional)GC_parallel@Base 0.9
+#(optional)GC_pause@Base 0.9 #missing 0.9.10
+ (optional)GC_posix_memalign@Base 0.9.3
+#(optional)GC_post_incr@Base 0.9 #missing 0.9.5
+#(optional)GC_pre_incr@Base 0.9 #missing 0.9.5
+#(optional)GC_prev_block@Base 0.9 #missing 0.9.10
+#(optional)GC_print_all_errors@Base 0.9 #missing 0.9.10
+#(optional)GC_print_all_smashed@Base 0.9 #missing 0.9.10
+#(optional)GC_print_all_smashed_proc@Base 0.9 #missing 0.9.10
+#(optional)GC_print_back_height@Base 0.9 #missing 0.9.10
+#(optional)GC_print_block_descr@Base 0.9 #missing 0.9.10
+#(optional)GC_print_block_list@Base 0.9 #missing 0.9.10
+#(optional)GC_print_finalization_stats@Base 0.9 #missing 0.9.10
+ (optional)GC_print_free_list@Base 0.9
+#(optional)GC_print_hblkfreelist@Base 0.9 #missing 0.9.10
+#(optional)GC_print_heap_obj@Base 0.9 #missing 0.9.10
+#(optional)GC_print_heap_sects@Base 0.9 #missing 0.9.10
+#(optional)GC_print_obj@Base 0.9 #missing 0.9.10
+#(optional)GC_print_smashed_obj@Base 0.9 #missing 0.9.10
+#(optional)GC_print_source_ptr@Base 0.9 #missing 0.9.3
+#(optional)GC_print_static_roots@Base 0.9 #missing 0.9.10
+#(optional)GC_print_stats@Base 0.9 #missing 0.9.10
+#(optional)GC_print_type@Base 0.9 #missing 0.9.4
+ (optional)GC_printf@Base 0.9
+#(optional)GC_project2@Base 0.9 #missing 0.9.3
+#(optional)GC_promote_black_lists@Base 0.9 #missing 0.9.10
+ (arch=!kfreebsd-amd64 !kfreebsd-i386|optional)GC_pthread_cancel@Base 0.9.3
+ (optional)GC_pthread_create@Base 0.9
+ (optional)GC_pthread_detach@Base 0.9
+ (arch=!kfreebsd-amd64 !kfreebsd-i386|optional)GC_pthread_exit@Base 0.9.3
+ (optional)GC_pthread_join@Base 0.9
+ (optional)GC_pthread_sigmask@Base 0.9
+ (optional)GC_push_all@Base 0.9
+ (optional)GC_push_all_eager@Base 0.9
+#(optional)GC_push_all_stack@Base 0.9 #missing 0.9.10
+#(optional)GC_push_all_stacks@Base 0.9 #missing 0.9.10
+#o(optional)GC_push_all_stack_sections@Base 0.9.3 #missing 0.9.10
+#(optional)GC_push_complex_descriptor@Base 0.9 #missing 0.9.5
+ (optional)GC_push_conditional@Base 0.9
+#(optional)GC_push_conditional_with_exclusions@Base 0.9 #missing 0.9.10
+#(optional)GC_push_current_stack@Base 0.9 #missing 0.9.10
+ (optional)GC_push_finalizer_structures@Base 0.9
+#(optional)GC_push_gc_structures@Base 0.9 #missing 0.9.10
+#(optional)GC_push_marked@Base 0.9 #missing 0.9.10
+#(optional)GC_push_next_marked@Base 0.9 #missing 0.9.10
+#(optional)GC_push_next_marked_dirty@Base 0.9 #missing 0.9.10
+#(optional)GC_push_next_marked_uncollectable@Base 0.9 #missing 0.9.10
+#(optional)GC_push_one@Base 0.9 #missing 0.9.10
+ (optional)GC_push_other_roots@Base 0.9
+#(optional)GC_push_regs@Base 0.9 #missing 0.9.3
+#(optional)GC_push_regs_and_stack@Base 0.9 #missing 0.9.10
+#(optional)GC_push_roots@Base 0.9 #missing 0.9.10
+#(optional)GC_push_selected@Base 0.9 #missing 0.9.10
+#(optional)GC_push_thread_structures@Base 0.9 #missing 0.9.10
+#(optional)GC_push_typed_structures@Base 0.9 #missing 0.9.10
+#(optional)GC_push_typed_structures_proc@Base 0.9.3 #missing 0.9.5
+#(optional)GC_push_unconditionally@Base 0.9.4 #missing 0.9.10
+#(optional)GC_quiet@Base 0.9 #missing 0.9.10
+#(optional)GC_read_dirty@Base 0.9 #missing 0.9.10
+ (optional)GC_realloc@Base 0.9
+#(optional)GC_rebuild_root_index@Base 0.9.3 #missing 0.9.10
+#(optional)GC_reclaim_all@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaim_block@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaim_check@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaim_clear@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaim_generic@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaim_small_nonempty_block@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaim_unconditionally_marked@Base 0.9.4 #missing 0.9.10
+#(optional)GC_reclaim_uninit@Base 0.9 #missing 0.9.10
+#(optional)GC_reclaimed_bytes_before_gc@Base 0.9.4 #missing 0.9.10
+#(optional)GC_register_data_segments@Base 0.9 #missing 0.9.10
+ (optional)GC_register_describe_type_fn@Base 0.9
+ (optional)GC_register_disappearing_link@Base 0.9
+#(optional)GC_register_disappearing_link_inner@Base 0.9.4 #missing 0.9.10
+#(optional)GC_register_disclaim_proc@Base 0.9.4 #missing 0.9.5
+ (optional)GC_register_displacement@Base 0.9
+#(optional)GC_register_displacement_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_register_dynamic_libraries@Base 0.9 #missing 0.9.10
+#(optional)GC_register_dynamic_libraries_dl_iterate_phdr@Base 0.9 #missing 0.9.10
+#(optional)GC_register_dynlib_callback@Base 0.9.3 #missing 0.9.10
+ (optional)GC_register_finalizer@Base 0.9
+ (optional)GC_register_finalizer_ignore_self@Base 0.9
+#(optional)GC_register_finalizer_inner@Base 0.9 #missing 0.9.10
+ (optional)GC_register_finalizer_no_order@Base 0.9
+ (optional)GC_register_finalizer_unreachable@Base 0.9
+ (optional)GC_register_has_static_roots_callback@Base 0.9.3
+ (optional)GC_register_long_link@Base 0.9.4
+#(optional)GC_register_main_static_data@Base 0.9 #missing 0.9.10
+ (optional)GC_register_my_thread@Base 0.9
+#(optional)GC_register_my_thread_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_remove_allowed_signals@Base 0.9 #missing 0.9.10
+#(optional)GC_remove_all_threads_but_me@Base 0.9.3 #missing 0.9.10
+#(optional)GC_remove_counts@Base 0.9 #missing 0.9.10
+#(optional)GC_remove_from_fl@Base 0.9 #missing 0.9.4
+#(optional)GC_remove_from_fl_at@Base 0.9.4 #missing 0.9.10
+#(optional)GC_remove_header@Base 0.9 #missing 0.9.10
+#(optional)GC_remove_protection@Base 0.9 #missing 0.9.10
+#(optional)GC_remove_root_at_pos@Base 0.9.3 #missing 0.9.10
+ (optional)GC_remove_roots@Base 0.9
+#(optional)GC_remove_roots_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_remove_tmp_roots@Base 0.9 #missing 0.9.10
+#(optional)GC_restart_handler@Base 0.9 #missing 0.9.10
+#(optional)GC_retry_signals@Base 0.9 #missing 0.9.10
+#(optional)GC_root_size@Base 0.9 #missing 0.9.10
+#(optional)GC_roots_present@Base 0.9 #missing 0.9.10
+#(optional)GC_same_obj@Base 0.9 #missing 0.9.5
+#(optional)GC_same_obj_print_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_scratch_recycle_inner@Base 0.9.6 #missing 0.9.10
+#(optional)GC_scratch_alloc@Base 0.9 #missing 0.9.10
+ (optional)GC_set_abort_func@Base 0.9.4
+ (optional)GC_set_all_interior_pointers@Base 0.9.3
+#(optional)GC_set_and_save_fault_handler@Base 0.9 #missing 0.9.10
+ (optional)GC_set_dont_expand@Base 0.9.3
+ (optional)GC_set_dont_precollect@Base 0.9.3
+ (optional)GC_set_finalize_on_demand@Base 0.9.3
+ (optional)GC_set_finalizer_notifier@Base 0.9.3
+ (optional)GC_set_find_leak@Base 0.9.3
+#(optional)GC_set_fl_marks@Base 0.9 #missing 0.9.10
+ (optional)GC_set_force_unmap_on_gcollect@Base 0.9.3
+ (optional)GC_set_free_space_divisor@Base 0.9
+ (optional)GC_set_full_freq@Base 0.9.3
+ (optional)GC_set_handle_fork@Base 0.9.3
+#(optional)GC_set_hdr_marks@Base 0.9 #missing 0.9.10
+ (optional)GC_set_java_finalization@Base 0.9.3
+ (optional)GC_set_mark_bit@Base 0.9
+ (optional)GC_set_max_heap_size@Base 0.9
+ (optional)GC_set_max_retries@Base 0.9.3
+ (optional)GC_set_no_dls@Base 0.9.3
+ (optional)GC_set_non_gc_bytes@Base 0.9.3
+ (optional)GC_set_on_heap_resize@Base 0.9.4
+ (optional)GC_set_oom_fn@Base 0.9.3
+ (optional)GC_set_pages_executable@Base 0.9.3
+ (optional)GC_set_push_other_roots@Base 0.9.4
+ (optional)GC_set_start_callback@Base 0.9.3
+ (optional)GC_set_stop_func@Base 0.9.3
+ (optional)GC_set_suspend_signal@Base 0.9.4
+ (optional)GC_set_thr_restart_signal@Base 0.9.4
+ (optional)GC_set_time_limit@Base 0.9.3
+ (optional)GC_set_warn_proc@Base 0.9
+#(optional)GC_setpagesize@Base 0.9 #missing 0.9.10
+#(optional)GC_should_collect@Base 0.9 #missing 0.9.10
+ (optional)GC_should_invoke_finalizers@Base 0.9
+#(optional)GC_sig_suspend@Base 0.9.4 #missing 0.9.10
+#(optional)GC_sig_thr_restart@Base 0.9.4 #missing 0.9.10
+#(optional)GC_signal_mark_stack_overflow@Base 0.9 #missing 0.9.10
+ (optional)GC_size@Base 0.9
+#(optional)GC_smashed@Base 0.9 #missing 0.9.10
+#(optional)GC_split_block@Base 0.9 #missing 0.9.10
+#(optional)GC_stack_last_cleared@Base 0.9 #missing 0.9.3
+ (optional)GC_stackbottom@Base 0.9
+#(optional)GC_start_call_back@Base 0.9 #missing 0.9.10
+#(optional)GC_start_debugging@Base 0.9
+#(optional)GC_start_debugging_inner@Base 0.9.4 #missing 0.9.10
+ (optional)GC_start_mark_threads@Base 0.9.4
+#(optional)GC_start_reclaim@Base 0.9 #missing 0.9.10
+#(optional)GC_start_routine@Base 0.9 #missing 0.9.10
+#(optional)GC_start_time@Base 0.9 #missing 0.9.10
+#(optional)GC_start_world@Base 0.9 #missing 0.9.10
+#(optional)GC_stderr@Base 0.9 #missing 0.9.10
+#(optional)GC_stdout@Base 0.9 #missing 0.9.10
+#(optional)GC_stop_count@Base 0.9 #missing 0.9.10
+#(optional)GC_stop_init@Base 0.9 #missing 0.9.10
+#(optional)GC_stop_world@Base 0.9 #missing 0.9.10
+#(optional)GC_stopped_mark@Base 0.9 #missing 0.9.10
+#(optional)GC_stopping_pid@Base 0.9 #missing 0.9.3
+#(optional)GC_stopping_thread@Base 0.9 #missing 0.9.3
+#(optional)GC_store_debug_info@Base 0.9
+#(optional)GC_store_debug_info_inner@Base 0.9.3 #missing 0.9.10
+ (optional)GC_strdup@Base 0.9
+ (optional)GC_strndup@Base 0.9.3
+#(optional)GC_suspend_ack_sem@Base 0.9 #missing 0.9.10
+#(optional)GC_suspend_all@Base 0.9 #missing 0.9.10
+#(optional)GC_suspend_handler@Base 0.9 #missing 0.9.10
+#(optional)GC_suspend_handler_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_thr_init@Base 0.9 #missing 0.9.10
+#(optional)GC_thr_initialized@Base 0.9 #missing 0.9.10
+#(optional)GC_thread_exit_proc@Base 0.9 #missing 0.9.10
+ (optional)GC_thread_is_registered@Base 0.9.4
+#(optional)GC_threads@Base 0.9 #missing 0.9.10
+ (optional)GC_time_limit@Base 0.9
+#(optional)GC_timeout_stop_func@Base 0.9 #missing 0.9.10
+#(optional)GC_total_stack_black_listed@Base 0.9 #missing 0.9.10
+#(optional)GC_total_stacksize@Base 0.9.3 #missing 0.9.10
+ (optional)GC_try_to_collect@Base 0.9
+#(optional)GC_try_to_collect_general@Base 0.9.3 #missing 0.9.10
+#(optional)GC_try_to_collect_inner@Base 0.9 #missing 0.9.10
+#(optional)GC_typed_mark_proc@Base 0.9 #missing 0.9.5
+#(optional)GC_typed_mark_proc_index@Base 0.9 #missing 0.9.5
+#(optional)GC_unblock_gc_signals@Base 0.9.6 #missing 0.9.10
+#(optional)GC_unix_get_mem@Base 0.9 #missing 0.9.10
+#(optional)GC_unix_sbrk_get_mem@Base 0.9 #missing 0.9.10
+#(optional)GC_unpromote_black_lists@Base 0.9 #missing 0.9.10
+#(optional)GC_unreachable_finalize_mark_proc@Base 0.9 #missing 0.9.10
+ (optional)GC_unregister_disappearing_link@Base 0.9
+ (optional)GC_unregister_long_link@Base 0.9.4
+ (optional)GC_unregister_my_thread@Base 0.9
+#(optional)GC_unregister_my_thread_inner@Base 0.9.3 #missing 0.9.10
+ (optional)GC_uobjfreelist_ptr@Base 0.9
+ (optional)GC_use_entire_heap@Base 0.9
+#(optional)GC_used_heap_size_after_full@Base 0.9 #missing 0.9.10
+#(optional)GC_version@Base 0.9 #missing 0.9.10
+#(optional)GC_wait_for_gc_completion@Base 0.9 #missing 0.9.10
+#(optional)GC_with_callee_saves_pushed@Base 0.9 #missing 0.9.10
+#(optional)GC_world_is_stopped@Base 0.9 #missing 0.9.10
+#(optional)GC_write@Base 0.9 #missing 0.9.10
+#(optional)GC_clear_togglerefs@Base 0.9.5 #missing 0.9.10
+#(optional)GC_debug_generic_malloc@Base 0.9.5 #missing 0.9.10
+ (optional)GC_debug_generic_or_special_malloc@Base 0.9.5
+#(optional)GC_do_enumerate_reachable_objects@Base 0.9.5 #missing 0.9.10
+ (optional)GC_enumerate_reachable_objects_inner@Base 0.9.5
+#(optional)GC_fnlz_roots@Base 0.9.5 #missing 0.9.10
+ (optional)GC_generic_malloc_uncollectable@Base 0.9.5
+ (optional)GC_get_await_finalize_proc@Base 0.9.5
+ (optional)GC_get_kind_and_size@Base 0.9.5
+ (optional)GC_get_memory_use@Base 0.9.5
+ (optional)GC_get_on_collection_event@Base 0.9.5
+ (optional)GC_get_on_thread_event@Base 0.9.5
+ (optional)GC_get_toggleref_func@Base 0.9.5
+#(optional)GC_heapsize_at_forced_unmap@Base 0.9.5 #missing 0.9.10
+ (optional)GC_malloc_kind@Base 0.9.5
+ (optional)GC_malloc_kind_global@Base 0.9.5
+#(optional)GC_mark_togglerefs@Base 0.9.5 #missing 0.9.10
+#(optional)GC_object_finalized_proc@Base 0.9.5 #missing 0.9.10
+#(optional)GC_on_collection_event@Base 0.9.5 #missing 0.9.10
+#(optional)GC_on_thread_event@Base 0.9.5 #missing 0.9.10
+#(optional)GC_process_togglerefs@Base 0.9.5 #missing 0.9.10
+ (optional)GC_register_altstack@Base 0.9.5
+ (optional)GC_set_await_finalize_proc@Base 0.9.5
+ (optional)GC_set_log_fd@Base 0.9.5
+ (optional)GC_set_on_collection_event@Base 0.9.5
+ (optional)GC_set_on_thread_event@Base 0.9.5
+ (optional)GC_set_toggleref_func@Base 0.9.5
+ (optional)GC_toggleref_add@Base 0.9.5
+#(optional)GC_toggleref_arr@Base 0.9.5 #missing 0.9.10
+#(optional)GC_toggleref_array_capacity@Base 0.9.5 #missing 0.9.10
+#(optional)GC_toggleref_array_size@Base 0.9.5 #missing 0.9.10
+#(optional)GC_toggleref_callback@Base 0.9.5 #missing 0.9.10
+ (optional)GC_abort_on_oom@Base 0.9.10
+ (optional)GC_calloc_explicitly_typed@Base 0.9.10
+ (optional)GC_change_stubborn@Base 0.9.10
+ (optional)GC_debug_ptr_store_and_dirty@Base 0.9.10
+ (optional)GC_deinit@Base 0.9.10
+ (optional)GC_dump_named@Base 0.9.10
+ (optional)GC_end_stubborn_change@Base 0.9.10
+ (optional)GC_finalized_malloc@Base 0.9.10
+ (optional)GC_get_expl_freed_bytes_since_gc@Base 0.9.10
+ (optional)GC_get_full_gc_total_time@Base 0.9.10
+ (optional)GC_get_manual_vdb_allowed@Base 0.9.10
+ (optional)GC_get_max_prior_attempts@Base 0.9.10
+ (optional)GC_get_min_bytes_allocd@Base 0.9.10
+ (optional)GC_get_rate@Base 0.9.10
+ (optional)GC_get_size_map_at@Base 0.9.10
+ (optional)GC_init_finalized_malloc@Base 0.9.10
+ (optional)GC_is_incremental_mode@Base 0.9.10
+ (optional)GC_is_valid_displacement@Base 0.9.10
+ (optional)GC_is_valid_displacement_print_proc@Base 0.9.10
+ (optional)GC_is_visible@Base 0.9.10
+ (optional)GC_is_visible_print_proc@Base 0.9.10
+ (optional)GC_make_descriptor@Base 0.9.10
+ (optional)GC_malloc_explicitly_typed@Base 0.9.10
+ (optional)GC_malloc_explicitly_typed_ignore_off_page@Base 0.9.10
+ (optional)GC_malloc_stubborn@Base 0.9.10
+ (optional)GC_post_incr@Base 0.9.10
+ (optional)GC_pre_incr@Base 0.9.10
+ (optional)GC_ptr_store_and_dirty@Base 0.9.10
+ (optional)GC_register_disclaim_proc@Base 0.9.10
+ (optional)GC_same_obj@Base 0.9.10
+ (optional)GC_same_obj_print_proc@Base 0.9.10
+ (optional)GC_set_manual_vdb_allowed@Base 0.9.10
+ (optional)GC_set_max_prior_attempts@Base 0.9.10
+ (optional)GC_set_min_bytes_allocd@Base 0.9.10
+ (optional)GC_set_rate@Base 0.9.10
+ (optional)GC_start_performance_measurement@Base 0.9.10
+ (optional)GC_start_world_external@Base 0.9.10
+ (optional)GC_stop_world_external@Base 0.9.10
+#(optional)free_list_index_of@Base 0.9 #missing 0.9.3
+#THREAD_LOCAL_ALLOC
+#(arch=m68k arm64 s390x mips armel hppa mips64el armhf mipsel alpha|optional)GC_allocate_lock@Base 0.9.6 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_allocate_ml@Base 0.9 #missing 0.9.10
+#(optional)GC_block_count@Base 0.9 #missing 0.9.3
+#(optional)GC_core_gcj_malloc@Base 0.9 #missing 0.9.5
+#(optional)GC_core_malloc@Base 0.9 #missing 0.9.5
+#(optional)GC_core_malloc_atomic@Base 0.9 #missing 0.9.5
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_destroy_thread_local@Base 0.9 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_generic_lock@Base 0.9 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_init_thread_local@Base 0.9 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_mark_thread_local_fls_for@Base 0.9 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_mark_thread_local_free_lists@Base 0.9 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_thread_key@Base 0.9 #missing 0.9.10
+#(arch=!m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_world_stopped@Base 0.9 #missing 0.9.10
+#(optional)GC_spin_count@Base 0.9 #missing 0.9.3
+#(optional)GC_unlocked_count@Base 0.9 #missing 0.9.3
+#
+ (arch=ia64|optional)GC_get_register_stack_base@Base 0.9
+ (arch=ia64|optional)GC_greatest_stack_base_below@Base 0.9
+ (arch=ia64|optional)GC_print_callers@Base 0.9
+ (arch=ia64|optional)GC_push_all_register_sections@Base 0.9.3
+ (arch=ia64|optional)GC_register_stackbottom@Base 0.9
+ (arch=ia64 sparc sparc64|optional)GC_save_regs_in_stack@Base 0.9
+ (arch=ia64 sparc sparc64|optional)GC_save_regs_ret_val@Base 0.9
+ (arch=sparc sparc64|optional)GC_SysVGetDataStart@Base 0.9
+ (arch=sparc sparc64|optional)_etext@Base 0.9
+ (arch=kfreebsd-amd64 kfreebsd-i386|optional)etext@Base 0.9
+ (arch=riscv64|optional)end@Base 0.9.10
+ (arch=kfreebsd-amd64 kfreebsd-i386|optional)GC_FreeBSDGetDataStart@Base 0.9
+ (arch=kfreebsd-amd64 kfreebsd-i386|optional)GC_freebsd_main_stack_base@Base 0.9.3
+#(arch=armel armhf hurd-i386|optional)GC_key_create@Base 0.9 #missing 0.9.4
+#(arch=armel armhf hurd-i386|optional)GC_remove_specific@Base 0.9 #missing 0.9.4
+#(arch=armel armhf hurd-i386|optional)GC_setspecific@Base 0.9 #missing 0.9.4
+#(arch=armel armhf hurd-i386|optional)GC_slow_getspecific@Base 0.9 #missing 0.9.4
+# !sparc !kfreebsd
+#(arch=!sparc !sparc64 !kfreebsd-amd64 !kfreebsd-i386 !arm64 !s390x !mips !mips64el !mipsel|optional)GC_data_start@Base 0.9 #missing 0.9.10
+#(arch=!sparc !sparc64 !kfreebsd-amd64 !kfreebsd-i386 !arm64 !s390x !mips !mips64el !mipsel|optional)GC_init_linux_data_start@Base 0.9 #missing 0.9.10
+# !sparc !mips !mipsel !kfreebsd !s390 !powerpc !armel !hppa !hurd-i386 !sh4
+#(arch=alpha amd64 arm ia64 i386 m68k avr32 x32|optional)GC_old_bus_handler@Base 0.9 #missing 0.9.10
+#(arch=alpha arm ia64 avr32|optional)GC_old_bus_handler_used_si@Base 0.9 #missing 0.9.6
+#(arch=alpha amd64 arm ia64 i386 m68k avr32 x32|optional)GC_old_segv_handler@Base 0.9 #missing 0.9.10
+#(arch=alpha amd64 arm ia64 i386 m68k avr32 x32|optional)GC_old_segv_handler_used_si@Base 0.9 #missing 0.9.10
+#(arch=alpha amd64 arm ia64 i386 m68k avr32|optional)async_set_pht_entry_from_index@Base 0.9 #missing 0.9.3
+#(arch=alpha amd64 arm ia64 i386 m68k avr32 x32|optional)GC_protect_heap@Base 0.9 #missing 0.9.10
+#(arch=alpha amd64 arm ia64 i386 m68k avr32 x32|optional)GC_write_fault_handler@Base 0.9 #missing 0.9.10
+# !kfreebsd !hurd-i386
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_enclosing_mapping@Base 0.9 #missing 0.9.3
+ (arch=ia64|optional)GC_enclosing_mapping@Base 0.9
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_err_write@Base 0.9 #missing 0.9.3
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_get_file_len@Base 0.9 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_get_maps@Base 0.9 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_get_maps_len@Base 0.9 #missing 0.9.10
+#(arch=!hurd-i386|optional)GC_get_nprocs@Base 0.9 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_linux_stack_base@Base 0.9 # missing 0.9.3
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_linux_main_stack_base@Base 0.9.3 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_parse_map_entry@Base 0.9 #missing 0.9.4
+ (arch=ia64|optional)GC_parse_map_entry@Base 0.9.6
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_print_address_map@Base 0.9 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !hurd-i386|optional)GC_repeat_read@Base 0.9 #missing 0.9.10
+#
+#(arch=!arm64 !s390x !mips !mips64el !mipsel|optional)GC_fault_handler@Base 0.9 #missing 0.9.10
+#(arch=!arm64 !s390x !mips !mips64el !mipsel|optional)GC_reset_fault_handler@Base 0.9 #missing 0.9.10
+#(optional)GC_reset_finalizer_nested@Base 0.9.3 #missing 0.9.10
+#(arch=!arm64 !s390x !mips !mips64el !mipsel|optional)GC_find_limit@Base 0.9 #missing 0.9.10
+#(arch=!arm64 !s390x !mips !mips64el !mipsel|optional)GC_find_limit_with_bound@Base 0.9 #missing 0.9.10
+#(optional)GC_findleak_delay_free@Base 0.9.3 #missing 0.9.10
+#(arch=!arm64 !s390x !mips !mips64el !mipsel|optional)GC_jmp_buf@Base 0.9 #missing 0.9.10
+#(arch=!arm64 !s390x !mips !mips64el !mipsel|optional)GC_setup_temporary_fault_handler@Base 0.9 #missing 0.9.10
+# !hurd-i386
+#(arch=!hurd-i386|optional)GC_unix_mmap_get_mem@Base 0.9 #missing 0.9.10
+#(arch=alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc sparc sparc64 s390 m68k sh4 avr32 armhf powerpcspe)
+### mipsel, sparc64, sh4, m68k, avr32
+# !kfreebsd-amd64 !kfreebsd-i386
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_acquire_mark_lock@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_active_count@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_bytes_allocd_tmp@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_do_local_mark@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_do_parallel_mark@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_first_nonempty@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_fl_builder_count@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_help_marker@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_help_wanted@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_helper_count@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_mark_local@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_mark_no@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_mark_thread@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_mark_threads@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_notify_all_builder@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_notify_all_marker@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_release_mark_lock@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_return_mark_stack@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_steal_mark_stack@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_wait_builder@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_wait_for_reclaim@Base 0.9.4 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_wait_marker@Base 0.9.4 #missing 0.9.10
+#
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_start_mark_threads_inner@Base 0.9.5 #missing 0.9.10
+#(arch=!kfreebsd-amd64 !kfreebsd-i386 !m68k !arm64 !s390x !mips !armel !hppa !mips64el !armhf !mipsel !alpha|optional)GC_wait_for_markers_init@Base 0.9.5 #missing 0.9.10
+# kfreebsd-amd64 kfreebsd-i386
+#(arch=kfreebsd-amd64 kfreebsd-i386 m68k arm64 s390x mips armel hppa mips64el armhf mipsel alpha|optional)GC_push_marked1@Base 0.9 #missing 0.9.4
+#(arch=kfreebsd-amd64 kfreebsd-i386 arm64 s390x mips armel hppa mips64el armhf mipsel alpha|optional)GC_push_marked2@Base 0.9 #missing 0.9.4
+#(arch=kfreebsd-amd64 kfreebsd-i386 arm64 s390x mips armel hppa mips64el armhf mipsel alpha|optional)GC_push_marked4@Base 0.9 #missing 0.9.4
+ GC_alloc_lock@Base 0.9.13
+ GC_alloc_unlock@Base 0.9.13
+ GC_clear_exclusion_table@Base 0.9.13
+ GC_get_allocd_bytes_per_finalizer@Base 0.9.13
+ GC_get_debug_header_size@Base 0.9.13
+ GC_get_disable_automatic_collection@Base 0.9.13
+ GC_get_my_stackbottom@Base 0.9.13
+ GC_get_obtained_from_os_bytes@Base 0.9.13
+ GC_get_sp_corrector@Base 0.9.13
+ GC_get_time_limit_tv@Base 0.9.13
+ GC_set_allocd_bytes_per_finalizer@Base 0.9.13
+ GC_set_disable_automatic_collection@Base 0.9.13
+ GC_set_markers_count@Base 0.9.13
+ GC_set_sp_corrector@Base 0.9.13
+ GC_set_stackbottom@Base 0.9.13
+ GC_set_time_limit_tv@Base 0.9.13
+ GC_start_incremental_collection@Base 0.9.13
+ Scm_AlistCopy@Base 0.9.13
+ Scm_BignumDump@Base 0.9.13
+ Scm_BitsAny@Base 0.9.13
+ Scm_BitsEvery@Base 0.9.13
+ Scm_CharWordConstituent@Base 0.9.13
+ Scm_CodeDebugInfo@Base 0.9.13
+ Scm_ConcurrentModificationViolationClass@Base 0.9.13
+ Scm_ConditionVariableBroadcast@Base 0.9.13
+ Scm_ConditionVariableClass@Base 0.9.13
+ Scm_ConditionVariableSignal@Base 0.9.13
+ Scm_ConstructType@Base 0.9.13
+ Scm_ContinuationErrorClass@Base 0.9.13
+ Scm_ContinuationMarkSetClass@Base 0.9.13
+ Scm_ContinuationMarkSetToList@Base 0.9.13
+ Scm_ContinuationMarks@Base 0.9.13
+ Scm_ContinuationP@Base 0.9.13
+ Scm_CurrentContinuationMarks@Base 0.9.13
+ Scm_CurrentErrorPort@Base 0.9.13
+ Scm_CurrentInputPort@Base 0.9.13
+ Scm_CurrentOutputPort@Base 0.9.13
+ Scm_CurrentParameterization@Base 0.9.13
+ Scm_DLOGetEntryAddress@Base 0.9.13
+ Scm_DLPtrP@Base 0.9.13
+ Scm_DLPtrValue@Base 0.9.13
+ Scm_DecodePackedDebugInfo@Base 0.9.13
+ Scm_DefaultPromptTag@Base 0.9.13
+ Scm_DescriptiveTypeClass@Base 0.9.13
+ Scm_DynamicHandlerClass@Base 0.9.13
+ Scm_GeneratorToLazyPair@Base 0.9.13
+ Scm_GenericSockAddrAddr@Base 0.9.13
+ Scm_GenericSockAddrFamily@Base 0.9.13
+ Scm_GenericSockAddrName@Base 0.9.13
+ Scm_GenericSockAddrPort@Base 0.9.13
+ Scm_GetAddrinfo@Base 0.9.13
+ Scm_GetHostByAddr@Base 0.9.13
+ Scm_GetHostByName@Base 0.9.13
+ Scm_GetNameinfo@Base 0.9.13
+ Scm_GetPeerName@Base 0.9.13
+ Scm_GetProtoByName@Base 0.9.13
+ Scm_GetProtoByNumber@Base 0.9.13
+ Scm_GetServByName@Base 0.9.13
+ Scm_GetServByPort@Base 0.9.13
+ Scm_GetSockName@Base 0.9.13
+ Scm_GlocGetValue@Base 0.9.13
+ Scm_GlocPhantomBindingP@Base 0.9.13
+ Scm_GlocSetValue@Base 0.9.13
+ Scm_GlocSupersedableP@Base 0.9.13
+ Scm_IdentifierGlobalRef@Base 0.9.13
+ Scm_IdentifierGlobalSet@Base 0.9.13
+ Scm_InetAddressToString@Base 0.9.13
+ Scm_InetStringToAddress@Base 0.9.13
+ Scm_Init_libbox@Base 0.9.13
+ Scm_Init_libmemo@Base 0.9.13
+ Scm_Init_libnative@Base 0.9.13
+ Scm_Init_libnet@Base 0.9.13
+ Scm_Init_libthr@Base 0.9.13
+ Scm_Init_libtype@Base 0.9.13
+ Scm_InstallParameterization@Base 0.9.13
+ Scm_IntegerFitsIntptrP@Base 0.9.13
+ Scm_IntegerFitsOffsetP@Base 0.9.13
+ Scm_IntegerFitsPtrdiffP@Base 0.9.13
+ Scm_IntegerFitsSizeP@Base 0.9.13
+ Scm_IntegerFitsSsizeP@Base 0.9.13
+ Scm_IntegerFitsUintptrP@Base 0.9.13
+ Scm_IntegerLength@Base 0.9.13
+ Scm_IntegerToIntptr@Base 0.9.13
+ Scm_IntegerToPtrdiff@Base 0.9.13
+ Scm_IntegerToSize@Base 0.9.13
+ Scm_IntegerToSsize@Base 0.9.13
+ Scm_IntegerToUintptr@Base 0.9.13
+ Scm_IntptrToInteger@Base 0.9.13
+ Scm_LazyCons@Base 0.9.13
+ Scm_LinkPorts@Base 0.9.13
+ Scm_MakeClosureWithTags@Base 0.9.13
+ Scm_MakeConditionVariable@Base 0.9.13
+ Scm_MakeIntegerFromUIArray@Base 0.9.13
+ Scm_MakeMemoTable@Base 0.9.13
+ Scm_MakeMutex@Base 0.9.13
+ Scm_MakePackedDebugInfo@Base 0.9.13
+ Scm_MakePromptTag@Base 0.9.13
+ Scm_MakeProxyType@Base 0.9.13
+ Scm_MakeSockAddr@Base 0.9.13
+ Scm_MakeSocket@Base 0.9.13
+ Scm_MakeSubrWithTags@Base 0.9.13
+ Scm_MakeThread@Base 0.9.13
+ Scm_MakeThreadLocal@Base 0.9.13
+ Scm_MakeUnboundVariableError@Base 0.9.13
+ Scm_MakeViewUVector@Base 0.9.13
+ Scm_Make_sys_tm@Base 0.9.13
+ Scm_MemoTableClass@Base 0.9.13
+ Scm_MemoTableGet@Base 0.9.13
+ Scm_MemoTableGetv@Base 0.9.13
+ Scm_MemoTablePut@Base 0.9.13
+ Scm_MemoTablePutv@Base 0.9.13
+ Scm_MemoryRegionClass@Base 0.9.13
+ Scm_MetaclassCPL@Base 0.9.13
+ Scm_MutexClass@Base 0.9.13
+ Scm_MutexLock@Base 0.9.13
+ Scm_MutexLocker@Base 0.9.13
+ Scm_MutexUnlock@Base 0.9.13
+ Scm_MutexUnlocker@Base 0.9.13
+ Scm_NativeTypeClass@Base 0.9.13
+ Scm_PackedDebugInfoClass@Base 0.9.13
+ Scm_ParameterizationClass@Base 0.9.13
+ Scm_PortColumn@Base 0.9.13
+ Scm_PrimitiveParameterSharedP@Base 0.9.13
+ Scm_PromptTagClass@Base 0.9.13
+ Scm_ProxyTypeClass@Base 0.9.13
+ Scm_ProxyTypeId@Base 0.9.13
+ Scm_ProxyTypeRef@Base 0.9.13
+ Scm_PtrdiffToInteger@Base 0.9.13
+ Scm_PushParameterization@Base 0.9.13
+ Scm_ReadStringLiteral@Base 0.9.13
+ Scm_SharedBoxClass@Base 0.9.13
+ Scm_SizeToInteger@Base 0.9.13
+ Scm_SockAddrCPL@Base 0.9.13
+ Scm_SockAddrClass@Base 0.9.13
+ Scm_SockAddrFamily@Base 0.9.13
+ Scm_SockAddrIn6Class@Base 0.9.13
+ Scm_SockAddrInClass@Base 0.9.13
+ Scm_SockAddrName@Base 0.9.13
+ Scm_SockAddrP@Base 0.9.13
+ Scm_SockAddrUnClass@Base 0.9.13
+ Scm_SocketAccept@Base 0.9.13
+ Scm_SocketBind@Base 0.9.13
+ Scm_SocketBuildMsg@Base 0.9.13
+ Scm_SocketClass@Base 0.9.13
+ Scm_SocketClose@Base 0.9.13
+ Scm_SocketConnect@Base 0.9.13
+ Scm_SocketGetOpt@Base 0.9.13
+ Scm_SocketGetPeerName@Base 0.9.13
+ Scm_SocketGetSockName@Base 0.9.13
+ Scm_SocketInputPort@Base 0.9.13
+ Scm_SocketIoctl@Base 0.9.13
+ Scm_SocketListen@Base 0.9.13
+ Scm_SocketOutputPort@Base 0.9.13
+ Scm_SocketRecv@Base 0.9.13
+ Scm_SocketRecvFrom@Base 0.9.13
+ Scm_SocketRecvFromX@Base 0.9.13
+ Scm_SocketRecvX@Base 0.9.13
+ Scm_SocketSend@Base 0.9.13
+ Scm_SocketSendMsg@Base 0.9.13
+ Scm_SocketSendTo@Base 0.9.13
+ Scm_SocketSetOpt@Base 0.9.13
+ Scm_SocketShutdown@Base 0.9.13
+ Scm_StrfTime@Base 0.9.13
+ Scm_SubclassP@Base 0.9.13
+ Scm_SysAddrinfoClass@Base 0.9.13
+ Scm_SysHostentClass@Base 0.9.13
+ Scm_SysMmap@Base 0.9.13
+ Scm_SysMmapWX@Base 0.9.13
+ Scm_SysProtoentClass@Base 0.9.13
+ Scm_SysServentClass@Base 0.9.13
+ Scm_ThreadCont@Base 0.9.13
+ Scm_ThreadJoin@Base 0.9.13
+ Scm_ThreadLocalClass@Base 0.9.13
+ Scm_ThreadLocalRef@Base 0.9.13
+ Scm_ThreadLocalSet@Base 0.9.13
+ Scm_ThreadSleep@Base 0.9.13
+ Scm_ThreadStart@Base 0.9.13
+ Scm_ThreadStop@Base 0.9.13
+ Scm_ThreadTerminate@Base 0.9.13
+ Scm_TypeClass@Base 0.9.13
+ Scm_TypeConstructorMetaClass@Base 0.9.13
+ Scm_TypeConstructorP@Base 0.9.13
+ Scm_UintptrToInteger@Base 0.9.13
+ Scm_UnboundVariableErrorClass@Base 0.9.13
+ Scm_UnlinkPorts@Base 0.9.13
+ Scm_VMAbortCurrentContinuation@Base 0.9.13
+ Scm_VMCallWithContinuationPrompt@Base 0.9.13
+ Scm_VMCurrentExceptionHandler@Base 0.9.13
+ Scm_VMExceptionHandlerStack@Base 0.9.13
+ Scm_VMFindDynamicEnv@Base 0.9.13
+ Scm_VMFlushDynamicHandlers@Base 0.9.13
+ Scm_VMGetDynamicHandlers@Base 0.9.13
+ Scm_VMOfType@Base 0.9.13
+ Scm_VMPopExceptionHandler@Base 0.9.13
+ Scm_VMPushDynamicEnv@Base 0.9.13
+ Scm_VMPushDynamicHandlers@Base 0.9.13
+ Scm_VMPushExceptionHandler@Base 0.9.13
+ Scm_VMSetDynamicHandlers@Base 0.9.13
+ Scm_VMTakeSnapshot@Base 0.9.13
+ Scm__CopyCallTraceQueue@Base 0.9.13
+ Scm__CopyProcedure@Base 0.9.13
+ Scm__DestroyModule@Base 0.9.13
+ Scm__FinishModuleInitialization@Base 0.9.13
+ Scm__GetDefaultExtendedPairDesctiptor@Base 0.9.13
+ Scm__GetDenvKey@Base 0.9.13
+ Scm__GetParameterSymbol@Base 0.9.13
+ Scm__InitCurrentRecursiveHash@Base 0.9.13
+ Scm__InitMemoTable@Base 0.9.13
+ Scm__InitMutex@Base 0.9.13
+ Scm__InitNative@Base 0.9.13
+ Scm__InitNet@Base 0.9.13
+ Scm__InitNetAddr@Base 0.9.13
+ Scm__InitNetDb@Base 0.9.13
+ Scm__InitThreadLocal@Base 0.9.13
+ Scm__InitThreads@Base 0.9.13
+ Scm__MakeVMThreadLocalTable@Base 0.9.13
+ Scm__MemoTableDump@Base 0.9.13
+ Scm__ProcedureInit@Base 0.9.13
+ Scm__VMCallNative@Base 0.9.13
+ Scm_pc_Alloca@Base 0.9.13
+ Scm_pc_Apply0@Base 0.9.13
+ Scm_pc_Apply1@Base 0.9.13
+ Scm_pc_Apply2@Base 0.9.13
+ Scm_pc_Apply3@Base 0.9.13
+ Scm_pc_Apply4@Base 0.9.13
+ Scm_pc_PushCC@Base 0.9.13
+ Scm_sys_tm_Class@Base 0.9.13
+ addrinfo_allocate@Base 0.9.13
+ make_dynamic_handler@Base 0.9.13
+ make_escape_handler@Base 0.9.15-p2
+ make_socket@Base 0.9.13
+ socket_cpl@Base 0.9.13
+ tl_freelists@Base 0.9.13

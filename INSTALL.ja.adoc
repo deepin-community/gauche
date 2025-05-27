@@ -1,0 +1,373 @@
+// -*- coding: utf-8 -*-
+:source-highlighter: pygments
+
+
+= Gaucheのコンパイルとインストール
+
+NOTE: Gaucheは開発中のシステムで、頻繁に更新しています。次のURLで最新の
+情報が得られます:
+https://practical-scheme.net/gauche/
+
+このドキュメントでは、配布されるtarballからGaucheをコンパイルしてインストールする
+方法を説明します。ソースリポジトリをcloneしてコンパイルする場合はさらに準備が必要です。
+詳しくは link:HACKING.adoc[] ファイルを参照してください。
+
+
+== 必要なもの
+
+
+Unix環境の標準的なビルドツールとGNU makeが必要です。
+
+それに加え、以下のツールとライブラリをあらかじめ入れておくことを
+推奨します。無くてもGaucheはビルドできますが、一部機能が使えなくなります。
+
+- Makeinfo (バージョン5.0以降) - infoドキュメントをビルドするのに使います。
+入ってなければドキュメントはインストールされません (その場合、REPLでのオンラインドキュメント
+も使えません)
+- Gzip - 同じくドキュメントビルド時に使われます。
+- Libiconv - 文字エンコーディング変換に使われます。下の説明も参照。
+- link:https://tls.mbed.org/[Mbed TLS] - TLS/SSL接続に使われます。下の説明も参照。
+
+他のオプショナルなライブラリについては以下で順次説明します。
+
+Windows上では、MSYS/MinGWを使ってビルドできます。
+詳しくはlink:doc/HOWTO-mingw.adoc[]を参照してください。
+
+
+== 簡単な方法
+
+[source,console]
+----
+% ./configure
+% make
+% make check
+% make install
+----
+
+これで、Gaucheシステムが `/usr/local/bin`, `/usr/local/lib/gauche` 及び
+`/usr/local/share/gauche` 以下にインストールされます。
+
+既にGaucheがインストールされているシステムで、
+全く同じconfigurationオプションで新しいバージョンのGaucheをインストール
+する場合、`configure` の代わりに次のコマンドを使うこともできます。
+
+[source,console]
+----
+% gauche-config --reconfigure | sh
+----
+
+`--reconfigure` オプションが与えられると、 `gauche-config` は現在
+インストールされているGaucheがconfigureされた時のコマンドラインを
+標準出力に書き出します。それをシェルに評価させれば、同じオプションで
+configureすることができます。Gaucheをアップデートする場合に便利です。
+
+
+== TLS/SSL のサポート
+
+Gaucheはセキュアソケット通信にlink:https://tls.mbed.org/[MbedTLS]を
+使っています。
+
+デフォルトでは、システムにMbedTLSライブラリがあればそれを使い、
+無ければTLSのサポートを組み込みません。
+システムにMbedTLSをインストールできない事情があったり、
+コンパイル後のバイナリだけを別環境に持ってゆくので依存ライブラリを減らしたい場合は、
+ビルド中にMbedTLSのソースをダウンロードしてGaucheに組み込んでしまうこともできます。
+
+[horizontal]
+`--with-tls=none`          :: do not include TLS/SSL support
+`--with-tls=mbedtls`       :: include only mbedTLS support
+`--with-tls=mbedtls-internal` :: During the build, MbedTLS source is downloaded
+                            and compiled with Gauche.  See below.
+
+
+`mbedtls-internal` を指定すると、ビルド中にMbedTLSのソースを
+ダウンロードして、Gaucheの拡張ライブラリの一部として組み込みます。生成されるバイナリは
+システムのMbedTLSライブラリには依存しないので、MbedTLSが入っていないターゲットシステムに
+もバイナリをそのまま持って行けます。このオプションを使う場合はビルドにCMakeが必要です。
+またその場合、`rfc--tls--mbed.so`および`libgauche-static-*.a`に
+MbedTLSのコードが含まれるため、バイナリの配布にあたってはMbedTLSのライセンスにも従う
+必要があります (Apache License 2.0)。
+
+MbedTLSライブラリはコンパイル時にでマルチスレッド対応にするかどうかを
+選べるようになっていますが、Gaucheではマルチスレッド対応でないと使えません。
+システムのMbedTLSライブラリがマルチスレッド対応でコンパイルされていない場合は、
+Gaucheに組み込むオプションを使ってください。
+
+TLSを使う場合、サーバー証明書を認証するためにはCA(認証局)証明書が必要になります。
+どこから証明書を探すかについて、いくつか選択肢を指定できます。
+
+[horizontal]
+`--with-ca-bundle=check`   :: Use heuristics to find CA bundle (default)
+`--with-ca-bundle=none`    :: Do not set default CA bundle
+`--with-ca-bundle=system`  :: Use system CA bundle.
+                              On MinGW, it accesses system CA store via
+                              Windows API.  Otherwise, it checks several
+                              known paths used for popular systems.
+`--with-ca-bundle=<path>`  :: Use given path as the CA bundle file
+
+
+詳しくはマニュアルの`rfc.tls`の項を参照してください。
+
+
+== 共通コマンド名
+
+Schemeの仕様を議論するSRFI (Scheme Requrests for Implementation) では、
+準拠する実装について、特定のコマンド名を推奨していることがあります。それらのコマンド名は
+他の処理系も使ってる可能性があるため、デフォルトではインストールされません。
+
+オプション `--enable-shared-commands` を指定すると、以下のコマンドがインストールされます。
+
+  `scheme-r7rs`, `scheme-srfi-0`, `scheme-srfi-7`::
+     `gosh`の別名。
+
+  `compile-r7rs`::
+     `gauche-compile-r7rs`の別名。
+
+
+
+== DBMデータベースのサポート
+
+デフォルトでは、Gaucheはシステム中にgdbm, ndbm, odbm (original dbm)のライブラリ
+があるかどうかを調べ、見つかったライブラリに対するインタフェースサポートをビルドします。
+
+もし特定のdbmライブラリのサポートを除外したい場合は、configureスクリプトの`--with-dbm`
+オプションに、*含めたいライブラリ*を列挙してください。例えば `--with-dbm=ndbm,odbm` と
+すれば、gdbmがシステムにあってもそれらは含まれず、
+ndbmとodbmのサポートだけビルドされます。いずれのライブラリサポートも含めたくなければ
+`--with-dbm=no` と指定してください。
+
+
+== 文字エンコーディング変換
+
+GaucheはUnicode(UTF-8, 16, 32)、Latin-N、および代表的な日本語文字エンコーディングを
+認識し変換することができますが、それ以外のエンコーディングに関しては、iconvが利用可能で
+あればそれを利用して変換を行います。iconvが標準でインストールされていないシステムでは、
+`--with-iconv` オプションで外部のiconvライブラリを利用することができます。
+
+[source,sh]
+----
+--with-iconv=DIR
+----
+
+
+例えば `--with-iconv=/usr/local` とすれば、Gaucheは `iconv.h` を `/usr/local/include`
+から、 `libiconv` を `/usr/local/lib` から探します。もしあなたのiconvライブラリが
+libiconv以外の名前 ( `libmyconv` とか) だったとしたら、
+`--with-iconv-lib=myconv` というオプションも指定して下さい。
+
+外部のiconvライブラリとしては、Bruno Haible氏のlibiconvが以下から入手可能です。
+https://www.gnu.org/software/libiconv/
+
+
+== ローカルライブラリパス
+
+Gaucheのビルドに、標準でない場所にインストールされているライブラリを
+使用したい場合、次のオプションでその場所を指定することができます。
+
+[source,sh]
+----
+--with-local=PATH:PATH2:...
+----
+
+これで、`PATH/include` 、`PATH2/include` 、... がインクルードパスに、
+`PATH/lib` 、`PATH2/lib` 、... がライブラリサーチパスに追加されます。
+
+例えば、`/usr/local` にインストールされたgdbmライブラリを使用したい
+場合は次のようにします。
+
+[source,sh]
+----
+--with-local=/usr/local
+----
+
+
+== SLIBの場所
+
+link:http://people.csail.mit.edu/jaffer/SLIB[SLIB]は、
+ポータブルなSchemeライブラリで、いろいろ便利な機能が
+完全にSchemeで書かれています。GaucheはSLIBがインストールされていれば
+その機能を利用することができます。
+
+configureスクリプトは、 `/usr/local/slib` や `/usr/share/slib` などいくつかの基本的なディレクトリ
+からSLIBを自動的に探します。もしあなたのSLIBシステムが標準的ではない場所に
+インストールされていたら、次のオプションでその場所を指定してください。
+
+[source,sh]
+----
+./configure --with-slib=PATH
+----
+
+ここで、`PATH` はSLIBがインストールされたパスです。
+
+GauchehはSLIB無しでも動作します。SLIBを使う必要がなければ、このオプションは
+気にしなくてよいです。
+
+SLIBは最初に使う前にGaucheのライブラリディレクトリにカタログファイルを
+作成します。Gaucheのインストール時に既にSLIBが存在すればインストール
+スクリプトがカタログファイルを作成しますが、Gaucheインストール後にSLIB
+がインストールされた場合、最初にSLIBを使おうとした時点でカタログファイルが
+作成されます。この時、Gauche使用者がライブラリディレクトリに書き込み権限を
+持っていないとエラーとなります。書き込み権限を持つユーザが `gosh` を起動して
+例えば次のような式を評価すればカタログファイルが正しく作られます。
+
+[source,scheme]
+----
+(use slib)
+(require 'logical)
+----
+
+
+== 実行時のライブラリパス
+
+しばしば、環境のコントロールができない箇所でGaucheを走らせなければならない
+場合があります。例えばCGIスクリプトをISPのサーバーで走らせる場合などです。
+もし、Gaucheが標準的でない場所にインストールされた共有ライブラリに依存し
+ている場合、それが問題となります。
+
+例えば、最新の `libiconv.so` を自分でコンパイルして `/home/yours/lib` に
+インストールしたとします。`--with-iconv=/home/yours/lib` としてconfigure
+すれば、Gaucheはあなたのiconvを使うようにコンパイルされます。実行時に適切
+な環境変数、例えば `LD_LIBRARY_PATH` などを設定しておけば、Gaucheの
+インタプリタ `gosh` は `libiconv.so` を捜し出すことができます。しかし、
+CGIスクリプトはWeb serverによって起動され、Web serverは `LD_LIBRARY_PATH`
+を設定してくれないかもしれません。その場合、`gosh` は `libiconv.so` が見つけられずに
+起動に失敗するかもしれません。
+
+コンパイラによっては、プログラムが依存している共有ライブラリのパスをプログラム
+本体に書き込んでしまえるオプションを持っています。 `configure` の `--with-rpath`
+オプションはそれを利用します。 `--with-rpath=DIR` とすると、実行時に `DIR` から
+共有ライブラリを探すような設定になります。このオプションは今のところ `gcc` でしか
+動作しません。
+
+
+== インストール先の指定
+
+次のようにconfigureスクリプトを起動することにより、インストール先の
+ディレクトリを指定できます。
+
+[source,console]
+----
+% ./configure --prefix=$PREFIX  --exec-prefix=$EXEC_PREFIX
+----
+
+
+`--prefix` オプションが指定されなければ、 `/usr/local` が指定されたものとみなされます。
+`--exec-prefix` オプションが指定されなければ、 `EXEC_PREFIX` は `PREFIX` と同じものに
+なります。
+
+
+インストールされるファイルの内訳は以下の通りです。
+
+  `$EXEC_PREFIX/bin/*`::
+     インタプリタ (`gosh`) とコンフィグレーションスクリプト (`gauche-config`)
+
+  `$EXEC_PREFIX/lib/*`::
+     ライブラリ (`libgauche.a`).
+
+  `$PREFIX/share/gauche/VERSION/include/*`::
+     libgaucheをリンクするアプリケーションに必要なヘッダーファイル
+
+  `$PREFIX/share/gauche/VERSION/lib/*`::
+     マシンに依存しないSchemeファイル
+
+  `$PREFIX/share/info/*`::
+     infoファイル
+
+  `$EXEC_PREFIX/lib/gauche/VERSION/ARCHITECTURE/*`::
+     マシンに依存するファイル (`.so`, `gosh`, `gauche-config`, `libgauche.a`)
+
+  `$PREFIX/share/gauche/site/lib/*`::
+  `$EXEC_PREFIX/lib/gauche/site/VERSION/ARCHITECTURE/*`::
+     ユーザが独自にインストールするマシン非依存／依存ファイルのデフォルトの置き場所。
+
+
+== 最適化オプション
+
+
+Make時に、 `make` マクロ `OPTFLAGS` を用いて追加のコンパイルオプションを指定すること
+ができます。 `configure` が設定する `OPTFLAGS` 以外のオプションを試したい場合は
+次のように `make` を走らせて下さい。
+
+[source,sh]
+----
+make OPTFLAGS="--some-compiler-option --other-option"
+----
+
+
+== アンインストール
+
+インストールされたGaucheソフトウェアを取り除くには、ソースツリーのトップ
+ディレクトリで
+
+[source,sh]
+----
+make uninstall
+----
+
+として下さい。
+
+
+== クロスコンパイル
+
+Gaucheはautotool標準のクロスコンパイルをサポートしています。
+つまり、 `configure` スクリプトに `--build` と `--host` オプションを与えて
+makeするだけです (クロス開発に必要なツールはもちろんインストールされているとします)。
+ただ、二つばかり気をつけることがあります。
+
+- クロスコンパイルしようとしているのと同じバージョンのGaucheをビルドマシンに
+  インストールしておいてください。
++
+通常のビルドでは、Gaucheは作ったばかりの `gosh` を使って `ext/` 以下の拡張
+ライブラリをビルドします。クロスコンパイル時には、作ったばかりの `gosh` は
+ビルドマシンでは実行できないので、既にビルドマシンにインストールされている
+`gosh` を使うことになります。
+
+- `./configure` に `--with-libatomic-ops=no` オプションが必要かもしれません。
++
+このオプションをつけることで、システムにインストールされている `libatomic_ops`
+ではなく同梱されたソースを使うようになります。どうもconfigureスクリプトが
+ビルドシステム用の `libatomic_ops` をホスト用と誤認するケースがあるようです。
+
+例として、次のコマンドラインで、Windows (mingw-w64 32bit) 用バイナリを
+あなたのシステム上でクロスコンパイルできます:
+
+[source,sh]
+----
+./configure --build=`./config.guess` \
+            --host=i686-w64-mingw32 \
+            --with-libatomic-ops=no \
+            --prefix=/usr/local
+----
+
+== 機種依存の情報
+
+
+* MacOS X - 10.15 (Catalina) では、ダウンロードしたtarballから取り出されたファイル
+  はセキュリティ機構にマークされているため、ビルド時に必要なシェルスクリプトを実行できません。
+  tarballを展開した後、次のコマンドを実行してください。(VERSIONは配布バージョンに
+  置き換えてください)。
+  tarballが真正のものであるかどうかは、https://practical-scheme.net/vault/ に置いてある
+  asc署名で確認してください。
++
+[source,sh]
+----
+xattr -r -d com.apple.quarantine Gauche-VERSION/
+----
+
+* IRIX with 64bit binary - デフォルトの32bit ABIではなく64bit ABIでコンパイル
+  したい場合は次のようにして下さい。
++
+[source,sh]
+----
+CC="cc -64" AS="as -64" ./configure
+----
+
+* Linux/Crusoe TM5800 - 最近のLinuxでは Crusoe TM5800がi686互換とされる
+  ようになったようですが、gc中でi686特有のprefetch命令を使っているところ
+  でコンパイルに失敗するという報告がありました。
+  この場合は以下のように環境依存の最適化を無効にして下さい。
++
+[source,sh]
+----
+./configure --disable-heuristic-optimization
+----
