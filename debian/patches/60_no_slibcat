@@ -1,0 +1,13 @@
+Index: gauche/lib/Makefile.in
+===================================================================
+--- gauche.orig/lib/Makefile.in
++++ gauche/lib/Makefile.in
+@@ -173,7 +173,7 @@ all:
+ 
+ check:
+ 
+-install: slibcat
++install:
+ 	for d in $(SUBDIRS); do \
+ 	  "$(MKINSTDIR)" "$(DESTDIR)$(SCM_INSTALL_DIR)/$$d"; \
+ 	done

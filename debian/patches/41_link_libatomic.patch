@@ -1,0 +1,55 @@
+Description: libatomic linking
+	When external library for atomic_ops is used,
+	armel, armhf, hppa, and sh4 require functions in atomic_ops,
+	because it uses non-inline function(s).
+	Add substitution of ATOMIC_OPS_LIBS
+	*** Not used now.  Using the internal implementation is good ***
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2018-10-05
+
+Index: gauche/configure.ac
+===================================================================
+--- gauche.orig/configure.ac
++++ gauche/configure.ac
+@@ -304,10 +304,12 @@ AS_IF([test x"$with_libatomic_ops" = xno
+ # even if we don't use libatomic_ops, since some of Gauche code still refers
+ # to AO_t etc.
+ need_atomic_ops_cflags=no
++need_libatomic_link=none
+ AC_MSG_CHECKING([which libatomic_ops to use])
+ AS_IF([test x"$with_libatomic_ops" != xno],
+   [ AS_IF([test x"$GAUCHE_THREAD_TYPE" != xnone],
+-          [ AC_MSG_RESULT([external]) ],
++          [ AC_MSG_RESULT([external])
++	    need_libatomic_link=external ],
+ 	  [ AC_MSG_RESULT([none]) ])
+ 	    need_atomic_ops_cflags=yes ],
+   [ AC_MSG_RESULT([internal])
+@@ -315,10 +317,26 @@ AS_IF([test x"$with_libatomic_ops" != xn
+ 
+ if test "$need_atomic_ops_cflags" = yes; then
+   ATOMIC_OPS_CFLAGS='-I$(top_builddir)/gc/libatomic_ops/src -I$(top_srcdir)/gc/libatomic_ops/src'
+-  ATOMIC_OPS_LIBS=""
+   AC_SUBST([ATOMIC_OPS_CFLAGS])
+ fi
+ 
++if test "$need_libatomic_link" = external; then
++  case $host in
++    armel-*|armhf-*|hppa-*|sh4-*)
++      need_libatomic_link=yes
++      ;;
++    *)
++      ;;
++  esac
++fi
++
++if test "$need_libatomic_link" = yes; then
++  ATOMIC_OPS_LIBS="-latomic_ops"
++else
++  ATOMIC_OPS_LIBS=""
++fi
++AC_SUBST([ATOMIC_OPS_LIBS])
++
+ AM_CONDITIONAL([USE_INTERNAL_LIBATOMIC_OPS],
+     [test x$with_libatomic_ops = xno -a x"$GAUCHE_THREAD_TYPE" != xnone])
+ AM_CONDITIONAL([NEED_ATOMIC_OPS_ASM],

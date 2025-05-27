@@ -1,0 +1,19 @@
+Description: Specify options for gzip at the invocation by makedoc
+	We used to use the environment variable, like  GZIP='-9 -n'
+	But this usage was deprecated.
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2024-12-06
+
+Index: gauche/doc/makedoc.scm
+===================================================================
+--- gauche.orig/doc/makedoc.scm
++++ gauche/doc/makedoc.scm
+@@ -60,7 +60,7 @@
+       (not (check-makeinfo-version makeinfo "5.0"))
+       (and (do-process (make-cmd `(,makeinfo ,input)))
+            (begin (remove-files (glob #"~|info|*.gz"))
+-                  (do-process (make-cmd `(,gzip "-n" ,info ,@(glob #"~|info|-[0-9]*"))))))))
++                  (do-process (make-cmd `(,gzip "--best" "-n" ,info ,@(glob #"~|info|-[0-9]*"))))))))
+ 
+ (define (do-html input makeinfo)
+   (or (string-null? makeinfo)

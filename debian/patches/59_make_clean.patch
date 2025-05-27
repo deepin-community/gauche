@@ -1,0 +1,18 @@
+Description: fix make clean
+ Make sure we can build twice in a row.
+ .
+Author: Jens Thiele <karme@karme.de>
+Last-Update: 2024-12-06
+
+Index: gauche/src/Makefile.in
+===================================================================
+--- gauche.orig/src/Makefile.in
++++ gauche/src/Makefile.in
+@@ -554,6 +554,7 @@ clean :
+ 	rm -rf core core.[0-9]* $(INSTALL_BINS) $(INSTALL_LIBS) \
+ 	       test-vmstack$(EXEEXT) test-arith$(EXEEXT) test-extra$(EXEEXT) \
+ 	       gauche-config.c \
++	       $(LIBGAUCHE).$(SOEXT).* \
+ 	       *.$(OBJEXT) *~ *.a *.t *.def *.exp *.exe *.dll \
+ 	       test.out test.log test.dir so_locations gauche/*~ paths_arch.c \
+ 	       gauche/config_threads.h gauche-config.in.c \

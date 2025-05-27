@@ -1,0 +1,25 @@
+Description: Fix Linking
+ Binaries should not set RPATH for /usr/lib.
+ Original Gauche would add $(LIB_INSTALL_DIR), which would be needed
+ if it were /usr/local/lib.  It will /usr/lib for Debian packaging,
+ which is not needed at all.
+ This fixes lintian errors of 'binary-or-shlib-defines-rpath'.
+ See the following: http://wiki.debian.org/RpathIssue
+Forwarded: Not-Yet
+Author: YAEGASHI Takeshi <yaegashi@debian.org>
+Bug-Debian: http://bugs.debian.org/358139
+Last-Update: 2040-12-06
+
+Index: gauche/configure.ac
+===================================================================
+--- gauche.orig/configure.ac
++++ gauche/configure.ac
+@@ -867,7 +867,7 @@ if test "$try_rpath" = "yes"; then
+   fi
+   if test "$RPATH_FLAG" != ""; then
+     RPATH_TMP=$RPATH_FLAG'"`pwd`"'
+-    RPATH_REAL=$RPATH_FLAG'"$(ARCH_INSTALL_DIR)"'
++    RPATH_REAL=''
+   fi
+ fi
+ AC_SUBST(RPATH_FLAG)

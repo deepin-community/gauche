@@ -1,0 +1,92 @@
+;;;
+;;; build-standalone
+;;;
+;;;   Copyright (c) 2000-2014  Shiro Kawai  <shiro@acm.org>
+;;;
+;;;   Redistribution and use in source and binary forms, with or without
+;;;   modification, are permitted provided that the following conditions
+;;;   are met:
+;;;
+;;;   1. Redistributions of source code must retain the above copyright
+;;;      notice, this list of conditions and the following disclaimer.
+;;;
+;;;   2. Redistributions in binary form must reproduce the above copyright
+;;;      notice, this list of conditions and the following disclaimer in the
+;;;      documentation and/or other materials provided with the distribution.
+;;;
+;;;   3. Neither the name of the authors nor the names of its contributors
+;;;      may be used to endorse or promote products derived from this
+;;;      software without specific prior written permission.
+;;;
+;;;   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+;;;   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+;;;   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+;;;   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+;;;   OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+;;;   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+;;;   TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+;;;   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+;;;   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+;;;   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+;;;   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+;;;
+
+(use gauche.cgen.standalone)
+(use gauche.parseopt)
+
+(define (usage)
+  (print "Usage: build-standalone [-o outfile][-I dir][--header-dir dir][--library-dir dir] main.scm lib/library.scm ...")
+  (print)
+  (print "Options:")
+  (display (option-parser-help-string))
+  (print)
+  (print "The file <main.scm> is the main script file; usually it contains 'main'")
+  (print "procedure.  Other files <lib/library.scm> ... are extra library files needed")
+  (print "by <main.scm>.  They are loaded before executing main.scm.")
+  (exit 1))
+
+(define (main args)
+  (let-args (cdr args)
+      ([outfile "o=s{OUTFILE}"
+                ? "Specify output file name.  When omitted, the basename of
+                   the main source file is used."]
+       [incdirs "I*=s{DIR}"
+                ? "Specify the search path of extra files (lib/library.scm ...)
+                   if they're not relative to the current directory.
+                   This option can be given multiple times."]
+       [defs "D*=s{VAR[=VAL]}"
+              ? "Add C preprocessor definitions while compiling the generated
+                 C code.  This option can be given multiple times."]
+       [hdrdirs "header-dir*=s{DIR}"
+                ? "Alternative include directory to find gauche.h etc.
+                   Specify this if you don't want to use installed Gauche's
+                   header files. This option can be given multiple times."]
+       [libdirs "library-dir*=s{DIR}"
+                ? "Alternative library directory to find libgauche-static.
+                   Specify this if you don't want to use installed Gauche's
+                   library. This option can be given multiple times."]
+       [keepc "keep-c-file"
+              ? "Do not delete intermediate C file after compilation.
+                This is for troubleshooting."]
+       [dynamic "dynamic"
+                ? "Instead of statically linking libgauche, use the system's
+                   library at runtime.  The resulting binary requires libgauche
+                   to run, so it's not really 'standalone', but the binary size
+                   is much smaller."]
+       [else _ (usage)]
+       . files)
+    (when (null? files) (usage))
+    (build-standalone (car files)
+                      :outfile outfile
+                      :extra-files (cdr files)
+                      :include-dirs incdirs
+                      :cpp-definitions defs
+                      :header-dirs hdrdirs
+                      :library-dirs libdirs
+                      :dynamic dynamic
+                      :keep-c-file keepc))
+  0)
+
+;; Local variables:
+;; mode: scheme
+;; end:

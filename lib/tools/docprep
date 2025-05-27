@@ -1,0 +1,259 @@
+;;;
+;;; tools/docprep - prepare document
+;;;
+;;;  Copyright (c) 2001-2022  Shiro Kawai  <shiro@acm.org>
+;;;
+;;;  Permission to use, copy, modify, distribute this software and
+;;;  accompanying documentation for any purpose is hereby granted,
+;;;  provided that existing copyright notices are retained in all
+;;;  copies and that this notice is included verbatim in all
+;;;  distributions.
+;;;  This software is provided as is, without express or implied
+;;;  warranty.  In no circumstances the author(s) shall be liable
+;;;  for any damages arising out of the use of this software.
+;;;
+
+(use file.util)
+(use gauche.charconv)
+(use gauche.parseopt)
+(use srfi.13)
+(use util.levenshtein)
+
+(define *version*
+  (string-trim-both (file->string (or (find (cut sys-access <> R_OK)
+                                            '("../VERSION"
+                                              "./VERSION"))
+                                      (error "No VERSION file?")))))
+(define *node-table* '())
+(define *header-table* '())
+
+(define lang   (make-parameter 'en))
+(define srcdir (make-parameter ""))
+
+;; TRANSIENT: We use :converion-illegal-output 'replace to read utf8 files,
+;; so that docprep won't barf if Gauche is compiled with non-utf8 encoding.
+;; (The resulting info file may contain replace chars, but that's unavoidable).
+;; After 0.9.13 release and we drop other encoding support, remove
+;; :converion-illegal-output option, for it is no longer needed.
+
+(define (scan-nodes)
+  (let ([current-node #f]
+        [current-header #f])
+    (port-for-each
+     (lambda (line)
+       (rxmatch-case line
+         [#/^@node\s+([^,]+)/ (#f node)
+          (set! current-node (string-trim-right node))]
+         [#/^@(chapter|(sub)*section|appendix\w*)\s+(.*)/ (#f #f #f header)
+          (set! current-header (string-trim-right header))]
+         [#/^@c NODE\s+([^,]*)(,(.*))?/ (#f jnode #f jheader)
+          (let* ([jn (string-trim-right jnode)]
+                 [jh (if jheader (string-trim-both jheader) jn)])
+            (push! *node-table* (cons current-node jn))
+            (push! *header-table* (cons current-header jh)))]
+         [#/^@include\s+(\S+)/ (#f file)
+           (with-input-from-file (find-included-file file)
+             (cut scan-nodes)
+             :encoding 'utf8
+             :conversion-illegal-output 'replace)]
+         ))
+     read-line)))
+
+(define (filter pattern-in pattern-out)
+  ;; This regexp picks potential typo of extract directives.
+  (define suspicious
+    #/^@c ([A-Za-z]{2,7}:?)(?![,-])\s*(.*)/)
+  ;; Loop for 'active' lines.
+  ;; MODTAG tracks whether the previous line was "[SRFI-nn]", "@c MOD ...", or
+  ;; something else.  It is to detect the error when those two are reversed.
+  (define (in line modtag)
+    (rxmatch-case line
+      [test eof-object?]
+      [pattern-in () (in (read-line) modtag)]
+      [pattern-out () (out (read-line) modtag)]
+      [#/^@include\s+(\S+)/ (#f file)
+        (finish-srfi-line modtag)
+        (with-input-from-file (find-included-file file)
+          (cut filter pattern-in pattern-out)
+          :encoding 'utf8
+          :conversion-illegal-output 'replace)
+        (in (read-line) #f)]
+      ;; Extract-time include.  @include will be tracked by
+      ;; texinfo-multiple-files-update and the includee must have @node
+      ;; at the toplevel, so this can be used to include files without
+      ;; the restriction.
+      [#/^@c xinclude\s+(\S+)/ (#f file)
+        (finish-srfi-line modtag)
+        (with-input-from-file (find-included-file file)
+          (cut filter pattern-in pattern-out)
+          :encoding 'utf8
+          :conversion-illegal-output 'replace)
+        (in (read-line) #f)]
+      [#/^@c COMMON$/ () (finish-srfi-line modtag) (in (read-line) #f)]
+      [#/^@c MOD\s+(\S+)$/ (#f module)
+        (display #"@{@t{~|module|}@}\n")
+        (in (read-line) 'mod)]
+      [#/^@c DEPRECATED$/ ()
+        (display "@b{Deprecated. }\n")
+        (in (read-line) modtag)]
+      [#/^\[SRFI/ (#f)
+        (when (eq? modtag 'mod)
+           (warn #"SRFI tag follows MOD directive: ~|line|\n"))
+        (display line)
+        (in (read-line) 'srfi)]
+      [suspicious (#f word rest)
+        (check-typo word rest line)
+        (finish-srfi-line modtag)
+        (in (read-line) #f)]
+      [test (^_ (eq? (lang) 'en))
+        (finish-srfi-line modtag)
+        (display (regexp-replace-all #/@VERSION@/ line *version*))
+        (newline) (in (read-line) #f)]
+      [#/^@node\s+(.*)$/ (#f nodedesc)
+        (process-node nodedesc) (in (read-line) #f)]
+      [#/^@(chapter|(sub)*section|appendix\w*)\s+(.*)/ (#f cmd #f header)
+        (process-header cmd header) (in (read-line) #f)]
+      [#/^\* ([^:]+)::(.*)?/ (#f node desc)
+        (process-menu node #f desc) (in (read-line) #f)]
+      [#/^\* ([^:]+):\s+([^\)]+\))\.(.*)?/ (#f tag node desc)
+        (process-menu node tag desc) (in (read-line) #f)]
+      [else (finish-srfi-line modtag)
+            (display
+             ($ regexp-replace-all* line
+                #/@VERSION@/ *version*
+                #/(@(?:px|x)?ref)\{([^\}]+)\}/ process-ref))
+            (newline)
+            (in (read-line) #f)]))
+
+  ;; When we see '[SRFI-nn]' line, we don't emit newline imediately,
+  ;; for we don't want space if it is immediately followed by '{module}'.
+  ;; This one emits the delayed newline when the next line isn't the module.
+  (define (finish-srfi-line modtag)
+    (when (eq? modtag 'srfi) (newline)))
+
+
+  ;; Loop for 'inactive' lines.
+  (define (out line modtag)
+    (rxmatch-case line
+      [test eof-object?]
+      [pattern-in ()  (in (read-line) modtag)]
+      [#/^@c COMMON$/ () (in (read-line) modtag)]
+      [suspicious (#f word rest)
+        (check-typo word rest line)
+        (out (read-line) modtag)]
+      [else (out (read-line) modtag)]))
+
+  (in (read-line) #f))
+
+;; Detect potential typo of extract directives.
+;; It is a bit complicated, since we need to allow general comment after @c.
+;; WORD is a 2-7 letter alphabetic word, and REST is what follows.
+(define (check-typo word rest line)
+  (when (and (string-any char-upper-case? word)
+             (or (and (equal? rest "")
+                      ;; directives that doesn't take argument
+                      (let1 ds (re-distances word '("EN" "JP" "COMMON"))
+                        (<= 1 (apply min ds) 2)))
+                 ;; directives that does take argument
+                 (and (>= (string-length word) 3)
+                      (let1 ds (re-distances word '("NODE" "MOD" "NOTE"
+                                                    "TODO:" "NB:"))
+                            (<= 1 (apply min ds) 2)))))
+    (errorf "Unrecognized extract directive ~s at or near ~s:~d: ~a\n"
+            word (port-name (current-input-port))
+            (port-current-line (current-input-port))
+            line)))
+
+;; We search relative to the current directory first, then
+;; relative to $srcdir; for FILE may be the generated one.
+(define (find-included-file file)
+  (if (file-exists? file)
+    file
+    (build-path (srcdir) file)))
+
+(define (lookup name table)
+  (cond [(assoc (string-trim-both name) table) => cdr]
+        [else name]))
+
+(define (process-node nodedesc)
+  (display "@node ")
+  (display (string-join
+            (map (cut lookup <> *node-table*) (string-split nodedesc #\,))
+            ", "))
+  (newline))
+
+(define (process-header cmd header)
+  (format #t "@~a ~a\n" cmd (lookup header *header-table*)))
+
+(define (process-menu node tag desc)
+  (if tag
+    (format #t "* ~a: ~a.  ~a\n" tag (lookup node *node-table*)
+            (string-trim-both (or desc "")))
+    (format #t "* ~a::  ~a\n" (lookup node *node-table*)
+            (string-trim-both (or desc "")))))
+
+(define (process-ref match)
+  (let ([cmd  (rxmatch-substring match 1)]
+        [node (rxmatch-substring match 2)])
+    (format #f "~a{~a}" cmd (lookup node *node-table*))))
+
+;; TRANSIENT:
+;;  This script is used by 0.9.15 to prepare tarball of sources after 0.9.15,
+;;  so it needs to work without the newly added parseopt's help string feature.
+;;  We just comment out the help string thingy for now.  Revive them after
+;;  the new release.
+(define (usage)
+  (print "Usage: gosh tools/docprep [options] infile")
+  ;;(print "Options:")
+  ;;(print (option-parser-help-string))
+  (exit 1))
+
+;; TODO: Switch to use 'ja' (language code) instead of 'jp' (country code)
+(define (main args)
+  (define language 'en)
+  (let-args (cdr args)
+      ([outfile "o=s"
+                ;; TRANSIENT: See above comment
+                ;; "o=s{FILE}"
+                ;; ? "Writes output to {FILE} instead of stdout."
+                ]
+       [#f "en" => (^[] (set! language 'en))
+           ;; TRANSIENT: See above comment
+           ;; ? "Set output language to English"
+           ]
+       [#f "jp" => (^[] (set! language 'jp))
+           ;; TRANSIENT: See above comment
+           ;; ? "Set output language to Japanese"
+           ]
+       [else _ (usage)]
+       . a)
+
+    (define (do-it)
+      (case language
+        [(en) (filter #/^@c EN$/ #/^@c JP$/)]
+        [(jp) (filter #/^@c JP$/ #/^@c EN$/)]))
+
+    (unless (= (length a) 1) (usage))
+
+    (parameterize ([srcdir (sys-normalize-pathname (sys-dirname (car a))
+                                                   :absolute #t)]
+                   [lang language])
+      (when (eq? language 'jp)
+        (with-input-from-file (car a) scan-nodes
+                              :encoding 'utf8
+                              :conversion-illegal-output 'replace))
+      (with-input-from-file (car a)
+        (^[]
+          (if outfile
+            (with-output-to-file outfile do-it :encoding 'utf8)
+            (let1 out (wrap-with-output-conversion
+                       (current-output-port) 'utf8)
+              (with-output-to-port out do-it)
+              (close-output-port out))))
+        :encoding 'utf8
+        :conversion-illegal-output 'replace))
+    0))
+
+;; Local variables:
+;; mode: Scheme
+;; end:

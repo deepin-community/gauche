@@ -1,0 +1,136 @@
+.\" -*-nroff-*-
+.TH GAUCHE\-CONFIG "1" "" "Gauche @GAUCHE_VERSION@" "Gauche Commands"
+.SH NAME
+gauche-config \- retrieve configuration parameters of Gauche
+.SH SYNOPSIS
+.B gauche-config
+.I option
+.br
+.sp 0.3
+.SH DESCRIPTION
+.I Gauche-config
+displays various parameters specified at the configuration time
+of the Gauche Scheme implementation.  It can be used in Makefile
+and other configuration scripts that uses Gauche.
+
+.SH OPTIONS
+
+.SS General parameter
+.TP
+.B -V
+The current Gauche version.
+
+.SS Parameters to compile applications using Gauche
+.TP
+.B -I
+Include path options required to compile programs using Gauche
+(Note: This doesn't work if Gauche installation directory
+path contains whitespaces.  See --incdirs below.)
+.TP
+.B -L
+Library path options required to link programs using Gauche
+(Note: This doesn't work if Gauche installation directory
+path contains whitespaces.  See --archdirs below.)
+.TP
+.B -l
+Link library options required to link programs using Gauche.
+.TP
+.B --cc
+The name of the C compiler used to compile this Gauche.
+.TP
+.B --cpp
+The command to run the C preprocessor.
+.TP
+.B --ac
+The directory that contains Gauche-specific autoconf macros.
+.TP
+.B --reconfigure
+The command line used to configure the current installation.
+.TP
+.B --arch
+The autoconf-style architecture signature (cpu-vendor-kernel-os).
+.TP
+.B --incdirs, --archdirs
+The list of directory names to be looked for include files and
+libraries, respectively.  Each directory name may be quoted if
+it contains whitespaces, and separated by ':' on Unix platforms, or
+by ';' on Windows platforms.
+.TP
+.B --local-incdir, --local-libdir
+These are '-I' and '-L' flags for additional local headers/libraries
+to search, given by '--with-local' configure flags.  Note that those
+are also included in '-I', '-L', '--incdirs', and '--archdirs'.
+
+.SS Parameters to install files
+.TP
+.B --prefix
+The directory prefix set by configure.
+.TP
+.B --sysincdir, --siteincdir, --pkgincdir
+Directories where system|site|package header files of extensions go.
+.TP
+.B --syslibdir, --sitelibdir, --pkglibdir
+Directories where system|site|package scheme files go.
+.TP
+.B --sysarchdir, --sitearchdir, --pkgarchdir
+Directories where system|site|package DSO files go.
+.TP
+.B --mandir, --infodir
+Directories where gauche manpage and info docs are installed.
+
+.SS Parameters to help building extensions
+.TP
+.B --object-suffix
+The extension of the compiled objects (e.g. 'o' or 'obj').
+.TP
+.B --executable-suffix
+The extension of the executable including a period (empty on Unix systems,
+'.exe' on Windows.
+.TP
+.B --so-suffix
+The extension for dynamically loadable (dlopen-able) modules (e.g. 'so').
+.TP
+.B --so-cflags
+Additional CFLAGS to create dynamically loadable modules.
+.TP
+.B --so-ldflags
+Additional LDFLAGS to create dynamically loadable modules.
+.TP
+.B --so-libs
+Additional libraries required to create dynamically loadable modules.
+.TP
+.B --dylib-suffix
+The extension for dynamically linked libraries (as opposed to dlopen()ed)
+Usually the same as --so-suffix, but OSX wants 'dylib'.
+.TP
+.B --dylib-ldflags
+LDFLAGS to create dynamically linked libraries.
+.TP
+.B --rpath-flag
+Compiler flag(s) to embed RPATH
+.TP
+.B --default-cflags
+This is the CFLAGS used to compile Gauche, and to be used to compile
+extensions as well.
+.TP
+.B --cppflags
+Compiler flag(s) passed to C preprocessor
+.TP
+.B --static-libs
+List of library link flags ('-llib') required to link Gauche statically.
+Similar to '-l', but this includes the libraries that are used
+for extension modules, and also the static library itself,
+that is -lgauche-static-X.X.
+.TP
+.B --libgauche-so
+The base name of dynamically linked libgauche.
+
+.SH AUTHORS
+Shiro Kawai (shiro @ acm . org)
+
+.SH SEE ALSO
+gosh(1), gauche-package(1)
+.PP
+Gauche Scheme script engine:
+.br
+https://practical-scheme.net/gauche/

@@ -1,0 +1,3 @@
+debian/tmp/usr/share/man/man1/gauche-config.1
+debian/tmp/usr/share/man/man1/gauche-install.1
+debian/tmp/usr/share/man/man1/gauche-package.1

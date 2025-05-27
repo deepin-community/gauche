@@ -1,0 +1,21 @@
+Description: Fix make clean/distclean process
+ Don't use xlink because it uses 'gosh'.
+Forwarded: Not-Yet
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2024-12-06
+
+Index: gauche/ext/Makefile.ext.in
+===================================================================
+--- gauche.orig/ext/Makefile.ext.in
++++ gauche/ext/Makefile.ext.in
+@@ -127,8 +127,8 @@ link : all
+ 	  -b "$(top_builddir)" -s $(srcdir) $(LIBFILES) $(SCMFILES)
+ 
+ unlink :
+-	-@$(GOSH) "$(top_srcdir)/ext/xlink" -u -g "$(SCM_CATEGORY)" \
+-	  -b "$(top_builddir)" -s $(srcdir) $(LIBFILES) $(SCMFILES)
++	@for f in $(SCMFILES); do rm -f $(srcdir)/lib/"$(SCM_CATEGORY)"/$$f; done
++	@for f in $(LIBFILES); do rm -f $(top_builddir)/src/$$f; done
+ 
+ list-objects:
+ 	@if test "X$(OBJECTS)" != X; then \

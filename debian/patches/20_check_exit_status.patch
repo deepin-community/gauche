@@ -1,0 +1,20 @@
+Description: Don't ignore exit status of MAKE
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2024-12-06
+
+Index: gauche/Makefile.in
+===================================================================
+--- gauche.orig/Makefile.in
++++ gauche/Makefile.in
+@@ -52,9 +52,10 @@ test : check
+ 
+ check: all
+ 	@rm -f $(TESTRECORD)
+-	set -e; for d in $(SUBDIRS); do (cd $$d; $(MAKE) check); done
++	set -e; for d in $(SUBDIRS); do (cd $$d; $(MAKE) check) || exit 1; done
+ 	@cd src; $(MAKE) test2
+ 	@cat $(TESTRECORD)
++	@grep -q '\b0 failed' test.record
+ 	@cd src; $(MAKE) test-summary-check
+ 
+ install-check:

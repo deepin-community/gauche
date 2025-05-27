@@ -1,0 +1,9 @@
+;; Placeholder for the backward compatibility
+;;
+(warn "'build-standalone' script is now 'tools/build-standalone'. \
+        Update your build script to use 'gosh tools/build-standalone arg ...'\n")
+(load "tools/build-standalone")
+
+;; Local variables:
+;; mode: scheme
+;; end:

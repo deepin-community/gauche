@@ -1,0 +1,30 @@
+Description: Fix alpha's FTBFS which was by:
+  GC Warning: pthread_getattr_np or pthread_attr_getstack failed for main thread
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2023-11-02
+
+Index: gauche-0.9.13/gc/include/private/gcconfig.h
+===================================================================
+--- gauche-0.9.13.orig/gc/include/private/gcconfig.h
++++ gauche-0.9.13/gc/include/private/gcconfig.h
+@@ -987,6 +987,7 @@ EXTERN_C_BEGIN
+ 
+ # ifdef LINUX
+ #   define OS_TYPE "LINUX"
++#   define DONT_USE_GET_STACKBASE_FOR_MAIN
+     EXTERN_C_END
+ #   include <features.h> /* for __GLIBC__ */
+     EXTERN_C_BEGIN
+Index: gauche-0.9.13/gc/os_dep.c
+===================================================================
+--- gauche-0.9.13.orig/gc/os_dep.c
++++ gauche-0.9.13/gc/os_dep.c
+@@ -1293,7 +1293,7 @@ GC_INNER size_t GC_page_size = 0;
+ #   if (defined(HAVE_PTHREAD_ATTR_GET_NP) \
+         || defined(HAVE_PTHREAD_GETATTR_NP)) \
+        && (defined(USE_GET_STACKBASE_FOR_MAIN) \
+-           || (defined(THREADS) && !defined(REDIRECT_MALLOC)))
++	   || (defined(THREADS) && !defined(REDIRECT_MALLOC) && !defined(DONT_USE_GET_STACKBASE_FOR_MAIN)))
+       pthread_attr_t attr;
+       void *stackaddr;
+       size_t size;

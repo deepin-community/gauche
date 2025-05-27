@@ -1,0 +1,17 @@
+Description: Don't put micro version in soname
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2024-12-06
+
+Index: gauche/configure.ac
+===================================================================
+--- gauche.orig/configure.ac
++++ gauche/configure.ac
+@@ -884,7 +884,7 @@ AC_CACHE_CHECK([linker takes --soname fl
+   ])
+ CFLAGS="$cflags_save"
+ if test "$ac_cv_linker_soname_flag" = "yes"; then
+-  SONAME_FLAG="-Wl,--soname,$LIBGAUCHE.so.0.$GAUCHE_MICRO_VERSION"
++  SONAME_FLAG="-Wl,--soname,$LIBGAUCHE.so.0"
+ fi
+ AC_SUBST(SONAME_FLAG)
+ 

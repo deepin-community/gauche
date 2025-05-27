@@ -1,0 +1,9 @@
+;; Placeholder for the backward compatibility
+;;
+(warn "'genstub' script is now 'tools/genstub'.  Update your build script \
+        to use 'gosh tools/genstub arg ...'\n")
+(load "tools/genstub")
+
+;; Local variables:
+;; mode: scheme
+;; end:

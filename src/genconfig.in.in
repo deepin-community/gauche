@@ -1,0 +1,263 @@
+@@@
+@@@ Template of genconfig.in
+@@@ gen-genconfig.scm processes this file to produce genconfig.in,
+@@@ which will be processed by configure to produce genconfig.
+@@@
+#! /bin/sh
+
+set -e
+
+#
+# Generates gauche-config.c, paths_arch.c and lib/gauche/config.scm
+#
+# This file is generated from genconfig.in.in by gen-genconfig.scm.
+# DO NOT EDIT.
+#
+
+host=@host@
+xhost=@xhost@
+gauche_version=@GAUCHE_VERSION@
+
+case "$xhost" in
+  *mingw*|*winnt*)
+     # On Windows we can't rely on the paths set by configure.
+     # We find the location of the binary and calculate the prefix path
+     # from it instead.  The '@' mark will be replaced by the prefix path
+     # at runtime.
+     prefix=@
+     exec_prefix=@
+     pathfix='sed -e sx/x\\xg -e sx\\x\\\\xg'
+     pathsep=";"
+     ;;
+  *darwin*-framework)
+     # On MacOSX Framework build, we also calculate the paths at runtime,
+     # so we can make a framework bundle that can be placed anywhere.
+     prefix=@
+     exec_prefix=@
+     pathfix="cat"
+     pathsep=":"
+     ;;
+  *)
+     # Standard configured paths
+     prefix=${prefix:-@prefix@}
+
+     exec_prefix=@exec_prefix@
+     pathfix="cat"
+     pathsep=":"
+     ;;
+esac
+
+datarootdir=@datarootdir@  # for autoconf 2.60 and later.
+garchabi=gauche-@GAUCHE_ABI_VERSION@
+garchdir=@libdir@/$garchabi
+gdatadir=@datadir@/$garchabi
+
+mandir=`echo @mandir@ | $pathfix`
+infodir=`echo @infodir@ | $pathfix`
+
+gauche_incdir=`echo "$garchdir/$gauche_version/include" | $pathfix`
+gauche_libdir=`echo "$gdatadir/$gauche_version/lib" | $pathfix`
+gauche_aclocaldir=`echo "$gdatadir/$gauche_version/" | $pathfix`
+gauche_archdir=`echo "$garchdir/$gauche_version/$host" | $pathfix`
+gauche_siteincdir=`echo "$garchdir/site/include" | $pathfix`
+gauche_sitelibdir=`echo "$gdatadir/site/lib" | $pathfix`
+gauche_sitearchdir=`echo "$garchdir/site/$host" | $pathfix`
+gauche_pkgincdir=`echo '${libdir}'"/$garchabi/site/include" | $pathfix`
+gauche_pkglibdir=`echo '${datadir}'"/$garchabi/site/lib" | $pathfix`
+gauche_pkgarchdir=`echo '${libdir}'"/$garchabi/site/$host" | $pathfix`
+
+gauche_libs="@LIBS@"
+gauche_configure_args="@GAUCHE_CONFIGURE_ARGS@"
+arch="$host"
+
+# If we search Gauche install path relative to the runtime, the --prefix
+# argument given to 'configure' is irrelevant.  Particulary, if we build
+# Windows installer, the path given to --prefix is only meaningful for
+# the host that makes the installer, and it doesn't make sense to show
+# it to the user (via 'gauche-config --reconfigure', for example).
+# So we remove the '--prefix' argument from gauche_configure_args.
+# NB: The following sed script fails if argument of --prefix contains
+# pathname including spaces.  For now, only a limited people builds
+# Windows installer so we make it so.
+if [ "$prefix" = "@" ]; then
+    gauche_configure_args=`echo $gauche_configure_args | sed -e "s/'--prefix=[^ ']*'//g" -e 's/--prefix=[^ ]*//g'`
+fi
+if [ "$exec_prefix" = "@" ]; then
+    gauche_configure_args=`echo $gauche_configure_args | sed -e "s/'--exec-prefix=[^ ']*'//g" -e 's/--exec-prefix=[^ ]*//g'`
+fi
+
+local_inc="@LOCAL_INC@"
+local_lib="@LOCAL_LIB@"
+
+static_libs="@STATIC_LIBS@"
+
+incdirs=`echo $gauche_incdir | sed s/^-I//`${pathsep}`echo $gauche_siteincdir | sed s/^-I//`
+if [ ! -z "@LOCAL_INCDIRS@" ]; then
+  incdirs="$incdirs${pathsep}@LOCAL_INCDIRS@"
+fi
+archdirs=`echo $gauche_archdir | sed s/^-L//`${pathsep}`echo $gauche_sitearchdir | sed s/^-L//`
+if [ ! -z "@LOCAL_LIBDIRS@" ]; then
+  archdirs="$archdirs${pathsep}@LOCAL_LIBDIRS@"
+fi
+
+cc="@CC@"
+cpp="@CPP@"
+default_cflags="@DEFAULT_CFLAGS@"
+cppflags="@CPPFLAGS@"
+
+object_suffix="@OBJEXT@"
+executable_suffix="@EXEEXT@"
+rpath_flag="@RPATH_FLAG@"
+shlib_so_suffix="@SHLIB_SO_SUFFIX@"
+shlib_so_cflags="@SHLIB_SO_CFLAGS@"
+shlib_so_ldflags="@SHLIB_SO_LDFLAGS@"
+shlib_so_libs="@SHLIB_LIBS_FOR_EXT@"
+shlib_dylib_suffix="@SHLIB_DYLIB_SUFFIX@"
+shlib_dylib_ldflags="@SHLIB_DYLIB_LDFLAGS@"
+shlib_main_ldflags="@SHLIB_MAIN_LDFLAGS@"
+libgauche_so="@LIBGAUCHE_SO@"
+
+#============================================================
+# gauche-config.c
+#
+cat > gauche-config.c.tmp.$$ <<EOF
+/* Generated automatically by genconfig.  DO NOT EDIT */
+
+/* The small program gauche-config is installed in the same place
+   as gosh, and used to retrieve various configuration information
+   later.  It is made a separate program from gosh for quicker
+   startup and avoiding complications of dynamic library etc.
+   It used to be a shell script, but turned into a C program
+   so that it works on the platform that lacks sh. */
+
+#if defined(__MINGW32__) || defined(_MSC_VER)
+#define _CRT_SECURE_NO_DEPRECATE 1
+#define _CRT_SECURE_NO_WARNINGS  1
+#include <winsock2.h>  /* MinGW needs this before windows.h */
+#include <windows.h>
+#include <shlwapi.h>
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
+#include <errno.h>
+#include <ctype.h>
+
+static void usage (void) {
+  fputs("Usage: gauche-config [option ...]\n"
+  "Multiple options can be given.\n"
+@@@USAGE@@@
+        ,stderr);
+  exit(1);
+}
+
+static struct cmd_rec {
+    const char *cmd;
+    const char *value;
+} cmds[] = {
+@@@COMMAND_TABLE@@@
+    { NULL, NULL }
+};
+
+#if (defined(__MINGW32__) || defined(_MSC_VER)) && defined(UNICODE)
+/* mbs <-> wcs stuff */
+#include "win-compat.c"
+static void errfn(const char *fmt,...); /*definition in paths.c*/
+#define SCM_MBS2WCS(s)   mbs2wcs(s, FALSE, errfn)
+#define SCM_WCS2MBS(s)   wcs2mbs(s, FALSE, errfn)
+#else  /* !(defined(__MINGW32__) || defined(_MSC_VER)) && defined(UNICODE) */
+#define SCM_MBS2WCS(s)  (s)
+#define SCM_WCS2MBS(s)  (s)
+#endif /* !(defined(__MINGW32__) || defined(_MSC_VER)) && defined(UNICODE) */
+
+#include "paths.c"
+
+static int process(const char *arg, int check)
+{
+    struct cmd_rec *cp = cmds;
+    while (cp->cmd != NULL) {
+        if (strcmp(cp->cmd, arg) == 0) {
+            if (!check) printf("%s\\n", replace_install_dir(cp->value));
+            return 1;
+        }
+        cp++;
+    }
+    return 0;
+}
+
+int main(int argc, char **argv)
+{
+#if (defined(__MINGW32__) || defined(_MSC_VER)) && defined(UNICODE)
+    (void)&mbs2wcs; /* suppress unused function warning */
+    (void)&wcs2mbs;
+#endif /* (defined(__MINGW32__) || defined(_MSC_VER)) && defined(UNICODE) */
+    (void)get_libgauche_path();	 /* ditto */
+
+    if (argc < 2) usage();
+    if (strcmp(argv[1], "--fixup-extension") == 0) {
+        fprintf(stderr, "(fixup-extension is no longer needed.)\n");
+    } else {
+        char **av;
+        for (av = argv+1; *av; av++) {
+            if (!process(*av, 1)) usage();
+        }
+        for (av = argv+1; *av; av++) {
+            process(*av, 0);
+        }
+    }
+    return 0;
+}
+
+EOF
+mv gauche-config.c.tmp.$$ gauche-config.c
+
+#============================================================
+# paths_arch.c
+#
+cat > paths_arch.c.tmp.$$ <<EOF
+/* Generated by genconfig.  DO NOT EDIT */
+static const char *gauche_arch = "$arch";
+static const char *gauche_lib_dir = "$gauche_libdir";
+static const char *gauche_arch_dir = "$gauche_archdir";
+static const char *gauche_site_lib_dir ="$gauche_sitelibdir";
+static const char *gauche_site_arch_dir = "$gauche_sitearchdir";
+EOF
+
+mv paths_arch.c.tmp.$$ paths_arch.c
+
+#============================================================
+# lib/gauche/config.scm
+#
+mkdir -p ../lib/gauche
+cat > ../lib/gauche/config.scm.tmp.$$ <<EOF
+;; Generated by genconfig.  DO NOT EDIT
+(define-module gauche.config
+  (export gauche-config))
+(select-module gauche.config)
+
+(define (gauche-config param)
+  (cond [(assoc param *configurations*) => (^p (replace-install-dir (cadr p)))]
+        [else (error "unknown configuration parameter name" param)]))
+
+(define (replace-install-dir str)
+  (let1 ss (string-split str #\@)
+    (if (length<=? ss 1)
+      str
+      (if-let1 d ((with-module gauche.internal %gauche-runtime-directory))
+        (string-join ss d)
+        (error "Couldn't obtain installation directory to complete " str)))))
+
+(define *configurations*
+  (quote (
+@@@COMMAND_LIST@@@
+   )))
+
+EOF
+
+mv ../lib/gauche/config.scm.tmp.$$ ../lib/gauche/config.scm
+
+# Local variables:
+# mode: shell-script
+# end:

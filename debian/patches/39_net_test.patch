@@ -1,0 +1,17 @@
+Description: net test patch
+Author: NIIBE Yutaka <gniibe@fsij.org>
+Last-Update: 2023-11-02
+
+Index: gauche-0.9.13/test/net.scm
+===================================================================
+--- gauche-0.9.13.orig/test/net.scm
++++ gauche-0.9.13/test/net.scm
+@@ -371,7 +371,7 @@
+   (test* "inet server socket" #t
+          (begin
+            (set! server-socks
+-                 (make-server-sockets #f *inet-port* :reuse-addr? #t))
++                 (make-server-sockets "localhost" *inet-port* :reuse-addr? #t))
+            (length>=? server-socks 1)))
+ 
+   (test* "inet client socket" '("GOT:abc" "GOT:xyz")
